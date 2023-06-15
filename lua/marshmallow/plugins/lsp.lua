@@ -179,6 +179,7 @@ return {
     dependencies = { "neovim/nvim-lspconfig" },
     event = { "BufReadPre", "BufNewFile" },
     opts = true,
+    branch = "legacy"
   },
   {
     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
