@@ -184,6 +184,7 @@ return {
           null_ls.builtins.code_actions.refactoring,
           null_ls.builtins.formatting.taplo,
           null_ls.builtins.formatting.prettierd,
+          null_ls.builtins.formatting.alejandra,
           null_ls.builtins.formatting.stylua.with({
             extra_args = function(params)
               local extra = {}
