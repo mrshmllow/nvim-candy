@@ -24,6 +24,7 @@ return {
                 end
                 return true
               end,
+              norg = false
             },
             event = { "InsertEnter", "LspAttach" },
             fix_pairs = true,
@@ -98,6 +99,7 @@ return {
           ["<CR>"] = cmp.mapping.confirm({ select = true }),
         }),
         sources = cmp.config.sources({
+          { name = "neorg", group_index = 2 },
           { name = "nvim_lsp", group_index = 2 },
           { name = "copilot",  group_index = 2 },
           { name = "git",      group_index = 2 },
