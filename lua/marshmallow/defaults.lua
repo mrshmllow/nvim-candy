@@ -13,6 +13,8 @@ vim.o.termguicolors = true
 
 vim.o.showmode = false
 
+vim.o.wrapmargin = 2
+
 vim.o.expandtab = true
 -- number of spaces used for each indentation level
 vim.o.shiftwidth = 2
