@@ -517,6 +517,17 @@ return {
 				},
 			}
 
+			local WordCount = {
+				condition = function()
+					return vim.bo.filetype == "norg"
+				end,
+				provider = function()
+					local wc = vim.fn.wordcount().words
+					return wc .. " words"
+				end,
+				hl = { fg = colors.subtext0 },
+			}
+
 			local LSPActive = {
 				condition = conditions.lsp_attached,
 				update = { "LspAttach", "LspDetach" },
@@ -651,6 +662,8 @@ return {
 				LSPActive,
 				SPACE,
 				FileType,
+				SPACE,
+				WordCount,
 				SPACE,
 				Ruler,
 				static = {
