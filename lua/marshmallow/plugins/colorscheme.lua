@@ -3,7 +3,7 @@ return {
 	name = "catppuccin",
 	priority = 1000,
 	opts = {
-		flavour = "mocha",
+		flavour = vim.env.LAUNCH_CATPPUCCIN and vim.env.LAUNCH_CATPPUCCIN or "mocha",
 		term_colors = true,
 		-- transparent_background = true,
 		intergration = {
