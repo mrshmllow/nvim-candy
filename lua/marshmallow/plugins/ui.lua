@@ -664,7 +664,6 @@ return {
 				FileType,
 				SPACE,
 				WordCount,
-				SPACE,
 				Ruler,
 				static = {
 					mode_names = {
