@@ -27,6 +27,9 @@ return {
 				t = {
 					name = "Open term",
 				},
+				o = {
+					name = "Org Mode",
+				},
 				m = {
 					name = "Map",
 				},
