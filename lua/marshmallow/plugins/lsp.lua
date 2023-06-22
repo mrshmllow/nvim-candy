@@ -45,7 +45,7 @@ return {
 						{ noremap = true, silent = true, buffer = bufnr, desc = "Code Actions" }
 					)
 					vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
-					vim.keymap.set("n", "<space>o", function()
+					vim.keymap.set("n", "<leader>r", function()
 						vim.lsp.buf.format({ async = true })
 					end, { noremap = true, silent = true, buffer = bufnr, desc = "Format document" })
 				end,
