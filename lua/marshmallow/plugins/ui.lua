@@ -382,26 +382,38 @@ return {
 			local heirline = require("heirline")
 			local conditions = require("heirline.conditions")
 			local utils = require("heirline.utils")
-			local palette = require("catppuccin.palettes").get_palette()
 
-			local colors = {
-				bg = palette.base,
-				fg = palette.text,
-				surface0 = palette.surface0,
-				surface1 = palette.surface1,
-				surface2 = palette.surface2,
-				subtext0 = palette.subtext0,
-				red = palette.red,
-				green = palette.green,
-				yellow = palette.yellow,
-				blue = palette.blue,
-				peach = palette.peach,
-				mauve = palette.mauve,
-				pink = palette.pink,
-				sky = palette.sky,
-				cyan = palette.teal,
-				dark = palette.mantle,
-			}
+			local function get_colors()
+				local palette = require("catppuccin.palettes").get_palette()
+
+				return {
+					bg = palette.base,
+					fg = palette.text,
+					surface0 = palette.surface0,
+					surface1 = palette.surface1,
+					surface2 = palette.surface2,
+					subtext0 = palette.subtext0,
+					red = palette.red,
+					green = palette.green,
+					yellow = palette.yellow,
+					blue = palette.blue,
+					peach = palette.peach,
+					mauve = palette.mauve,
+					pink = palette.pink,
+					sky = palette.sky,
+					cyan = palette.teal,
+					dark = palette.mantle,
+				}
+			end
+
+			vim.api.nvim_create_augroup("Heirline", { clear = true })
+			vim.api.nvim_create_autocmd("OptionSet", {
+				pattern = "background",
+				callback = function()
+					require("heirline").load_colors(get_colors())
+				end,
+				group = "Heirline",
+			})
 
 			local ViMode = {
 				init = function(self)
@@ -478,7 +490,7 @@ return {
 					condition = function()
 						return not vim.bo.modifiable or vim.bo.readonly
 					end,
-					provider = "",
+					provider = " ",
 					hl = { fg = "orange" },
 				},
 			}
@@ -518,14 +530,26 @@ return {
 			}
 
 			local WordCount = {
-				condition = function()
-					return vim.bo.filetype == "norg"
+				init = function(self)
+					self.is_visual = vim.fn.mode() == "V"
 				end,
-				provider = function()
-					local wc = vim.fn.wordcount().words
+				condition = function()
+					return vim.b.show_word_count
+				end,
+				provider = function(self)
+					local wc = vim.fn.wordcount()
+
+					if self.is_visual then
+						wc = wc.visual_words
+					else
+						wc = wc.words
+					end
+
 					return wc .. " words"
 				end,
-				hl = { fg = colors.subtext0 },
+				hl = function(self)
+					return { fg = "subtext0", bold = self.is_visual }
+				end,
 			}
 
 			local LSPActive = {
@@ -595,7 +619,7 @@ return {
 				{
 					-- git branch name
 					provider = function(self)
-						return " " .. self.status_dict.head
+						return self.status_dict.head
 					end,
 					hl = { bold = true },
 				},
@@ -643,7 +667,51 @@ return {
 					local filename = vim.api.nvim_buf_get_name(0)
 					return vim.fn.fnamemodify(filename, ":t")
 				end,
-				hl = { fg = colors.blue },
+				hl = { fg = "blue" },
+			}
+
+			local SearchCount = {
+				condition = function()
+					return vim.v.hlsearch ~= 0 -- and vim.o.cmdheight == 0
+				end,
+				init = function(self)
+					local ok, search = pcall(vim.fn.searchcount)
+					if ok and search.total then
+						self.search = search
+					end
+				end,
+				provider = function(self)
+					local search = self.search
+					return string.format("[%d/%d]", search.current, math.min(search.total, search.maxcount))
+				end,
+				hl = { fg = "subtext0" },
+				{ provider = " " },
+			}
+
+			local MacroRec = {
+				{
+					provider = " ",
+					condition = function()
+						return vim.fn.reg_recording() ~= ""
+					end,
+				},
+				{
+					condition = function()
+						return vim.fn.reg_recording() ~= "" -- and vim.o.cmdheight == 0
+					end,
+					provider = " ",
+					hl = { fg = "red", bold = true },
+          utils.surround({ "[", "]" }, nil, {
+						provider = function()
+							return vim.fn.reg_recording()
+						end,
+						hl = { fg = "green", bold = true },
+					}),
+					update = {
+						"RecordingEnter",
+						"RecordingLeave",
+					},
+				},
 			}
 
 			local ALIGN = { provider = "%=" }
@@ -651,6 +719,7 @@ return {
 
 			local StatusLine = {
 				ViMode,
+				MacroRec,
 				SPACE,
 				FileNameBlock,
 				SPACE,
@@ -663,6 +732,7 @@ return {
 				SPACE,
 				FileType,
 				SPACE,
+				SearchCount,
 				WordCount,
 				Ruler,
 				static = {
@@ -727,7 +797,7 @@ return {
 			heirline.setup({
 				statusline = StatusLine,
 				opts = {
-					colors = colors,
+					colors = get_colors(),
 				},
 			})
 		end,

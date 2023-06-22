@@ -23,6 +23,8 @@ vim.o.softtabstop = 2
 -- number of spaces a tab character appears as
 vim.o.tabstop = 2
 
+vim.o.cmdheight = 0
+
 -- I use nf-fa nerd icons
 vim.fn.sign_define("DiagnosticSignError", { text = " ", texthl = "DiagnosticSignError" })
 vim.fn.sign_define("DiagnosticSignWarn", { text = " ", texthl = "DiagnosticSignWarn" })
