@@ -13,6 +13,8 @@ return {
 			treesitter = true,
 			hop = true,
 			mini = true,
+      harpoon = true,
+      headlines = true
 		},
 		custom_highlights = function(colors)
 			return {
