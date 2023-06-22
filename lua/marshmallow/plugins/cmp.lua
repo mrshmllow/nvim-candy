@@ -25,6 +25,7 @@ return {
 								return true
 							end,
 							norg = false,
+							org = false,
 						},
 						event = { "InsertEnter", "LspAttach" },
 						fix_pairs = true,
@@ -100,6 +101,7 @@ return {
 				}),
 				sources = cmp.config.sources({
 					{ name = "neorg", group_index = 2 },
+					{ name = "orgmode", group_index = 2 },
 					{ name = "nvim_lsp", group_index = 2 },
 					{ name = "copilot", group_index = 2 },
 					{ name = "git", group_index = 2 },
