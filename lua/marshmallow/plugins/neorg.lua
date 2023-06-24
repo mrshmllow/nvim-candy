@@ -1,7 +1,7 @@
 return {
 	{
 		"dhruvasagar/vim-table-mode",
-		lazy = false,
+    cmd = { "TableModeEnable", "TableModeDisable", "Tableize" },
 	},
 	{
 		"nvim-orgmode/orgmode",
