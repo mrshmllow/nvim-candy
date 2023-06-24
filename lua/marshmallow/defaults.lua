@@ -24,6 +24,9 @@ vim.o.softtabstop = 2
 vim.o.tabstop = 2
 
 vim.o.cmdheight = 0
+vim.opt.thesaurus:append({ "~/.config/nvim/thesaurus/mthesaur.txt" })
+vim.g.tq_mthesaur_file = "~/.config/nvim/thesaurus/mthesaur.txt"
+vim.g.tq_openoffice_en_file = "~/Downloads/MyThes-1.0/th_en_US_new"
 
 -- I use nf-fa nerd icons
 vim.fn.sign_define("DiagnosticSignError", { text = " ", texthl = "DiagnosticSignError" })
