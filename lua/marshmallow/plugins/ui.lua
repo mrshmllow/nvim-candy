@@ -389,24 +389,10 @@ return {
 			local function get_colors()
 				local palette = require("catppuccin.palettes").get_palette()
 
-				return {
+				return vim.tbl_extend("keep", {
 					bg = palette.base,
 					fg = palette.text,
-					surface0 = palette.surface0,
-					surface1 = palette.surface1,
-					surface2 = palette.surface2,
-					subtext0 = palette.subtext0,
-					red = palette.red,
-					green = palette.green,
-					yellow = palette.yellow,
-					blue = palette.blue,
-					peach = palette.peach,
-					mauve = palette.mauve,
-					pink = palette.pink,
-					sky = palette.sky,
-					cyan = palette.teal,
-					dark = palette.mantle,
-				}
+				}, palette)
 			end
 
 			vim.api.nvim_create_augroup("Heirline", { clear = true })
@@ -548,7 +534,7 @@ return {
 						wc = wc.words
 					end
 
-					return wc .. " words"
+					return wc .. " words "
 				end,
 				hl = function(self)
 					return { fg = "subtext0", bold = self.is_visual }
@@ -670,7 +656,7 @@ return {
 					local filename = vim.api.nvim_buf_get_name(0)
 					return vim.fn.fnamemodify(filename, ":t")
 				end,
-				hl = { fg = "blue" },
+				hl = { fg = utils.get_highlight("Directory").fg },
 			}
 
 			local SearchCount = {
@@ -704,7 +690,7 @@ return {
 					end,
 					provider = " ",
 					hl = { fg = "red", bold = true },
-          utils.surround({ "[", "]" }, nil, {
+					utils.surround({ "[", "]" }, nil, {
 						provider = function()
 							return vim.fn.reg_recording()
 						end,
@@ -715,6 +701,28 @@ return {
 						"RecordingLeave",
 					},
 				},
+			}
+
+			local Scrollbar = {
+				static = {
+					-- sbar = { "▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" },
+					sbar = { "🭶", "🭷", "🭸", "🭹", "🭺", "🭻" },
+				},
+				init = function(self)
+					self.curr_line = vim.api.nvim_win_get_cursor(0)[1]
+					self.lines = vim.api.nvim_buf_line_count(0)
+				end,
+				provider = function(self)
+					local i = math.floor((self.curr_line - 1) / self.lines * #self.sbar) + 1
+					return string.rep(self.sbar[i], 2)
+				end,
+				hl = function(self)
+					if self.curr_line == self.lines or self.curr_line == 1 then
+						return { fg = "red", bg = "base" }
+					end
+
+					return { fg = "mauve", bg = "base" }
+				end,
 			}
 
 			local ALIGN = { provider = "%=" }
@@ -737,7 +745,7 @@ return {
 				SPACE,
 				SearchCount,
 				WordCount,
-				Ruler,
+				Scrollbar,
 				static = {
 					mode_names = {
 						n = "H",
