@@ -5,6 +5,8 @@ vim.opt.relativenumber = true
 
 vim.o.undofile = true
 
+vim.o.mousemodel = "extend"
+
 -- Case insensitive searching UNLESS /C or capital in search
 vim.o.ignorecase = true
 vim.o.smartcase = true
