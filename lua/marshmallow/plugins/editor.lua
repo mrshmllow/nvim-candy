@@ -88,7 +88,7 @@ return {
 	},
 	{
 		"mbbill/undotree",
-		event = "VeryLazy",
+		cmd = { "UndotreeToggle", "UndotreeFocus", "UndotreeShow", "UndotreeHide" },
 	},
 	{
 		"Ron89/thesaurus_query.vim",
