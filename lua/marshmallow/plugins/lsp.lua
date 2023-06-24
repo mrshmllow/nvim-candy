@@ -70,6 +70,10 @@ return {
 			lspconfig.lua_ls.setup({
 				settings = {
 					Lua = {
+						format = {
+							-- Use stylua
+							enable = false,
+						},
 						runtime = { version = "LuaJIT" },
 						workspace = { checkThirdParty = false },
 						telemetry = { enable = false },
