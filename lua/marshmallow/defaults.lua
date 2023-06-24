@@ -27,6 +27,9 @@ vim.o.tabstop = 2
 
 -- vim.o.cmdheight = 0
 
+vim.o.sidescrolloff = 8
+vim.o.scrolloff = 5
+
 vim.opt.thesaurus:append({ "~/.config/nvim/thesaurus/mthesaur.txt" })
 vim.g.tq_mthesaur_file = "~/.config/nvim/thesaurus/mthesaur.txt"
 vim.g.tq_openoffice_en_file = "~/Downloads/MyThes-1.0/th_en_US_new"
