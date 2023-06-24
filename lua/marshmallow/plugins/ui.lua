@@ -454,7 +454,7 @@ return {
 	{
 		"echasnovski/mini.files",
 		version = false,
-		lazy = false,
+    event = "BufReadCmd",
 		opts = {
 			options = {
 				use_as_default_explorer = true,
