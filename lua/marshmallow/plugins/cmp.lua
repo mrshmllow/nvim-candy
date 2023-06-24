@@ -12,7 +12,7 @@ return {
 			"saadparwaiz1/cmp_luasnip",
 			"onsails/lspkind.nvim",
 			"petertriho/cmp-git",
-
+      "kristijanhusak/vim-dadbod-completion",
 			{
 				"zbirenbaum/copilot.lua",
 				config = function()
@@ -106,6 +106,7 @@ return {
 					{ name = "copilot", group_index = 2 },
 					{ name = "git", group_index = 2 },
 					{ name = "luasnip", group_index = 2 },
+					{ name = "vim-dadbod-completion", group_index = 2 },
 				}, {
 					{ name = "buffer" },
 				}),

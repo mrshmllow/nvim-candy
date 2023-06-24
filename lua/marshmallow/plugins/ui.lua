@@ -498,7 +498,18 @@ return {
 	},
 	{
 		"tpope/vim-dadbod",
-		lazy = false,
+    dependencies = {
+      "kristijanhusak/vim-dadbod-ui",
+    },
+    cmd = {
+      "DB",
+      "DBUIClose",
+      "DBUIToggle",
+      "DBUIFindBuffer",
+      "DBUIRenameBuffer",
+      "DBUIAddConnection",
+      "DBUILastQueryInfo",
+    }
 	},
 	-- {
 	--   "echasnovski/mini.starter",
