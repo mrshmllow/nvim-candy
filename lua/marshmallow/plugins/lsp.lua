@@ -105,11 +105,11 @@ return {
 
 			require("typescript-tools").setup({
 				settings = {
-          -- https://github.com/pmizio/typescript-tools.nvim/blob/master/lua/typescript-tools/protocol/text_document/did_open.lua#L8
+					-- https://github.com/pmizio/typescript-tools.nvim/blob/master/lua/typescript-tools/protocol/text_document/did_open.lua#L8
 					tsserver_file_preferences = {
 						includeInlayParameterNameHints = "all",
-            includeInlayFunctionParameterTypeHints = true,
-            includeInlayEnumMemberValueHints = true,
+						includeInlayFunctionParameterTypeHints = true,
+						includeInlayEnumMemberValueHints = true,
 
 						includeCompletionsForModuleExports = true,
 

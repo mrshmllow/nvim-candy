@@ -67,7 +67,7 @@ return {
 			-- require("headlines").setup()
 
 			require("hologram").setup({
-				auto_display = true
+				auto_display = true,
 			})
 
 			vim.opt.conceallevel = 2

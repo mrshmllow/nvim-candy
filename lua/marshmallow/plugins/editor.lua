@@ -90,14 +90,14 @@ return {
 		"mbbill/undotree",
 		event = "VeryLazy",
 	},
-  {
-    "Ron89/thesaurus_query.vim",
-    keys = {
-      {
-        "<Leader>cs",
-      }
-    }
-  }
+	{
+		"Ron89/thesaurus_query.vim",
+		keys = {
+			{
+				"<Leader>cs",
+			},
+		},
+	},
 	-- {
 	--   "zbirenbaum/copilot.lua",
 	--   cmd = "Copilot",
