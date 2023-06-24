@@ -33,6 +33,13 @@ return {
 				MiniMapSymbolCount = { fg = colors.mauve },
 				MiniMapSymbolLine = { fg = colors.surface2 },
 				MiniMapSymbolView = { fg = colors.surface0 },
+
+				MiniFilesBorder = { fg = colors.surface0 },
+				MiniFilesNormal = { bg = colors.base },
+
+				FloatBorder = { fg = colors.mauve },
+
+				Directory = { fg = colors.mauve },
 			}
 		end,
 	},
