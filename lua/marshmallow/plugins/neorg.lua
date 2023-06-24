@@ -12,7 +12,6 @@ return {
 			{ "michaelb/sniprun", build = "sh install.sh" },
 			"edluffy/hologram.nvim",
 		},
-		lazy = false,
 		ft = { "org" },
 		config = function()
 			require("orgmode").setup_ts_grammar()
