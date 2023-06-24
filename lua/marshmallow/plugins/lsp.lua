@@ -4,7 +4,8 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 		cmd = { "LspInfo", "LspInstall", "LspUninstall" },
 		dependencies = {
-			"jose-elias-alvarez/typescript.nvim",
+			"pmizio/typescript-tools.nvim",
+			"nvim-lua/plenary.nvim",
 		},
 		config = function()
 			vim.diagnostic.config({
@@ -17,7 +18,20 @@ return {
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 				callback = function(ev)
-					vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+					local client = vim.lsp.get_client_by_id(ev.data.client_id)
+					local bufnr = ev.buf
+
+					if client.server_capabilities.inlayHintProvider then
+						vim.lsp.buf.inlay_hint(bufnr, true)
+					end
+
+					if client.server_capabilities.completionProvider then
+						vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
+					end
+
+					if client.server_capabilities.definitionProvider then
+						vim.bo[bufnr].tagfunc = "v:lua.vim.lsp.tagfunc"
+					end
 
 					local opts = { noremap = true, silent = true }
 					vim.keymap.set("n", "E", vim.diagnostic.open_float, opts)
@@ -84,51 +98,71 @@ return {
 			lspconfig.clangd.setup({})
 			lspconfig.cssls.setup({})
 			lspconfig.nil_ls.setup({})
-			require("typescript").setup({
-				server = {
-					settings = {
-						settings = {
-							typescript = {
-								format = {
-									indentSize = vim.o.shiftwidth,
-									convertTabsToSpaces = vim.o.expandtab,
-									tabSize = vim.o.tabstop,
-								},
-							},
-							javascript = {
-								format = {
-									indentSize = vim.o.shiftwidth,
-									convertTabsToSpaces = vim.o.expandtab,
-									tabSize = vim.o.tabstop,
-								},
-							},
-							completions = {
-								completeFunctionCalls = true,
-							},
-						},
+
+			require("typescript-tools").setup({
+				settings = {
+          -- https://github.com/pmizio/typescript-tools.nvim/blob/master/lua/typescript-tools/protocol/text_document/did_open.lua#L8
+					tsserver_file_preferences = {
+						includeInlayParameterNameHints = "all",
+            includeInlayFunctionParameterTypeHints = true,
+            includeInlayEnumMemberValueHints = true,
+
+						includeCompletionsForModuleExports = true,
+
+						quotePreference = "auto",
 					},
-					on_attach = function(_, bufnr)
-						vim.keymap.set(
-							"n",
-							"<leader>co",
-							"<cmd>TypescriptOrganizeImports<CR>",
-							{ buffer = bufnr, desc = "Organize Imports" }
-						)
-						vim.keymap.set(
-							"n",
-							"<leader>cR",
-							"<cmd>TypescriptRenameFile<CR>",
-							{ desc = "Rename File", buffer = bufnr }
-						)
-						vim.keymap.set(
-							"n",
-							"gS",
-							"<cmd>TypescriptGoToSourceDefinition<CR>",
-							{ buffer = bufnr, desc = "Goto Source Definition" }
-						)
-					end,
+					tsserver_format_options = {
+						allowIncompleteCompletions = false,
+						allowRenameOfImportPath = false,
+					},
 				},
 			})
+
+			-- require("typescript").setup({
+			-- 	server = {
+			-- 		settings = {
+			-- 			settings = {
+			-- 				typescript = {
+			-- 					format = {
+			-- 						indentSize = vim.o.shiftwidth,
+			-- 						convertTabsToSpaces = vim.o.expandtab,
+			-- 						tabSize = vim.o.tabstop,
+			-- 					},
+			-- 				},
+			-- 				javascript = {
+			-- 					format = {
+			-- 						indentSize = vim.o.shiftwidth,
+			-- 						convertTabsToSpaces = vim.o.expandtab,
+			-- 						tabSize = vim.o.tabstop,
+			-- 					},
+			-- 				},
+			-- 				completions = {
+			-- 					completeFunctionCalls = true,
+			-- 				},
+			-- 			},
+			-- 		},
+			-- 		on_attach = function(_, bufnr)
+			-- 			vim.keymap.set(
+			-- 				"n",
+			-- 				"<leader>co",
+			-- 				"<cmd>TypescriptOrganizeImports<CR>",
+			-- 				{ buffer = bufnr, desc = "Organize Imports" }
+			-- 			)
+			-- 			vim.keymap.set(
+			-- 				"n",
+			-- 				"<leader>cR",
+			-- 				"<cmd>TypescriptRenameFile<CR>",
+			-- 				{ desc = "Rename File", buffer = bufnr }
+			-- 			)
+			-- 			vim.keymap.set(
+			-- 				"n",
+			-- 				"gS",
+			-- 				"<cmd>TypescriptGoToSourceDefinition<CR>",
+			-- 				{ buffer = bufnr, desc = "Goto Source Definition" }
+			-- 			)
+			-- 		end,
+			-- 	},
+			-- })
 		end,
 	},
 	{
