@@ -30,6 +30,8 @@ vim.opt.thesaurus:append({ "~/.config/nvim/thesaurus/mthesaur.txt" })
 vim.g.tq_mthesaur_file = "~/.config/nvim/thesaurus/mthesaur.txt"
 vim.g.tq_openoffice_en_file = "~/Downloads/MyThes-1.0/th_en_US_new"
 
+vim.o.shortmess = "filnxtToOFcI"
+
 -- I use nf-fa nerd icons
 vim.fn.sign_define("DiagnosticSignError", { text = " ", texthl = "DiagnosticSignError" })
 vim.fn.sign_define("DiagnosticSignWarn", { text = " ", texthl = "DiagnosticSignWarn" })
