@@ -459,6 +459,9 @@ return {
 			options = {
 				use_as_default_explorer = true,
 			},
+			windows = {
+				preview = true,
+			},
 		},
 		keys = {
 			{
