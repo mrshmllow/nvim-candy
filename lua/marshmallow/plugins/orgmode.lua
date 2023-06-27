@@ -9,9 +9,6 @@ return {
 			"nvim-treesitter/nvim-treesitter",
 			"akinsho/org-bullets.nvim",
 			"lukas-reineke/headlines.nvim",
-			{ "michaelb/sniprun", build = "sh install.sh", dev = true },
-			"edluffy/hologram.nvim",
-			"jubnzv/mdeval.nvim",
 			{ "edluffy/hologram.nvim", cond = not vim.g.neovide },
 		},
 		keys = {
@@ -29,9 +26,6 @@ return {
         org_indent_mode = "noindent",
 			})
 
-			require("sniprun").setup({
-				selected_interpreters = { "OrgMode_original" },
-				display = { "Api" },
 			})
 
 			require("org-bullets").setup({})
