@@ -21,11 +21,21 @@ return {
 			require("orgmode").setup_ts_grammar()
 
 			require("orgmode").setup({
-				org_agenda_files = { "~/my-orgs/**/*" },
+				org_agenda_files = { "~/org/**/*" },
 				org_default_notes_file = "~/my-orgs/refile.org",
-        org_indent_mode = "noindent",
-			})
-
+				org_indent_mode = "noindent",
+				org_capture_templates = {
+					t = {
+						description = "Task",
+						template = "* TODO %?\n  %u",
+						target = "~/org/refile.org",
+					},
+					n = {
+						description = "Quick Note",
+						template = "* Note\n%U\n\n%?",
+						target = "~/org/t2_23_refile.org",
+					},
+				}
 			})
 
 			require("org-bullets").setup({})
