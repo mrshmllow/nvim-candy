@@ -6,6 +6,18 @@ vim.api.nvim_create_user_command("Detach", function()
 	end
 end, {})
 
+vim.api.nvim_create_user_command("Cd", function()
+	vim.cmd("cd %:p:h")
+end, {})
+
+vim.api.nvim_create_user_command("Tcd", function()
+	vim.cmd("tcd %:p:h")
+end, {})
+
+vim.api.nvim_create_user_command("Lcd", function()
+	vim.cmd("lcd %:p:h")
+end, {})
+
 local ns = vim.api.nvim_create_namespace("marker")
 
 local colors = { "yellow", "blue", "red" }
