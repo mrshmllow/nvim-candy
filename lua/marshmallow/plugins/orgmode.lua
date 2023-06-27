@@ -12,6 +12,7 @@ return {
 			{ "michaelb/sniprun", build = "sh install.sh", dev = true },
 			"edluffy/hologram.nvim",
 			"jubnzv/mdeval.nvim",
+			{ "edluffy/hologram.nvim", cond = not vim.g.neovide },
 		},
 		keys = {
 			"<Leader>oa",
@@ -36,9 +37,11 @@ return {
 			require("org-bullets").setup({})
 			-- require("headlines").setup()
 
-			require("hologram").setup({
-				auto_display = true,
-			})
+			if not vim.g.neovide then
+				require("hologram").setup({
+					auto_display = true,
+				})
+			end
 
 			vim.opt.conceallevel = 2
 			vim.opt.concealcursor = "nc"
