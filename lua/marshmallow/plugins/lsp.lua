@@ -6,6 +6,7 @@ return {
 		dependencies = {
 			"pmizio/typescript-tools.nvim",
 			"nvim-lua/plenary.nvim",
+			"b0o/schemastore.nvim",
 		},
 		config = function()
 			vim.diagnostic.config({
@@ -102,6 +103,27 @@ return {
 			lspconfig.clangd.setup({})
 			lspconfig.cssls.setup({})
 			lspconfig.nil_ls.setup({})
+			lspconfig.jsonls.setup({
+				cmd = { "json-languageserver", "--stdio" },
+				settings = {
+					json = {
+						schemas = require("schemastore").json.schemas(),
+						validate = { enable = true },
+					},
+				},
+			})
+			lspconfig.yamlls.setup({
+				settings = {
+					yaml = {
+						schemaStore = {
+							-- You must disable built-in schemaStore support if you want to use
+							-- this plugin and its advanced options like `ignore`.
+							enable = false,
+						},
+						schemas = require("schemastore").yaml.schemas(),
+					},
+				},
+			})
 
 			require("typescript-tools").setup({
 				settings = {
