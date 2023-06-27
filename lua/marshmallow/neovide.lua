@@ -1,7 +1,7 @@
 if vim.g.neovide then
-	-- vim.o.guifont = "JetBrains Mono Nerd Font Mono:h14"
+	vim.opt.guifont = { "JetBrainsMono Nerd Font Mono", ":h14" }
 	-- vim.o.guifont = "Vulf Mono:h14"
-	vim.o.guifont = "CaskaydiaCove Nerd Font Mono:h14"
+	-- vim.o.guifont = "CaskaydiaCove Nerd Font Mono:h14"
 
 	vim.g.neovide_input_use_logo = 1
 
