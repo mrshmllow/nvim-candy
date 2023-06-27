@@ -370,11 +370,6 @@ return {
 				"<cmd>:FloatermNew --cwd=<root> --name=Lazygit --width=1.0 --height=1.0  lazygit<CR>",
 				desc = "Open Lazygit",
 			},
-			{
-				"<leader>tc",
-				"<cmd>:FloatermNew --cwd=<root> --name=Chezmoi --width=1.0 --height=1.0 --auto_close=0 chezmoi cd<CR>",
-				desc = "Open chezmoi",
-			},
 		},
 	},
 	{
