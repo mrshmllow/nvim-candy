@@ -4,3 +4,9 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 		vim.o.filetype = "markdown"
 	end,
 })
+
+vim.api.nvim_create_autocmd({ "VimResized" }, {
+	callback = function()
+		vim.cmd("wincmd =")
+	end,
+})
