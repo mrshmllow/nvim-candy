@@ -169,7 +169,13 @@ return {
 				provider = function()
 					local names = {}
 					for _, server in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
+						if server.name == "copilot" or server.name == "null-ls" then
+							goto continue
+						end
+
 						table.insert(names, server.name)
+
+						::continue::
 					end
 					return table.concat(names, " ")
 				end,
