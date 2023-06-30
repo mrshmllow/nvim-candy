@@ -7,10 +7,9 @@ return {
 		term_colors = true,
 		-- transparent_background = true,
 		intergration = {
-			neotree = true,
+			neogit = true,
 			gitsigns = true,
 			treesitter_context = true,
-			treesitter = true,
 			hop = true,
 			mini = true,
 			harpoon = true,
