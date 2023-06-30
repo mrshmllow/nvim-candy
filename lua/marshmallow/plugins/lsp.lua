@@ -101,7 +101,9 @@ return {
 			})
 			lspconfig.pyright.setup({})
 			lspconfig.clangd.setup({})
-			lspconfig.cssls.setup({})
+			lspconfig.cssls.setup({
+				cmd = { "css-languageserver", "--stdio" },
+			})
 			lspconfig.nil_ls.setup({})
 			lspconfig.jsonls.setup({
 				cmd = { "json-languageserver", "--stdio" },
