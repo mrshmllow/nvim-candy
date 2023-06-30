@@ -16,7 +16,7 @@ return {
 			"<Leader>oc",
 		},
 		ft = { "org" },
-    lazy = false,
+		lazy = false,
 		config = function()
 			require("orgmode").setup_ts_grammar()
 
@@ -35,7 +35,7 @@ return {
 						template = "* Note\n%U\n\n%?",
 						target = "~/org/t2_23_refile.org",
 					},
-				}
+				},
 			})
 
 			require("org-bullets").setup({})
@@ -57,7 +57,7 @@ return {
 			"nvim-orgmode/orgmode",
 			"nvim-treesitter/nvim-treesitter",
 		},
-    dev = true,
+		dev = true,
 		cmd = { "OrgExecute", "OrgTangle" },
 		opts = {
 			langs = { "python", "lua", "mermaid" },

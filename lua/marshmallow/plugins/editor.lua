@@ -97,14 +97,14 @@ return {
 				"<Leader>cs",
 			},
 		},
-    cmd = {
-      "Thesaurus",
-      "ThesaurusQuery",
-      "ThesaurusReplace",
-      "ThesaurusLookup",
-      "ThesaurusQueryLookupCurrentWord",
-      "ThesaurusReplaceLookupCurrentWord",
-    }
+		cmd = {
+			"Thesaurus",
+			"ThesaurusQuery",
+			"ThesaurusReplace",
+			"ThesaurusLookup",
+			"ThesaurusQueryLookupCurrentWord",
+			"ThesaurusReplaceLookupCurrentWord",
+		},
 	},
 	-- {
 	--   "zbirenbaum/copilot.lua",

@@ -449,7 +449,6 @@ return {
 	{
 		"echasnovski/mini.files",
 		version = false,
-    event = "BufReadCmd",
 		opts = {
 			options = {
 				use_as_default_explorer = true,
@@ -496,18 +495,18 @@ return {
 	},
 	{
 		"tpope/vim-dadbod",
-    dependencies = {
-      "kristijanhusak/vim-dadbod-ui",
-    },
-    cmd = {
-      "DB",
-      "DBUIClose",
-      "DBUIToggle",
-      "DBUIFindBuffer",
-      "DBUIRenameBuffer",
-      "DBUIAddConnection",
-      "DBUILastQueryInfo",
-    }
+		dependencies = {
+			"kristijanhusak/vim-dadbod-ui",
+		},
+		cmd = {
+			"DB",
+			"DBUIClose",
+			"DBUIToggle",
+			"DBUIFindBuffer",
+			"DBUIRenameBuffer",
+			"DBUIAddConnection",
+			"DBUILastQueryInfo",
+		},
 	},
 	-- {
 	--   "echasnovski/mini.starter",

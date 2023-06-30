@@ -18,9 +18,9 @@ require("lazy").setup("marshmallow.plugins", {
 	change_detection = {
 		notify = false,
 	},
-  install = {
-    colorscheme = { "catppuccin" },
-  },
+	install = {
+		colorscheme = { "catppuccin" },
+	},
 })
 
 require("marshmallow.defaults")
