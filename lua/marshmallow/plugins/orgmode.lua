@@ -33,7 +33,7 @@ return {
 					n = {
 						description = "Quick Note",
 						template = "* Note\n%U\n\n%?",
-						target = "~/org/t2_23_refile.org",
+						target = "~/org/t3_23_refile.org",
 					},
 				},
 			})
