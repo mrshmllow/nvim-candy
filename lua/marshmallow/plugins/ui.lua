@@ -452,6 +452,7 @@ return {
 		opts = {
 			options = {
 				use_as_default_explorer = true,
+				permanant_delete = false,
 			},
 			windows = {
 				preview = true,
