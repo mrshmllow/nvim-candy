@@ -22,7 +22,7 @@ return {
 					local client = vim.lsp.get_client_by_id(ev.data.client_id)
 					local bufnr = ev.buf
 
-					if client.server_capabilities.inlayHintProvider then
+					if client.server_capabilities.inlayHintProvider and vim.lsp.buf.inlay_hint ~= nil then
 						vim.lsp.buf.inlay_hint(bufnr, true)
 					end
 
