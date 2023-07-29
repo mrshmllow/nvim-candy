@@ -13,26 +13,26 @@ return {
 			"onsails/lspkind.nvim",
 			"petertriho/cmp-git",
 			"kristijanhusak/vim-dadbod-completion",
-			{
-				"zbirenbaum/copilot.lua",
-				config = function()
-					require("copilot").setup({
-						filetypes = {
-							sh = function()
-								if string.match(vim.fs.basename(vim.api.nvim_buf_get_name(0)), "^%.env.*") then
-									return false
-								end
-								return true
-							end,
-							norg = false,
-							org = false,
-						},
-						event = { "InsertEnter", "LspAttach" },
-						fix_pairs = true,
-					})
-				end,
-			},
-			"zbirenbaum/copilot-cmp",
+			-- {
+			-- 	"zbirenbaum/copilot.lua",
+			-- 	config = function()
+			-- 		require("copilot").setup({
+			-- 			filetypes = {
+			-- 				sh = function()
+			-- 					if string.match(vim.fs.basename(vim.api.nvim_buf_get_name(0)), "^%.env.*") then
+			-- 						return false
+			-- 					end
+			-- 					return true
+			-- 				end,
+			-- 				norg = false,
+			-- 				org = false,
+			-- 			},
+			-- 			event = { "InsertEnter", "LspAttach" },
+			-- 			fix_pairs = true,
+			-- 		})
+			-- 	end,
+			-- },
+			-- "zbirenbaum/copilot-cmp",
 		},
 		config = function()
 			vim.g.completeopt = "menu,menuone,noselect"
@@ -62,7 +62,7 @@ return {
 				sorting = {
 					priority_weight = 2,
 					comparators = {
-						require("copilot_cmp.comparators").prioritize,
+						-- require("copilot_cmp.comparators").prioritize,
 
 						cmp.config.compare.offset,
 						-- cmp.config.compare.scopes, --this is commented in nvim-cmp too
@@ -103,7 +103,7 @@ return {
 					{ name = "neorg", group_index = 2 },
 					{ name = "orgmode", group_index = 2 },
 					{ name = "nvim_lsp", group_index = 2 },
-					{ name = "copilot", group_index = 2 },
+					-- { name = "copilot", group_index = 2 },
 					{ name = "git", group_index = 2 },
 					{ name = "luasnip", group_index = 2 },
 					{ name = "vim-dadbod-completion", group_index = 2 },
@@ -128,7 +128,7 @@ return {
 				}),
 			})
 
-			require("copilot_cmp").setup()
+			-- require("copilot_cmp").setup()
 			require("cmp_git").setup()
 		end,
 	},
