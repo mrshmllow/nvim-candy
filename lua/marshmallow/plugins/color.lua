@@ -34,6 +34,8 @@ return {
 					"javascript",
 					"css",
 					"org",
+					"nix",
+					"json",
 				},
 				highlight = {
 					enable = true,
