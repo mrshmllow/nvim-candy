@@ -9,7 +9,9 @@ return {
 			"nvim-treesitter/nvim-treesitter",
 			"akinsho/org-bullets.nvim",
 			"lukas-reineke/headlines.nvim",
-			{ "edluffy/hologram.nvim", cond = not vim.g.neovide },
+			-- { "edluffy/hologram.nvim", cond = not vim.g.neovide, opts = {
+			--    auto_display = true,
+			-- } },
 		},
 		keys = {
 			"<Leader>oa",
@@ -41,12 +43,6 @@ return {
 			require("org-bullets").setup({})
 			-- require("headlines").setup()
 
-			if not vim.g.neovide then
-				require("hologram").setup({
-					auto_display = true,
-				})
-			end
-
 			vim.opt.conceallevel = 2
 			vim.opt.concealcursor = "nc"
 		end,
@@ -57,10 +53,10 @@ return {
 			"nvim-orgmode/orgmode",
 			"nvim-treesitter/nvim-treesitter",
 		},
-		dev = true,
 		cmd = { "OrgExecute", "OrgTangle" },
 		opts = {
 			langs = { "python", "lua", "mermaid" },
+			load_paths = { "/home/marsh/.emacs.d/elpa/ob-mermaid-20200320.1504" },
 		},
 	},
 }
