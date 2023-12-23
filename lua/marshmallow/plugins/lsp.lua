@@ -145,52 +145,6 @@ return {
 					},
 				},
 			})
-
-			-- require("typescript").setup({
-			-- 	server = {
-			-- 		settings = {
-			-- 			settings = {
-			-- 				typescript = {
-			-- 					format = {
-			-- 						indentSize = vim.o.shiftwidth,
-			-- 						convertTabsToSpaces = vim.o.expandtab,
-			-- 						tabSize = vim.o.tabstop,
-			-- 					},
-			-- 				},
-			-- 				javascript = {
-			-- 					format = {
-			-- 						indentSize = vim.o.shiftwidth,
-			-- 						convertTabsToSpaces = vim.o.expandtab,
-			-- 						tabSize = vim.o.tabstop,
-			-- 					},
-			-- 				},
-			-- 				completions = {
-			-- 					completeFunctionCalls = true,
-			-- 				},
-			-- 			},
-			-- 		},
-			-- 		on_attach = function(_, bufnr)
-			-- 			vim.keymap.set(
-			-- 				"n",
-			-- 				"<leader>co",
-			-- 				"<cmd>TypescriptOrganizeImports<CR>",
-			-- 				{ buffer = bufnr, desc = "Organize Imports" }
-			-- 			)
-			-- 			vim.keymap.set(
-			-- 				"n",
-			-- 				"<leader>cR",
-			-- 				"<cmd>TypescriptRenameFile<CR>",
-			-- 				{ desc = "Rename File", buffer = bufnr }
-			-- 			)
-			-- 			vim.keymap.set(
-			-- 				"n",
-			-- 				"gS",
-			-- 				"<cmd>TypescriptGoToSourceDefinition<CR>",
-			-- 				{ buffer = bufnr, desc = "Goto Source Definition" }
-			-- 			)
-			-- 		end,
-			-- 	},
-			-- })
 		end,
 	},
 	{

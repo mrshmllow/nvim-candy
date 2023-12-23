@@ -30,9 +30,6 @@ return {
 				o = {
 					name = "Org Mode",
 				},
-				m = {
-					name = "Map",
-				},
 				S = {
 					name = "Sessions",
 				},
@@ -50,11 +47,12 @@ return {
 	},
 	{
 		"lukas-reineke/indent-blankline.nvim",
+		name = "ibl",
 		event = { "BufReadPost", "BufNewFile" },
 		opts = {
-			space_char_blankline = " ",
-			show_current_context = true,
-			char = "▎",
+			indent = {
+				char = "▎",
+			},
 		},
 	},
 	{
@@ -75,7 +73,6 @@ return {
 				Util.telescope("live_grep"),
 				desc = "Find in Files (Grep)",
 			},
-			{ "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
 			-- find
 			{
 				"<leader>ff",
@@ -95,15 +92,11 @@ return {
 			},
 			{ "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
 			-- search
-			{ "<leader>sa", "<cmd>Telescope autocommands<cr>", desc = "Auto Commands" },
-			{ "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer" },
-			{ "<leader>sC", "<cmd>Telescope commands<cr>", desc = "Commands" },
 			{
 				"<leader>sc",
 				Util.telescope("live_grep", { cwd = "~/.config/nvim" }),
 				desc = "Search in ~/.config/nvim",
 			},
-			{ "<leader>sd", "<cmd>Telescope diagnostics<cr>", desc = "Diagnostics" },
 			{ "<leader>sg", Util.telescope("live_grep"), desc = "Grep (root dir)" },
 			{ "<leader>sG", Util.telescope("live_grep", { cwd = false }), desc = "Grep (cwd)" },
 			{ "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
@@ -112,50 +105,8 @@ return {
 				"<cmd>Telescope highlights<cr>",
 				desc = "Search Highlight Groups",
 			},
-			{ "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
 			{ "<leader>sM", "<cmd>Telescope man_pages<cr>", desc = "Man Pages" },
-			{ "<leader>sm", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
-			{ "<leader>so", "<cmd>Telescope vim_options<cr>", desc = "Options" },
 			{ "<leader>sR", "<cmd>Telescope resume<cr>", desc = "Resume" },
-			{ "<leader>sl", "<cmd>Telescope symbols<cr>", desc = "Symbols" },
-			{ "<leader>sw", Util.telescope("grep_string"), desc = "Word (root dir)" },
-			{ "<leader>sW", Util.telescope("grep_string", { cwd = false }), desc = "Word (cwd)" },
-			{
-				"<leader>ss",
-				Util.telescope("lsp_document_symbols", {
-					symbols = {
-						"Class",
-						"Function",
-						"Method",
-						"Constructor",
-						"Interface",
-						"Module",
-						"Struct",
-						"Trait",
-						"Field",
-						"Property",
-					},
-				}),
-				desc = "Goto Symbol",
-			},
-			{
-				"<leader>sS",
-				Util.telescope("lsp_workspace_symbols", {
-					symbols = {
-						"Class",
-						"Function",
-						"Method",
-						"Constructor",
-						"Interface",
-						"Module",
-						"Struct",
-						"Trait",
-						"Field",
-						"Property",
-					},
-				}),
-				desc = "Goto Symbol (Workspace)",
-			},
 		},
 		config = function()
 			require("telescope").setup({})
@@ -225,92 +176,6 @@ return {
 			},
 		},
 		opts = {},
-	},
-	{
-		"echasnovski/mini.map",
-		version = false,
-		dependencies = "lewis6991/gitsigns.nvim",
-		keys = {
-			{
-				"<Leader>mc",
-				function()
-					require("mini.map").close()
-				end,
-				desc = "Close Map",
-			},
-			{
-				"<Leader>mf",
-				function()
-					require("mini.map").toggle_focus()
-				end,
-				desc = "Toggle Map Focus",
-			},
-			{
-				"<Leader>mo",
-				function()
-					require("mini.map").open()
-				end,
-				desc = "Open Map",
-			},
-			{
-				"<Leader>mr",
-				function()
-					require("mini.map").refresh()
-				end,
-				desc = "Refresh Map",
-			},
-			{
-				"<Leader>ms",
-				function()
-					require("mini.map").toggle_side()
-				end,
-				desc = "Toggle Map Side",
-			},
-			{
-				"<Leader>mt",
-				function()
-					require("mini.map").toggle()
-				end,
-				desc = "Toggle Map",
-			},
-		},
-		config = function()
-			local map = require("mini.map")
-
-			for _, key in ipairs({ "n", "N", "*", "#" }) do
-				vim.keymap.set("n", key, key .. "<Cmd>lua MiniMap.refresh({}, {lines = false, scrollbar = false})<CR>")
-			end
-
-			map.setup({
-				integrations = {
-					map.gen_integration.builtin_search({
-						search = "MiniMapSearch",
-					}),
-					map.gen_integration.diagnostic({
-						error = "MiniMapDiagnosticError",
-						warn = "MiniMapDiagnosticWarn",
-						info = "MiniMapDiagnosticInfo",
-						hint = nil,
-					}),
-					map.gen_integration.gitsigns({
-						add = "GitSignsAdd",
-						change = "GitSignsChange",
-						delete = "GitSignsDelete",
-					}),
-				},
-				symbols = {
-					encode = map.gen_encode_symbols.block("3x2"),
-
-					-- Scrollbar parts for view and line. Use empty string to disable any.
-					scroll_line = "┃",
-					scroll_view = "┃",
-				},
-
-				window = {
-					show_integration_count = false,
-				},
-			})
-		end,
 	},
 	{
 		"echasnovski/mini.surround",
@@ -408,44 +273,6 @@ return {
 			},
 		},
 	},
-	-- {
-	-- 	"stevearc/oil.nvim",
-	-- 	dependencies = {
-	-- 		"nvim-tree/nvim-web-devicons",
-	-- 	},
-	-- 	opts = {
-	-- 		columns = {
-	-- 			"icon",
-	-- 		},
-	-- 		trash_command = "gio trash",
-	-- 		delete_to_trash = true,
-	-- 		keymaps = {
-	-- 			["g?"] = "actions.show_help",
-	-- 			["<CR>"] = "actions.select",
-	-- 			["<C-v>"] = "actions.select_vsplit",
-	-- 			["<C-s>"] = false,
-	-- 			["<C-h>"] = false,
-	-- 			["<C-t>"] = "actions.select_tab",
-	-- 			["<C-p>"] = "actions.preview",
-	-- 			["<C-c>"] = false,
-	-- 			["<C-l>"] = false,
-	-- 			["-"] = "actions.parent",
-	-- 			["_"] = "actions.open_cwd",
-	-- 			["`"] = "actions.cd",
-	-- 			["~"] = "actions.tcd",
-	-- 			["g."] = "actions.toggle_hidden",
-	-- 		},
-	-- 	},
-	-- 	keys = {
-	-- 		{
-	-- 			"-",
-	-- 			function()
-	-- 				require("oil").open()
-	-- 			end,
-	-- 			desc = "Open parent directory",
-	-- 		},
-	-- 	},
-	-- },
 	{
 		"echasnovski/mini.files",
 		version = false,
@@ -475,7 +302,7 @@ return {
 
 			local show_dotfiles = true
 
-			local filter_show = function(fs_entry)
+			local filter_show = function()
 				return true
 			end
 
@@ -499,101 +326,10 @@ return {
 		end,
 	},
 	{
-		"tpope/vim-dadbod",
-		dependencies = {
-			"kristijanhusak/vim-dadbod-ui",
-		},
-		cmd = {
-			"DB",
-			"DBUIClose",
-			"DBUIToggle",
-			"DBUIFindBuffer",
-			"DBUIRenameBuffer",
-			"DBUIAddConnection",
-			"DBUILastQueryInfo",
-		},
-	},
-	-- {
-	--   "echasnovski/mini.starter",
-	--   version = false,
-	--   opts = {},
-	--   config = function()
-	--     local starter = require("mini.starter")
-
-	--     local function footer()
-	--       local timer = vim.loop.new_timer()
-
-	--       timer:start(
-	--         0,
-	--         1000,
-	--         vim.schedule_wrap(function()
-	--           if vim.api.nvim_buf_get_option(0, "filetype") == "starter" then
-	--             starter.refresh()
-	--             timer:close()
-	--           end
-	--         end)
-	--       )
-
-	--       return function()
-	--         local stats = require("lazy").stats()
-
-	--         return "Loaded in ~" .. math.floor(stats.startuptime + 0.5)
-	--       end
-	--     end
-
-	--     require("mini.starter").setup({
-	--       header = function()
-	--         return table.concat({}, "\n")
-	--       end,
-	--       footer = footer(),
-	--       items = {
-	--         starter.sections.recent_files(5, true, false),
-	--         starter.sections.sessions(),
-	--       },
-	--       evaluate_single = true,
-	--     })
-	--   end,
-	-- },
-	{
-		"echasnovski/mini.sessions",
-		version = false,
-		opts = {},
-		keys = {
-			{
-				"<leader>Sr",
-				function()
-					require("mini.sessions").select()
-				end,
-				desc = "Read Session",
-			},
-			{
-				"<leader>Sd",
-				function()
-					require("mini.sessions").select("delete")
-				end,
-				desc = "Delete Session",
-			},
-			{
-				"<leader>Sw",
-				function()
-					local name = vim.fn.input({ prompt = "Session name (optional): ", default = "" })
-
-					require("mini.sessions").write(name == "" and nil or name)
-				end,
-				desc = "Write Session",
-			},
-		},
-		lazy = false,
-	},
-	{
 		"m4xshen/smartcolumn.nvim",
 		opts = {
 			{ "lazy", "help", "minifiles" },
 		},
 		event = { "BufReadPre", "BufNewFile" },
-	},
-	{
-		"tpope/vim-fugitive",
-		lazy = false,
 	},
 }

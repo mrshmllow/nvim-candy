@@ -12,27 +12,6 @@ return {
 			"saadparwaiz1/cmp_luasnip",
 			"onsails/lspkind.nvim",
 			"petertriho/cmp-git",
-			"kristijanhusak/vim-dadbod-completion",
-			-- {
-			-- 	"zbirenbaum/copilot.lua",
-			-- 	config = function()
-			-- 		require("copilot").setup({
-			-- 			filetypes = {
-			-- 				sh = function()
-			-- 					if string.match(vim.fs.basename(vim.api.nvim_buf_get_name(0)), "^%.env.*") then
-			-- 						return false
-			-- 					end
-			-- 					return true
-			-- 				end,
-			-- 				norg = false,
-			-- 				org = false,
-			-- 			},
-			-- 			event = { "InsertEnter", "LspAttach" },
-			-- 			fix_pairs = true,
-			-- 		})
-			-- 	end,
-			-- },
-			-- "zbirenbaum/copilot-cmp",
 		},
 		config = function()
 			vim.g.completeopt = "menu,menuone,noselect"
@@ -103,30 +82,28 @@ return {
 					{ name = "neorg", group_index = 2 },
 					{ name = "orgmode", group_index = 2 },
 					{ name = "nvim_lsp", group_index = 2 },
-					-- { name = "copilot", group_index = 2 },
 					{ name = "git", group_index = 2 },
 					{ name = "luasnip", group_index = 2 },
-					{ name = "vim-dadbod-completion", group_index = 2 },
 				}, {
 					{ name = "buffer" },
 				}),
 			})
 
-			cmp.setup.cmdline({ "/", "?" }, {
-				mapping = cmp.mapping.preset.cmdline(),
-				sources = {
-					{ name = "buffer" },
-				},
-			})
+			-- cmp.setup.cmdline({ "/", "?" }, {
+			-- 	mapping = cmp.mapping.preset.cmdline(),
+			-- 	sources = {
+			-- 		{ name = "buffer" },
+			-- 	},
+			-- })
 
-			cmp.setup.cmdline(":", {
-				mapping = cmp.mapping.preset.cmdline(),
-				sources = cmp.config.sources({
-					{ name = "path" },
-				}, {
-					{ name = "cmdline" },
-				}),
-			})
+			-- cmp.setup.cmdline(":", {
+			-- 	mapping = cmp.mapping.preset.cmdline(),
+			-- 	sources = cmp.config.sources({
+			-- 		{ name = "path" },
+			-- 	}, {
+			-- 		{ name = "cmdline" },
+			-- 	}),
+			-- })
 
 			-- require("copilot_cmp").setup()
 			require("cmp_git").setup()

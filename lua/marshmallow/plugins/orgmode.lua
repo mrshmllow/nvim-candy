@@ -9,9 +9,6 @@ return {
 			"nvim-treesitter/nvim-treesitter",
 			"akinsho/org-bullets.nvim",
 			"lukas-reineke/headlines.nvim",
-			-- { "edluffy/hologram.nvim", cond = not vim.g.neovide, opts = {
-			--    auto_display = true,
-			-- } },
 		},
 		keys = {
 			"<Leader>oa",

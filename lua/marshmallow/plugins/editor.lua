@@ -90,26 +90,4 @@ return {
 		"mbbill/undotree",
 		cmd = { "UndotreeToggle", "UndotreeFocus", "UndotreeShow", "UndotreeHide" },
 	},
-	{
-		"Ron89/thesaurus_query.vim",
-		keys = {
-			{
-				"<Leader>cs",
-			},
-		},
-		cmd = {
-			"Thesaurus",
-			"ThesaurusQuery",
-			"ThesaurusReplace",
-			"ThesaurusLookup",
-			"ThesaurusQueryLookupCurrentWord",
-			"ThesaurusReplaceLookupCurrentWord",
-		},
-	},
-	-- {
-	--   "zbirenbaum/copilot.lua",
-	--   cmd = "Copilot",
-	--   event = "InsertEnter",
-	--   opts = {}
-	-- },
 }
