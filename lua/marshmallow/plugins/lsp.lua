@@ -4,7 +4,6 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 		cmd = { "LspInfo", "LspInstall", "LspUninstall" },
 		dependencies = {
-			"pmizio/typescript-tools.nvim",
 			"nvim-lua/plenary.nvim",
 			"b0o/schemastore.nvim",
 		},
@@ -61,7 +60,7 @@ return {
 					)
 					vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
 					vim.keymap.set("n", "<leader>r", function()
-						vim.lsp.buf.format({ async = true })
+						require("conform").format()
 					end, { noremap = true, silent = true, buffer = bufnr, desc = "Format document" })
 				end,
 			})
@@ -85,7 +84,7 @@ return {
 					},
 				},
 			})
-			require("lspconfig").tailwindcss.setup({
+			lspconfig.tailwindcss.setup({
 				settings = {
 					tailwindCSS = {
 						experimental = {
@@ -126,7 +125,32 @@ return {
 					},
 				},
 			})
-
+		end,
+	},
+	{
+		"stevearc/conform.nvim",
+		config = function()
+			require("conform").setup({
+				formatters_by_ft = {
+					lua = { "stylua" },
+					-- Use a sub-list to run only the first available formatter
+					javascript = { { "prettierd", "prettier" } },
+					nix = { "alejandra" },
+					toml = { "taplo" },
+				},
+				format_on_save = {
+					-- These options will be passed to conform.format()
+					timeout_ms = 500,
+					lsp_fallback = true,
+				},
+			})
+		end,
+	},
+	{
+		"pmizio/typescript-tools.nvim",
+		dependencies = "neovim/nvim-lspconfig",
+		ft = "typescript",
+		config = function()
 			require("typescript-tools").setup({
 				settings = {
 					-- https://github.com/pmizio/typescript-tools.nvim/blob/master/lua/typescript-tools/protocol/text_document/did_open.lua#L8
@@ -143,49 +167,6 @@ return {
 						allowIncompleteCompletions = false,
 						allowRenameOfImportPath = false,
 					},
-				},
-			})
-		end,
-	},
-	{
-		"jose-elias-alvarez/null-ls.nvim",
-		event = { "BufReadPre", "BufNewFile" },
-		dependencies = {
-			"ThePrimeagen/refactoring.nvim",
-			"lewis6991/gitsigns.nvim",
-			"jose-elias-alvarez/typescript.nvim",
-		},
-		config = function()
-			local null_ls = require("null-ls")
-
-			null_ls.setup({
-				sources = {
-					null_ls.builtins.code_actions.refactoring,
-					null_ls.builtins.formatting.taplo,
-					null_ls.builtins.formatting.prettierd,
-					null_ls.builtins.formatting.stylua.with({
-						extra_args = function(params)
-							local extra = {}
-
-							if params.lsp_params.options.tabSize then
-								table.insert(extra, {
-									"--indent-width",
-									params.lsp_params.options.tabSize,
-								})
-							end
-
-							if params.lsp_params.options.insertSpaces then
-								table.insert(extra, {
-									"--indent-type",
-									"Spaces",
-								})
-							end
-
-							return extra
-						end,
-					}),
-					null_ls.builtins.code_actions.gitsigns,
-					require("typescript.extensions.null-ls.code-actions"),
 				},
 			})
 		end,
