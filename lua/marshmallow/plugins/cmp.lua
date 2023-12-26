@@ -89,21 +89,21 @@ return {
 				}),
 			})
 
-			-- cmp.setup.cmdline({ "/", "?" }, {
-			-- 	mapping = cmp.mapping.preset.cmdline(),
-			-- 	sources = {
-			-- 		{ name = "buffer" },
-			-- 	},
-			-- })
+			cmp.setup.cmdline({ "/", "?" }, {
+				mapping = cmp.mapping.preset.cmdline(),
+				sources = {
+					{ name = "buffer" },
+				},
+			})
 
-			-- cmp.setup.cmdline(":", {
-			-- 	mapping = cmp.mapping.preset.cmdline(),
-			-- 	sources = cmp.config.sources({
-			-- 		{ name = "path" },
-			-- 	}, {
-			-- 		{ name = "cmdline" },
-			-- 	}),
-			-- })
+			cmp.setup.cmdline(":", {
+				mapping = cmp.mapping.preset.cmdline(),
+				sources = cmp.config.sources({
+					{ name = "path" },
+				}, {
+					{ name = "cmdline" },
+				}),
+			})
 
 			-- require("copilot_cmp").setup()
 			require("cmp_git").setup()
