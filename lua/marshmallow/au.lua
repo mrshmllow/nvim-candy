@@ -17,11 +17,12 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
 	end,
 })
 
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+vim.api.nvim_create_autocmd({ "TermOpen" }, {
 	group = id,
+	pattern = "*",
 	callback = function()
-		vim.lsp.buf.format({
-			async = false,
-		})
+		vim.opt_local.number = false
+		vim.opt_local.relativenumber = false
+		vim.opt_local.signcolumn = "no"
 	end,
 })
