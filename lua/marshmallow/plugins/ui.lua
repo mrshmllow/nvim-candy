@@ -241,36 +241,45 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 		},
-		keys = {
-			{
-				"<leader>a",
-				function()
-					require("harpoon.mark").add_file()
-				end,
-				desc = "Harpoon file",
-			},
-			{
-				"<leader><C-space>",
-				function()
-					require("harpoon.ui").toggle_quick_menu()
-				end,
-				desc = "Open Harpoon",
-			},
-			{
-				"<leader>h",
-				function()
-					require("harpoon.ui").nav_prev()
-				end,
-				desc = "Harpoon prev",
-			},
-			{
-				"<leader>l",
-				function()
-					require("harpoon.ui").nav_next()
-				end,
-				desc = "Harpoon next",
-			},
-		},
+		keys = function()
+			local keys = {
+				{
+					"<leader>a",
+					function()
+						require("harpoon.mark").add_file()
+						vim.notify("Harpooned file", vim.log.levels.INFO)
+					end,
+					desc = "Harpoon file",
+				},
+				{
+					"<leader><C-space>",
+					function()
+						require("harpoon.ui").toggle_quick_menu()
+					end,
+					desc = "Open Harpoon",
+				},
+			}
+
+			for i = 1, 5 do
+				vim.list_extend(keys, {
+					{
+						"<M-" .. i .. ">",
+						function()
+							require("harpoon.ui").nav_file(i)
+						end,
+					},
+					{
+						"<leader>" .. i,
+						function()
+							require("harpoon.term").gotoTerminal(i)
+						end,
+						desc = "Goto term " .. i,
+					},
+				})
+			end
+
+			return keys
+		end,
 	},
 	{
 		"echasnovski/mini.files",
