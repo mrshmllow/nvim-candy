@@ -329,7 +329,7 @@ return {
 				group = id,
 				callback = function(args)
 					local buf_id = args.data.buf_id
-					vim.keymap.set("n", "g.", toggle_dotfiles, { buffer = buf_id })
+					vim.keymap.set("n", "g.", toggle_dotfiles, { buffer = buf_id, desc = "Toggle dotfiles" })
 				end,
 			})
 		end,
