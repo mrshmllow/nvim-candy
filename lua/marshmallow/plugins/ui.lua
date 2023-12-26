@@ -304,6 +304,10 @@ return {
 		config = function(_, opts)
 			require("mini.files").setup(opts)
 
+			local id = vim.api.nvim_create_augroup("MarshmallowMiniFiles", {
+				clear = true,
+			})
+
 			local show_dotfiles = true
 
 			local filter_show = function()
@@ -322,6 +326,7 @@ return {
 
 			vim.api.nvim_create_autocmd("User", {
 				pattern = "MiniFilesBufferCreate",
+				group = id,
 				callback = function(args)
 					local buf_id = args.data.buf_id
 					vim.keymap.set("n", "g.", toggle_dotfiles, { buffer = buf_id })
