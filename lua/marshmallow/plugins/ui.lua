@@ -332,7 +332,7 @@ return {
 	{
 		"m4xshen/smartcolumn.nvim",
 		opts = {
-			{ "lazy", "help", "minifiles" },
+			{ "lazy", "help", "minifiles", "markdown", "qf", "checkhealth" },
 		},
 		event = { "BufReadPre", "BufNewFile" },
 	},
