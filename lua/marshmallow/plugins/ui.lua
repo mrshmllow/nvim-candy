@@ -174,6 +174,7 @@ return {
 	{
 		"echasnovski/mini.surround",
 		version = false,
+		lazy = false,
 		keys = {
 			"gza",
 			"gzd",
@@ -201,6 +202,10 @@ return {
 		keys = {
 			"gc",
 			"gcc",
+			{
+				"gcc",
+				mode = "v",
+			},
 		},
 		opts = true,
 	},
