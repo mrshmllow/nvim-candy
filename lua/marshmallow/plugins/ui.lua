@@ -297,11 +297,7 @@ return {
 			{
 				"-",
 				function()
-					require("mini.files").open(require("mini.files").open(vim.api.nvim_buf_get_name(0)))
-				end,
-				"_",
-				function()
-					require("mini.files").open(require("mini.files").get_latest_path())
+					require("mini.files").open(vim.api.nvim_buf_get_name(0))
 				end,
 			},
 		},
