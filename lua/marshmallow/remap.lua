@@ -25,3 +25,22 @@ vim.keymap.set({ "n" }, "<C-z>", function()
 		vim.cmd.suspend()
 	end
 end, { silent = true })
+
+vim.keymap.set({ "n" }, "<leader>tl", function()
+	if vim.g.marsh_lazygit_buf == nil then
+		vim.cmd.terminal("lazygit")
+		vim.cmd.startinsert()
+		vim.g.marsh_lazygit_buf = vim.api.nvim_win_get_buf(0)
+
+		vim.api.nvim_create_autocmd({ "BufDelete" }, {
+			buffer = vim.g.marsh_lazygit_buf,
+			callback = function()
+				vim.g.marsh_lazygit_buf = nil
+			end,
+		})
+	else
+		vim.api.nvim_set_current_buf(vim.g.marsh_lazygit_buf)
+	end
+end, {
+	desc = "Open Lazygit",
+})

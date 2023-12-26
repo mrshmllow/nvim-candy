@@ -225,18 +225,6 @@ return {
 		event = "VeryLazy",
 	},
 	{
-		"voldikss/vim-floaterm",
-		cmd = "FloatermNew",
-		lazy = true,
-		keys = {
-			{
-				"<leader>tl",
-				"<cmd>:FloatermNew --cwd=<root> --name=Lazygit --width=1.0 --height=1.0  lazygit<CR>",
-				desc = "Open Lazygit",
-			},
-		},
-	},
-	{
 		"ThePrimeagen/harpoon",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
