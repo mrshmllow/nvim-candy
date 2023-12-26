@@ -73,10 +73,6 @@ return {
 				provider = function(self)
 					local filename = vim.fn.fnamemodify(self.filename, ":.")
 
-					if vim.bo.filetype == "oil" then
-						filename = vim.fn.fnamemodify(require("oil").get_current_dir(), ":p:~")
-					end
-
 					if filename == "" then
 						return "[No Name]"
 					end
