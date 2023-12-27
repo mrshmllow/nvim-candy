@@ -36,6 +36,10 @@ return {
 				MiniFilesBorder = { fg = colors.surface0 },
 				MiniFilesNormal = { bg = colors.base },
 
+				MiniPickBorder = { fg = colors.surface0 },
+				MiniPickNormal = { bg = colors.base },
+				MiniPickPrompt = { fg = colors.mauve },
+
 				FloatBorder = { fg = colors.mauve },
 
 				Directory = { fg = colors.mauve },

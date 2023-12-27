@@ -56,63 +56,34 @@ return {
 		},
 	},
 	{
-		"nvim-telescope/telescope.nvim",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			{
-				"nvim-telescope/telescope-fzf-native.nvim",
-				build = "make",
-				cond = vim.fn.executable("make") == 1,
-			},
-			"nvim-telescope/telescope-symbols.nvim",
-		},
+		"echasnovski/mini.nvim",
+		lazy = false,
+		config = function()
+			require("mini.pick").setup()
+		end,
 		keys = {
-			{ "<leader><space>", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Switch Buffer" },
-			{
-				"<leader>/",
-				Util.telescope("live_grep"),
-				desc = "Find in Files (Grep)",
-			},
-			-- find
 			{
 				"<leader>ff",
-				Util.telescope("files"),
+				function()
+					require("mini.pick").builtin.files()
+				end,
 				desc = "Find Files (root dir)",
 			},
-			{ "<leader>fF", Util.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
 			{
-				"<leader>fc",
-				Util.telescope("find_files", { cwd = "~/.config/nvim" }),
-				desc = "Find Files (~/.config/nvim)",
+				"<leader>/",
+				function()
+					require("mini.pick").builtin.grep_live()
+				end,
+				desc = "Find in Files (Grep)",
 			},
 			{
-				"<leader>fC",
-				Util.telescope("find_files", { cwd = "~/.config/" }),
-				desc = "Find Files (~/.config/)",
+				"<leader><space>",
+				function()
+					require("mini.pick").builtin.buffers()
+				end,
+				desc = "Switch Buffer",
 			},
-			{ "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
-			-- search
-			{
-				"<leader>sc",
-				Util.telescope("live_grep", { cwd = "~/.config/nvim" }),
-				desc = "Search in ~/.config/nvim",
-			},
-			{ "<leader>sg", Util.telescope("live_grep"), desc = "Grep (root dir)" },
-			{ "<leader>sG", Util.telescope("live_grep", { cwd = false }), desc = "Grep (cwd)" },
-			{ "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
-			{
-				"<leader>sH",
-				"<cmd>Telescope highlights<cr>",
-				desc = "Search Highlight Groups",
-			},
-			{ "<leader>sM", "<cmd>Telescope man_pages<cr>", desc = "Man Pages" },
-			{ "<leader>sR", "<cmd>Telescope resume<cr>", desc = "Resume" },
 		},
-		config = function()
-			require("telescope").setup({})
-
-			pcall(require("telescope").load_extension, "fzf")
-		end,
 	},
 	{
 		"lewis6991/gitsigns.nvim",
