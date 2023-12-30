@@ -56,7 +56,7 @@ return {
 		},
 	},
 	{
-		"echasnovski/mini.nvim",
+		"echasnovski/mini.pick",
 		lazy = false,
 		config = function()
 			require("mini.pick").setup()
