@@ -63,7 +63,7 @@ return {
 		end,
 		keys = {
 			{
-				"<leader>ff",
+				"<leader>f",
 				function()
 					require("mini.pick").builtin.files()
 				end,
