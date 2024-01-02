@@ -10,7 +10,6 @@ return {
 
 	{
 		"mrshmllow/open-handlers.nvim",
-		dev = true,
 		cond = vim.ui.open ~= nil,
 		lazy = false,
 		config = function()
