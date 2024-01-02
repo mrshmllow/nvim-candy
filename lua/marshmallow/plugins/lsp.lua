@@ -149,7 +149,7 @@ return {
 	{
 		"pmizio/typescript-tools.nvim",
 		dependencies = "neovim/nvim-lspconfig",
-		ft = "typescript",
+		ft = { "typescript", "typescriptreact" },
 		config = function()
 			require("typescript-tools").setup({
 				settings = {
