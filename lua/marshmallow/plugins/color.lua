@@ -36,6 +36,7 @@ return {
 					"org",
 					"nix",
 					"json",
+					"vimdoc",
 				},
 				highlight = {
 					enable = true,
