@@ -200,12 +200,14 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 		},
+		branch = "harpoon2",
+		opts = true,
 		keys = function()
 			local keys = {
 				{
 					"<leader>a",
 					function()
-						require("harpoon.mark").add_file()
+						require("harpoon"):list():append()
 						vim.notify("Harpooned file", vim.log.levels.INFO)
 					end,
 					desc = "Harpoon file",
@@ -213,7 +215,7 @@ return {
 				{
 					"<leader><C-space>",
 					function()
-						require("harpoon.ui").toggle_quick_menu()
+						require("harpoon"):toggle_quick_menu(require("harpoon"):list())
 					end,
 					desc = "Open Harpoon",
 				},
@@ -224,15 +226,8 @@ return {
 					{
 						"<M-" .. i .. ">",
 						function()
-							require("harpoon.ui").nav_file(i)
+							require("harpoon"):list():select(i)
 						end,
-					},
-					{
-						"<leader>" .. i,
-						function()
-							require("harpoon.term").gotoTerminal(i)
-						end,
-						desc = "Goto term " .. i,
 					},
 				})
 			end
