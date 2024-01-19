@@ -1,7 +1,5 @@
 if vim.g.neovide then
 	vim.opt.guifont = { "JetBrainsMono Nerd Font Mono", ":h14" }
-	-- vim.o.guifont = "Vulf Mono:h14"
-	-- vim.o.guifont = "CaskaydiaCove Nerd Font Mono:h14"
 
 	vim.g.neovide_input_use_logo = 1
 
@@ -33,8 +31,4 @@ if vim.g.neovide then
 	vim.keymap.set("v", "<D-v>", '"+P') -- Paste visual mode
 	vim.keymap.set("c", "<D-v>", "<C-R>+") -- Paste command mode
 	vim.keymap.set("i", "<D-v>", '<ESC>l"+Pli') -- Paste insert mode
-
-	vim.cmd([[:FloatermNew --silent --name=sus --width=1.0 --height=1.0]])
-
-	vim.keymap.set({ "t", "n" }, "<C-z>", "<cmd>FloatermToggle sus<cr>")
 end
