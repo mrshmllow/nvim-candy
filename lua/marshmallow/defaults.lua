@@ -49,4 +49,8 @@ vim.o.splitright = true
 
 vim.o.laststatus = 3
 
-vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,terminal,options"
+vim.opt.sessionoptions = {
+	"buffers",
+	"tabpages",
+	"globals",
+}
