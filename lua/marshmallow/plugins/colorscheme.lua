@@ -6,6 +6,7 @@ return {
 		flavour = vim.env.LAUNCH_CATPPUCCIN and vim.env.LAUNCH_CATPPUCCIN or "mocha",
 		term_colors = true,
 		-- transparent_background = true,
+		show_end_of_buffer = false,
 		intergration = {
 			neogit = true,
 			gitsigns = true,
