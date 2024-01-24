@@ -66,7 +66,6 @@ return {
 			})
 
 			local lspconfig = require("lspconfig")
-			lspconfig.rust_analyzer.setup({})
 			lspconfig.lua_ls.setup({
 				settings = {
 					Lua = {
@@ -169,6 +168,23 @@ return {
 					},
 				},
 			})
+		end,
+	},
+	{
+		"mrcjkb/rustaceanvim",
+		version = "^3",
+		ft = { "rust" },
+		config = function()
+			vim.g.rustaceanvim = {
+				server = {
+					cmd = function()
+						return { require("marshmallow.nix_pkgs").get_sync("rust-analyzer") .. "/bin/rust-analyzer" }
+					end,
+				},
+				inlay_hints = {
+					highlight = "NonText",
+				},
+			}
 		end,
 	},
 	{
