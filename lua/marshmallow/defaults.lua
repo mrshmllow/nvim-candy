@@ -25,7 +25,7 @@ vim.o.softtabstop = 2
 -- number of spaces a tab character appears as
 vim.o.tabstop = 2
 
--- vim.o.cmdheight = 0
+vim.o.cmdheight = 0
 
 vim.o.sidescrolloff = 8
 vim.o.scrolloff = 5
