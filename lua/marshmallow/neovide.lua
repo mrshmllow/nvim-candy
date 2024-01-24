@@ -1,5 +1,5 @@
 if vim.g.neovide then
-	vim.opt.guifont = { "JetBrainsMono Nerd Font Mono", ":h14" }
+	vim.opt.guifont = { "JetBrainsMono Nerd Font Mono", ":h14:w-1" }
 
 	vim.g.neovide_input_use_logo = 1
 
@@ -14,6 +14,23 @@ if vim.g.neovide then
 
 	vim.g.winblend = 30
 	vim.g.pumblend = 30
+
+	vim.g.neovide_scale_factor = 1.25
+
+	vim.g.neovide_padding_top = 10
+	vim.g.neovide_padding_bottom = 10
+	vim.g.neovide_padding_right = 10
+	vim.g.neovide_padding_left = 10
+
+	vim.g.neovide_transparency = 0.8
+
+	-- TODO: Sort this out
+	-- vim.g.neovide_theme = "auto"
+
+	vim.g.neovide_refresh_rate = 240
+
+	-- Is this okay??
+	vim.opt.linespace = -2
 
 	local change_scale_factor = function(delta)
 		vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta
@@ -32,3 +49,11 @@ if vim.g.neovide then
 	vim.keymap.set("c", "<D-v>", "<C-R>+") -- Paste command mode
 	vim.keymap.set("i", "<D-v>", '<ESC>l"+Pli') -- Paste insert mode
 end
+
+vim.api.nvim_create_user_command("Trans", function()
+	if vim.g.neovide_transparency == 0.8 then
+		vim.g.neovide_transparency = 1
+	else
+		vim.g.neovide_transparency = 0.8
+	end
+end, {})
