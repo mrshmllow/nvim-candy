@@ -35,7 +35,11 @@ return {
 				end,
 				hl = function(self)
 					local mode = self.mode:sub(1, 1)
-					return { fg = self.mode_colors[mode], bold = true }
+					return {
+						fg = self.mode_colors[mode],
+						bg = vim.g.neovide and "NONE" or nil,
+						bold = true,
+					}
 				end,
 				update = {
 					"ModeChanged",
@@ -46,7 +50,7 @@ return {
 				},
 			}
 
-			ViMode = utils.surround({ "", "" }, "surface0", { ViMode })
+			ViMode = utils.surround(vim.g.neovide and { " ", " " } or { "", "" }, "surface0", { ViMode })
 
 			local FileNameBlock = {
 				init = function(self)
