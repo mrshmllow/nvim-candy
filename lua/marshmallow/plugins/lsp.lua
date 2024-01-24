@@ -170,6 +170,20 @@ return {
 			})
 		end,
 	},
+	-- {
+	-- 	"mfussenegger/nvim-jdtls",
+	-- 	dependencies = "neovim/nvim-lspconfig",
+	-- 	ft = { "java" },
+	-- 	config = function()
+	-- 		local config = {
+	-- 			-- https://github.com/NixOS/nixpkgs/issues/232822#issuecomment-1564243667
+	-- 			cmd = { "jdt-language-server", "-data", "$XDG_CACHE_HOME/jdtls/$PWD" },
+	-- 			root_dir = vim.fs.dirname(vim.fs.find({ "gradlew", ".git", "mvnw" }, { upward = true })[1]),
+	-- 		}
+
+	-- 		require("jdtls").start_or_attach(config)
+	-- 	end,
+	-- },
 	{
 		"mrcjkb/rustaceanvim",
 		version = "^3",
