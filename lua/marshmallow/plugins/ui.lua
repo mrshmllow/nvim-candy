@@ -79,7 +79,13 @@ return {
 			{
 				"<leader><space>",
 				function()
-					require("mini.pick").builtin.buffers()
+					local wipeout_cur = function()
+						vim.api.nvim_buf_delete(require("mini.pick").get_picker_matches().current.bufnr, {})
+					end
+					local buffer_mappings = { wipeout = { char = "<C-d>", func = wipeout_cur } }
+					require("mini.pick").builtin.buffers({
+						include_current = false,
+					}, { mappings = buffer_mappings })
 				end,
 				desc = "Switch Buffer",
 			},
