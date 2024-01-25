@@ -194,35 +194,29 @@ return {
 			"nvim-lua/plenary.nvim",
 		},
 		branch = "harpoon2",
-		opts = true,
+		config = function()
+			local harpoon = require("harpoon")
+			harpoon:setup()
+			vim.keymap.set("n", "<leader>a", function()
+				harpoon:list():append()
+			end)
+			vim.keymap.set("n", "<leader><C-space>", function()
+				harpoon.ui:toggle_quick_menu(harpoon:list())
+			end)
+			for i = 1, 5 do
+				vim.keymap.set("n", "<M-" .. i .. ">", function()
+					harpoon:list():select(i)
+				end)
+			end
+		end,
 		keys = function()
 			local keys = {
-				{
-					"<leader>a",
-					function()
-						require("harpoon"):list():append()
-						vim.notify("Harpooned file", vim.log.levels.INFO)
-					end,
-					desc = "Harpoon file",
-				},
-				{
-					"<leader><C-space>",
-					function()
-						require("harpoon"):toggle_quick_menu(require("harpoon"):list())
-					end,
-					desc = "Open Harpoon",
-				},
+				"<leader>a",
+				"<leader><C-space>",
 			}
 
 			for i = 1, 5 do
-				vim.list_extend(keys, {
-					{
-						"<M-" .. i .. ">",
-						function()
-							require("harpoon"):list():select(i)
-						end,
-					},
-				})
+				table.insert(keys, "<M-" .. i .. ">")
 			end
 
 			return keys
