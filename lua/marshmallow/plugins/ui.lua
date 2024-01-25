@@ -103,19 +103,6 @@ return {
 		},
 	},
 	{
-		"folke/todo-comments.nvim",
-		dependencies = {
-			"nvim-telescope/telescope.nvim",
-			"nvim-lua/plenary.nvim",
-		},
-		cmd = { "TodoTrouble", "TodoTelescope" },
-		event = { "BufReadPost", "BufNewFile" },
-		opts = true,
-		keys = {
-			{ "<leader>st", "<cmd>TodoTelescope<CR>", desc = "Todo Comments" },
-		},
-	},
-	{
 		"echasnovski/mini.pairs",
 		event = "VeryLazy",
 		opts = {},
