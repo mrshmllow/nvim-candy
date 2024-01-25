@@ -1,5 +1,3 @@
-local Util = require("marshmallow.util")
-
 return {
 	{
 		"folke/which-key.nvim",
