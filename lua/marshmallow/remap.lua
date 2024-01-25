@@ -44,3 +44,6 @@ vim.keymap.set({ "n" }, "<leader>tl", function()
 end, {
 	desc = "Open Lazygit",
 })
+
+vim.keymap.set("t", "<C-w>n", "<C-\\><C-n><C-w>h", { silent = true })
+vim.keymap.set("t", "<C-w><C-n>", "<C-\\><C-n><C-w>h", { silent = true })
