@@ -22,7 +22,7 @@ if vim.g.neovide then
 	vim.g.neovide_padding_right = 10
 	vim.g.neovide_padding_left = 10
 
-	vim.g.neovide_transparency = 0.8
+	vim.g.neovide_transparency = 0.9
 
 	-- TODO: Sort this out
 	-- vim.g.neovide_theme = "auto"
@@ -51,9 +51,9 @@ if vim.g.neovide then
 end
 
 vim.api.nvim_create_user_command("Trans", function()
-	if vim.g.neovide_transparency == 0.8 then
+	if vim.g.neovide_transparency ~= 1 then
 		vim.g.neovide_transparency = 1
 	else
-		vim.g.neovide_transparency = 0.8
+		vim.g.neovide_transparency = 0.9
 	end
 end, {})
