@@ -44,6 +44,8 @@ return {
 				FloatBorder = { fg = colors.mauve },
 
 				Directory = { fg = colors.mauve },
+				IblScope = { fg = colors.surface2 },
+
 			}
 		end,
 	},
