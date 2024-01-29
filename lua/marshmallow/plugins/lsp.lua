@@ -21,12 +21,10 @@ return {
 					local client = vim.lsp.get_client_by_id(ev.data.client_id)
 					local bufnr = ev.buf
 
-					if client.server_capabilities.inlayHintProvider and vim.lsp.buf.inlay_hint ~= nil then
-						vim.lsp.buf.inlay_hint(bufnr, true)
-					end
 
-					if client.server_capabilities.completionProvider then
-						vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
+					-- if client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint.enable ~= nil then
+					if vim.lsp.inlay_hint.enable ~= nil then
+						vim.lsp.inlay_hint.enable(bufnr, true)
 					end
 
 					if client.server_capabilities.definitionProvider then
