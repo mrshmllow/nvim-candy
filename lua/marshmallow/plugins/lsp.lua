@@ -138,6 +138,8 @@ return {
 					javascript = { { "prettierd", "prettier" } },
 					nix = { "alejandra" },
 					toml = { "taplo" },
+					sql = { "sql_formatter" },
+					["*"] = { "injected" },
 				},
 				format_on_save = {
 					-- These options will be passed to conform.format()
