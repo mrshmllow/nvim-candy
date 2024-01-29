@@ -27,9 +27,13 @@ return {
 						vim.lsp.inlay_hint.enable(bufnr, true)
 					end
 
-					if client.server_capabilities.definitionProvider then
-						vim.bo[bufnr].tagfunc = "v:lua.vim.lsp.tagfunc"
-					end
+					-- if client.server_capabilities.completionProvider then
+					-- 	vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
+					-- end
+
+					-- if client.server_capabilities.definitionProvider then
+					-- 	vim.bo[bufnr].tagfunc = "v:lua.vim.lsp.tagfunc"
+					-- end
 
 					local opts = { noremap = true, silent = true }
 					vim.keymap.set("n", "E", vim.diagnostic.open_float, opts)
