@@ -46,6 +46,8 @@ return {
 				Directory = { fg = colors.mauve },
 				IblScope = { fg = colors.surface2 },
 
+				-- native_lsp method doesnt work?
+				LspInlayHint = { fg = colors.overlay0, bg = colors.base },
 			}
 		end,
 	},
