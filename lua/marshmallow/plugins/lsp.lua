@@ -190,14 +190,13 @@ return {
 		ft = { "rust" },
 		config = function()
 			vim.g.rustaceanvim = {
+				tools = {},
 				server = {
-					cmd = function()
-						return { require("marshmallow.nix_pkgs").get_sync("rust-analyzer") .. "/bin/rust-analyzer" }
-					end,
+					settings = {
+						["rust-analyzer"] = {},
+					},
 				},
-				inlay_hints = {
-					highlight = "NonText",
-				},
+				dap = {},
 			}
 		end,
 	},
