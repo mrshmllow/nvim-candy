@@ -75,7 +75,11 @@ return {
 			{
 				"<leader>/",
 				function()
-					require("mini.pick").builtin.grep_live()
+					local cope = function()
+						vim.api.nvim_buf_delete(require("mini.pick").get_picker_matches().current.bufnr, {})
+					end
+					local buffer_mappings = { wipeout = { char = "<C-q>", func = cope } }
+					require("mini.pick").builtin.grep_live({}, { mappings = buffer_mappings })
 				end,
 				desc = "Find in Files (Grep)",
 			},
