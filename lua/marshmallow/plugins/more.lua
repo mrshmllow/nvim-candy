@@ -15,4 +15,7 @@ return {
 			})
 		end,
 	},
+	{
+		"direnv/direnv.vim",
+	},
 }
