@@ -6,6 +6,6 @@ Neovim config for myself
 nix run github:mrshmllow/nvim-candy
 ```
 
-- Attempts to rely on as little plugins as possible
+- Attempts to rely on as few plugins as possible
 - `APPNAME=candy` as to not cause conflicts
 - all custom lua is under the `require("marshmallow\..*")` space
