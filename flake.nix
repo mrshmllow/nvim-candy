@@ -45,21 +45,16 @@
           luasnip
           cmp_luasnip
         ];
-        customRC = "";
+        wrapRc = false;
       };
 
-      nvim-package = pkgs.wrapNeovimUnstable neovim (config
-        // {
-          wrapRc = false;
-        });
-
-      bin = pkgs.writeScriptBin "nvim" ''
-        NVIM_APPNAME=candy XDG_CONFIG_HOME=${./.} ${lib.getExe nvim-package} "$@"
-      '';
+      nvim-package = (pkgs.wrapNeovimUnstable neovim config).overrideAttrs (old: {
+        generatedWrapperArgs = old.generatedWrapperArgs or [ ] ++ ["--set" "NVIM_APPNAME" "candy" "--set" "XDG_CONFIG_HOME" "${./.}"];
+      });
     in {
-      packages.default = bin;
+      packages.default = nvim-package;
       devShells.default = pkgs.mkShell {
-        packages = [bin];
+        packages = [nvim-package];
       };
     });
 }
