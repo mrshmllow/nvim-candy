@@ -10,6 +10,5 @@ require("marshmallow.snippets")
 require("mini.pick").setup()
 
 require("marshmallow.format")
-require("marshmallow.clue")
 require("marshmallow.files")
 require("marshmallow.usercommand")
