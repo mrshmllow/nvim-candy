@@ -51,7 +51,7 @@
       };
 
       nvim-package = (pkgs.wrapNeovimUnstable neovim config).overrideAttrs (old: {
-        generatedWrapperArgs = old.generatedWrapperArgs or [ ] ++ ["--set" "NVIM_APPNAME" "candy" "--set" "XDG_CONFIG_HOME" "${./.}"];
+        generatedWrapperArgs = old.generatedWrapperArgs or [] ++ ["--set" "NVIM_APPNAME" "candy" "--set" "XDG_CONFIG_HOME" "${./.}"];
       });
     in {
       packages.default = nvim-package;
