@@ -35,6 +35,8 @@
             name = "harpoon";
           })
           rustaceanvim
+          heirline-nvim
+          nvim-web-devicons
 
           # nvim-cmp
           nvim-cmp
