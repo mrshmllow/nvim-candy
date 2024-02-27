@@ -7,7 +7,6 @@
   };
   inputs.devshell.url = "github:numtide/devshell";
   inputs.nightly.url = "github:nix-community/neovim-nightly-overlay";
-  inputs.hercules-ci-effects.url = "github:hercules-ci/hercules-ci-effects";
 
   # Plugins
   inputs.harpoon-nvim.url = "github:ThePrimeagen/harpoon/harpoon2";
@@ -27,7 +26,6 @@
       imports = [
         inputs.flake-parts.flakeModules.easyOverlay
         inputs.devshell.flakeModule
-        inputs.hercules-ci-effects.flakeModule
       ];
 
       perSystem = {
@@ -83,18 +81,6 @@
       in {
         defaultPackage = package;
         overlay = inputs.self.overlays.default;
-      };
-
-      hercules-ci.flake-update = {
-        enable = true;
-        baseMerge.enable = true;
-        baseMerge.method = "rebase";
-        autoMergeMethod = "rebase";
-        # Update everynight at midnight
-        when = {
-          hour = [0];
-          minute = 0;
-        };
       };
     });
 }
