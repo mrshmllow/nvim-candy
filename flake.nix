@@ -1,62 +1,100 @@
 {
   description = "my-neovim";
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-  inputs.flake-utils.url = "github:numtide/flake-utils";
-  inputs.overlay.url = "github:nix-community/neovim-nightly-overlay";
+  inputs.flake-parts = {
+    url = "github:hercules-ci/flake-parts";
+    inputs.nixpkgs-lib.follows = "nixpkgs";
+  };
+  inputs.devshell.url = "github:numtide/devshell";
+  inputs.nightly.url = "github:nix-community/neovim-nightly-overlay";
+  inputs.hercules-ci-effects.url = "github:hercules-ci/hercules-ci-effects";
 
+  # Plugins
   inputs.harpoon-nvim.url = "github:ThePrimeagen/harpoon/harpoon2";
   inputs.harpoon-nvim.flake = false;
   inputs.stay-in-place-nvim.url = "github:gbprod/stay-in-place.nvim";
   inputs.stay-in-place-nvim.flake = false;
 
-  outputs = inputs @ {
-    nixpkgs,
-    self,
-    flake-utils,
-    ...
-  }:
-    flake-utils.lib.eachDefaultSystem (system: let
-      inherit (nixpkgs) lib;
+  outputs = inputs:
+    inputs.flake-parts.lib.mkFlake {inherit inputs;} ({config, ...}: {
+      systems = [
+        "x86_64-linux"
+        "x86_64-darwin"
+        "aarch64-linux"
+        "aarch64-darwin"
+      ];
 
-      pkgs = nixpkgs.legacyPackages.${system};
-      neovim = inputs.overlay.packages.${system}.default;
-      config = pkgs.neovimUtils.makeNeovimConfig {
-        plugins = with pkgs.vimPlugins; [
-          nvim-treesitter.withAllGrammars
-          nvim-lspconfig
-          catppuccin-nvim
-          mini-nvim
-          luasnip
-          conform-nvim
-          plenary-nvim
-          which-key-nvim
-          (pkgs.vimUtils.buildVimPlugin {
-            src = inputs.harpoon-nvim;
-            name = "harpoon";
-          })
-          rustaceanvim
-          heirline-nvim
-          nvim-web-devicons
+      imports = [
+        inputs.flake-parts.flakeModules.easyOverlay
+        inputs.devshell.flakeModule
+        inputs.hercules-ci-effects.flakeModule
+      ];
 
-          # nvim-cmp
-          nvim-cmp
-          cmp-nvim-lsp
-          cmp-cmdline
-          cmp-async-path
-          cmp-buffer
-          luasnip
-          cmp_luasnip
-        ];
-        wrapRc = false;
+      perSystem = {
+        inputs',
+        system,
+        config,
+        lib,
+        pkgs,
+        ...
+      }: {
+        packages = let
+          unstable = inputs'.nightly.packages.neovim;
+          nvim-config = pkgs.neovimUtils.makeNeovimConfig {
+            plugins = with pkgs.vimPlugins; [
+              nvim-treesitter.withAllGrammars
+              nvim-lspconfig
+              catppuccin-nvim
+              mini-nvim
+              luasnip
+              conform-nvim
+              plenary-nvim
+              which-key-nvim
+              (pkgs.vimUtils.buildVimPlugin {
+                src = inputs.harpoon-nvim;
+                name = "harpoon";
+              })
+              rustaceanvim
+              heirline-nvim
+              nvim-web-devicons
+
+              # nvim-cmp
+              nvim-cmp
+              cmp-nvim-lsp
+              cmp-cmdline
+              cmp-async-path
+              cmp-buffer
+              luasnip
+              cmp_luasnip
+            ];
+            wrapRc = false;
+          };
+        in {
+          neovim = (pkgs.wrapNeovimUnstable unstable nvim-config).overrideAttrs (old: {
+            generatedWrapperArgs = old.generatedWrapperArgs or [] ++ ["--set" "NVIM_APPNAME" "candy" "--set" "XDG_CONFIG_HOME" "${./.}"];
+          });
+          default = config.packages.neovim;
+        };
+        overlayAttrs = lib.genAttrs ["candy-nvim"] (_: config.packages.neovim);
       };
 
-      nvim-package = (pkgs.wrapNeovimUnstable neovim config).overrideAttrs (old: {
-        generatedWrapperArgs = old.generatedWrapperArgs or [] ++ ["--set" "NVIM_APPNAME" "candy" "--set" "XDG_CONFIG_HOME" "${./.}"];
-      });
-    in {
-      packages.default = nvim-package;
-      devShells.default = pkgs.mkShell {
-        packages = [nvim-package];
+      flake = let
+        package = inputs.nixpkgs.lib.genAttrs config.systems (system: inputs.self.packages.${system}.default);
+      in {
+        defaultPackage = package;
+        overlay = inputs.self.overlays.default;
+      };
+
+      hercules-ci.flake-update = {
+        enable = true;
+        baseMerge.enable = true;
+        baseMerge.method = "rebase";
+        autoMergeMethod = "rebase";
+        # Update everynight at midnight
+        when = {
+          hour = [0];
+          minute = 0;
+        };
       };
     });
 }
