@@ -60,6 +60,19 @@ lspconfig.lua_ls.setup({
 	},
 })
 
+lspconfig.tailwindcss.setup({
+	settings = {
+		tailwindCSS = {
+			experimental = {
+				classRegex = {
+					{ "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
+					{ "cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
+				},
+			},
+		},
+	},
+})
+
 require("typescript-tools").setup({
 	cmd = { "typescript-language-server", "--stdio" },
 	settings = {
