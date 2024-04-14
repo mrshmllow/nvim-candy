@@ -55,6 +55,7 @@
               rustaceanvim
               heirline-nvim
               nvim-web-devicons
+              typescript-tools-nvim
 
               # nvim-cmp
               nvim-cmp
