@@ -50,7 +50,7 @@ vim.keymap.set("n", "<leader>/", function()
 	require("mini.pick").builtin.grep_live({}, { mappings = buffer_mappings })
 end, { desc = "Grep (root dir)" })
 
-vim.keymap.set("n", "<leader>/", function()
+vim.keymap.set("n", "<leader><leader>", function()
 	local wipeout_current = function()
 		vim.api.nvim_buf_delete(require("mini.pick").get_picker_matches().current.bufnr, {})
 	end
