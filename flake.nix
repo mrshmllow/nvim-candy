@@ -69,9 +69,10 @@
             wrapRc = false;
           };
         in {
-          neovim = (pkgs.wrapNeovimUnstable unstable nvim-config).overrideAttrs (old: {
-            generatedWrapperArgs = old.generatedWrapperArgs or [] ++ ["--set" "NVIM_APPNAME" "candy" "--set" "XDG_CONFIG_HOME" "${./.}"];
-          });
+          neovim = pkgs.writeShellScriptBin "neovim" ''
+            systemd-run --user -qt -p PrivateUsers=yes -p BindPaths=${./.}/candy:/home/$USER/.config/nvim ${lib.getExe (pkgs.wrapNeovimUnstable unstable nvim-config)}
+          '';
+
           default = config.packages.neovim;
         };
         overlayAttrs = lib.genAttrs ["candy-nvim"] (_: config.packages.neovim);
