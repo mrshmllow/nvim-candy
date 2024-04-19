@@ -24,7 +24,6 @@
       ];
 
       imports = [
-        inputs.flake-parts.flakeModules.easyOverlay
         inputs.devshell.flakeModule
       ];
 
@@ -75,14 +74,12 @@
 
           default = config.packages.neovim;
         };
-        overlayAttrs = lib.genAttrs ["candy-nvim"] (_: config.packages.neovim);
       };
 
       flake = let
         package = inputs.nixpkgs.lib.genAttrs config.systems (system: inputs.self.packages.${system}.default);
       in {
         defaultPackage = package;
-        overlay = inputs.self.overlays.default;
       };
     });
 }
