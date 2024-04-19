@@ -70,7 +70,7 @@
           };
         in {
           neovim = pkgs.writeShellScriptBin "nvim" ''
-            systemd-run --user -qt -d -p PrivateUsers=yes -p BindPaths=${./.}/candy:/home/$USER/.config/nvim ${lib.getExe (pkgs.wrapNeovimUnstable unstable nvim-config)} "$@"
+            systemd-run --user -qt -d -E NVIM_APPNAME=candy -p PrivateUsers=yes -p BindPaths=${./.}/candy:/home/$USER/.config/candy ${lib.getExe (pkgs.wrapNeovimUnstable unstable nvim-config)} "$@"
           '';
 
           default = config.packages.neovim;
