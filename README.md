@@ -7,32 +7,31 @@ nix run github:mrshmllow/nvim-candy
 ```
 
 - Attempts to rely on as few plugins as possible
-- `APPNAME=candy` as to not cause conflicts
+- `$NVIM_APPNAME=candy` as to not cause conflicts
+- runs under systemd-run, virtually linking the nix store path to ~/.config/candy
 - all custom lua is under the `require("marshmallow\..*")` space
 
 ## Output
 
 ```
-git+file:///home/marsh/.config/nvim
+$ nix flake show --all-systems
+git+file:///home/marsh/projects/nvim-candy
 ├───defaultPackage
-│   ├───aarch64-darwin: package 'neovim-XXXXXXX'
-│   ├───aarch64-linux: package 'neovim-XXXXXXX'
-│   ├───x86_64-darwin: package 'neovim-XXXXXXX'
-│   └───x86_64-linux: package 'neovim-XXXXXXX'
-├───overlay: Nixpkgs overlay
-├───overlays
-│   └───default: Nixpkgs overlay
+│   ├───aarch64-darwin: package 'nvim'
+│   ├───aarch64-linux: package 'nvim'
+│   ├───x86_64-darwin: package 'nvim'
+│   └───x86_64-linux: package 'nvim'
 └───packages
     ├───aarch64-darwin
-    │   ├───default: package 'neovim-XXXXXXX'
-    │   └───neovim: package 'neovim-XXXXXXX'
+    │   ├───default: package 'nvim'
+    │   └───neovim: package 'nvim'
     ├───aarch64-linux
-    │   ├───default: package 'neovim-XXXXXXX'
-    │   └───neovim: package 'neovim-XXXXXXX'
+    │   ├───default: package 'nvim'
+    │   └───neovim: package 'nvim'
     ├───x86_64-darwin
-    │   ├───default: package 'neovim-XXXXXXX'
-    │   └───neovim: package 'neovim-XXXXXXX'
+    │   ├───default: package 'nvim'
+    │   └───neovim: package 'nvim'
     └───x86_64-linux
-        ├───default: package 'neovim-XXXXXXX'
-        └───neovim: package 'neovim-XXXXXXX'
+        ├───default: package 'nvim'
+        └───neovim: package 'nvim'
 ```
