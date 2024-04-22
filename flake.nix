@@ -39,6 +39,12 @@
           unstable = inputs'.nightly.packages.neovim;
           nvim-config = pkgs.neovimUtils.makeNeovimConfig {
             plugins = with pkgs.vimPlugins; [
+              (pkgs.vimUtils.buildVimPlugin {
+                pname = "nvim-candy";
+                src = ./candy;
+                version = "#";
+              })
+
               nvim-treesitter.withAllGrammars
               nvim-lspconfig
               catppuccin-nvim
@@ -68,9 +74,9 @@
             wrapRc = false;
           };
         in {
-          neovim = pkgs.writeShellScriptBin "nvim" ''
-            systemd-run --user -qt -d -E NVIM_APPNAME=candy -p PrivateUsers=yes -p BindPaths=${./.}/candy:/home/$USER/.config/candy ${lib.getExe (pkgs.wrapNeovimUnstable unstable nvim-config)} "$@"
-          '';
+          neovim = (pkgs.wrapNeovimUnstable unstable nvim-config).overrideAttrs (old: {
+            generatedWrapperArgs = old.generatedWrapperArgs or [] ++ ["--set" "NVIM_APPNAME" "candy"];
+          });
 
           default = config.packages.neovim;
         };

@@ -8,7 +8,6 @@ nix run github:mrshmllow/nvim-candy
 
 - Attempts to rely on as few plugins as possible
 - `$NVIM_APPNAME=candy` as to not cause conflicts
-- runs under systemd-run, virtually linking the nix store path to ~/.config/candy
 - all custom lua is under the `require("marshmallow\..*")` space
 
 ## Output
