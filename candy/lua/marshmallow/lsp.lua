@@ -7,9 +7,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		local client = vim.lsp.get_client_by_id(ev.data.client_id)
 		local bufnr = ev.buf
 
-		if vim.lsp.inlay_hint.enable ~= nil then
-			vim.lsp.inlay_hint.enable(bufnr, true)
-		end
+		vim.lsp.inlay_hint.enable(true, {
+			bufnr = bufnr,
+		})
 
 		local opts = { noremap = true, silent = true }
 		vim.keymap.set("n", "E", vim.diagnostic.open_float, opts)
