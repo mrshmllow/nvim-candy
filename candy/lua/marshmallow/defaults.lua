@@ -6,6 +6,9 @@ vim.o.timeoutlen = 300
 -- Terminal --
 vim.opt.termguicolors = true
 
+-- Undo --
+vim.opt.undofile = true -- ... ouch
+
 -- Number / Gutter / Column --
 vim.opt.nu = true
 vim.opt.rnu = true
