@@ -64,6 +64,7 @@
               direnv-vim
               vim-dotenv
               nvim-spider
+              vim-fugitive
 
               # nvim-cmp
               nvim-cmp
