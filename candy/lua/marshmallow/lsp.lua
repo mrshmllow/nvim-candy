@@ -73,6 +73,8 @@ lspconfig.tailwindcss.setup({
 	},
 })
 
+lspconfig.astro.setup({})
+
 require("typescript-tools").setup({
 	cmd = { "typescript-language-server", "--stdio" },
 	settings = {
