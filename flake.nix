@@ -61,6 +61,8 @@
               heirline-nvim
               nvim-web-devicons
               typescript-tools-nvim
+              direnv-vim
+              vim-dotenv
               nvim-spider
 
               # nvim-cmp
