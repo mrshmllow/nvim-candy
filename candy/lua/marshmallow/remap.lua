@@ -56,7 +56,23 @@ vim.keymap.set("n", "<leader>f", require("mini.pick").builtin.files, { desc = "P
 
 vim.keymap.set("n", "<leader>/", function()
 	local cope = function()
-		vim.api.nvim_buf_delete(require("mini.pick").get_picker_matches().current.bufnr, {})
+		local items = require("mini.pick").get_picker_items()
+		local qfitems = {}
+
+		for _, value in pairs(items) do
+			local split = vim.split(value, ":")
+
+			table.insert(qfitems, {
+				filename = split[1],
+				lnum = split[2],
+				col = split[3],
+				text = vim.trim(split[4]),
+			})
+		end
+
+		vim.fn.setqflist(qfitems)
+		vim.cmd.cope()
+		return true
 	end
 	local buffer_mappings = { wipeout = { char = "<C-q>", func = cope } }
 	require("mini.pick").builtin.grep_live({}, { mappings = buffer_mappings })
