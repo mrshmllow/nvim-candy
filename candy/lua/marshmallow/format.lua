@@ -15,5 +15,11 @@ require("conform").setup({
 		timeout_ms = 500,
 		lsp_fallback = true,
 	},
+	formatters = {
+		sql_formatter = {
+			cmd = "sql-formatter",
+			-- TODO: Find a better way.......
+			prepend_args = { "-l", "postgresql" },
+		},
+	},
 })
-
