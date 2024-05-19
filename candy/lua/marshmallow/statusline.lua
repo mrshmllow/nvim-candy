@@ -342,13 +342,16 @@ local Scrollbar = {
 local ALIGN = { provider = "%=" }
 local SPACE = { provider = "  " }
 
+local Winbar = {
+	ALIGN,
+	FileNameBlock,
+	ALIGN,
+}
+
 local StatusLine = {
 	ViMode,
 	MacroRec,
 	SPACE,
-	FileNameBlock,
-	SPACE,
-	HelpFileName,
 	Git,
 	SPACE,
 	Diagnostics,
@@ -421,7 +424,15 @@ local StatusLine = {
 
 heirline.setup({
 	statusline = StatusLine,
+	winbar = Winbar,
 	opts = {
 		colors = get_colors(),
+
+		disable_winbar_cb = function(args)
+			return conditions.buffer_matches({
+				buftype = { "nofile", "prompt", "quickfix" },
+				filetype = { "^git.*", "fugitive" },
+			}, args.buf)
+		end,
 	},
 })
