@@ -48,6 +48,7 @@
               nvim-treesitter.withAllGrammars
               nvim-lspconfig
               catppuccin-nvim
+              kanagawa-nvim
               mini-nvim
               luasnip
               conform-nvim
