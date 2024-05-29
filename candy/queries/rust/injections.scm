@@ -3,7 +3,7 @@
 (macro_invocation
 	macro: (scoped_identifier
 		 path: (identifier) @path (#eq? @path "sqlx")
-		 name: (identifier) @name (#eq? @name "query_as")
+		 name: (identifier) @name (#any-of? @name "query_as" "query")
 	)
 
 	(token_tree
