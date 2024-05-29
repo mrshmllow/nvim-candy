@@ -75,6 +75,13 @@
               cmp-buffer
               luasnip
               cmp_luasnip
+
+              # formatters
+              pkgs.stylua
+              pkgs.prettierd
+              pkgs.alejandra
+              pkgs.taplo
+              pkgs.nodePackages.sql-formatter
             ];
             wrapRc = false;
           };
