@@ -1,5 +1,8 @@
 require("which-key").setup({})
--- Other keymaps set in `remap`
+
+-- experimental --
+vim.keymap.set("n", "0", "^", { noremap = true, silent = true })
+vim.keymap.set("n", "^", "0", { noremap = true, silent = true })
 
 -- nvim-spider
 require("spider").setup({
