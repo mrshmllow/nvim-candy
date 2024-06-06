@@ -13,6 +13,8 @@
   inputs.harpoon-nvim.flake = false;
   inputs.stay-in-place-nvim.url = "github:gbprod/stay-in-place.nvim";
   inputs.stay-in-place-nvim.flake = false;
+  inputs.supermaven-nvim.url = "github:supermaven-inc/supermaven-nvim";
+  inputs.supermaven-nvim.flake = false;
 
   outputs = inputs:
     inputs.flake-parts.lib.mkFlake {inherit inputs;} ({config, ...}: {
@@ -57,6 +59,10 @@
               (pkgs.vimUtils.buildVimPlugin {
                 src = inputs.harpoon-nvim;
                 name = "harpoon";
+              })
+              (pkgs.vimUtils.buildVimPlugin {
+                src = inputs.supermaven-nvim;
+                name = "supermaven";
               })
               rustaceanvim
               heirline-nvim

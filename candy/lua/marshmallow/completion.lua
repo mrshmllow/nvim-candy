@@ -1,6 +1,11 @@
 -- Awaiting mini.completion w/ snippet support...
 -- require("mini.completion").setup()
 
+require("supermaven-nvim").setup({
+	disable_inline_completion = true,
+	disable_keymaps = true,
+})
+
 local cmp = require("cmp")
 cmp.setup({
 	snippet = {
@@ -21,11 +26,14 @@ cmp.setup({
 	}),
 	sources = cmp.config.sources({
 		{ name = "nvim_lsp" },
+		{ name = "supermaven" },
 		{ name = "luasnip" },
 		{ name = "async_path" },
 	}, {
 		{ name = "buffer" },
 	}),
+
+	experimental = { ghost_text = true },
 })
 
 cmp.setup.cmdline(":", {

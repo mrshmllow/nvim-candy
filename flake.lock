@@ -313,7 +313,8 @@
         "harpoon-nvim": "harpoon-nvim",
         "nightly": "nightly",
         "nixpkgs": "nixpkgs_3",
-        "stay-in-place-nvim": "stay-in-place-nvim"
+        "stay-in-place-nvim": "stay-in-place-nvim",
+        "supermaven-nvim": "supermaven-nvim"
       }
     },
     "stay-in-place-nvim": {
@@ -329,6 +330,22 @@
       "original": {
         "owner": "gbprod",
         "repo": "stay-in-place.nvim",
+        "type": "github"
+      }
+    },
+    "supermaven-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1717539476,
+        "narHash": "sha256-mlVo/ZKDZUjOfXwaLhpi45B4zxtnwa40GEIaa1E+sy0=",
+        "owner": "supermaven-inc",
+        "repo": "supermaven-nvim",
+        "rev": "ef3bd1a6b6f722857f2f88d929dd4ac875655611",
+        "type": "github"
+      },
+      "original": {
+        "owner": "supermaven-inc",
+        "repo": "supermaven-nvim",
         "type": "github"
       }
     },
