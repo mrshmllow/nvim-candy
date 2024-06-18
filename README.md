@@ -8,6 +8,7 @@ nix run github:mrshmllow/nvim-candy
 
 - Attempts to rely on as few plugins as possible
 - `$NVIM_APPNAME=candy` as to not cause conflicts
+- Patches in a new env var, `$NIX_ABS_CONFIG`
 - all custom lua is under the `require("marshmallow\..*")` space
 
 ## Output

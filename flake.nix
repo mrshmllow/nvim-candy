@@ -38,15 +38,11 @@
         ...
       }: {
         packages = let
-          unstable = inputs'.nightly.packages.neovim;
+          unstable = inputs'.nightly.packages.neovim.overrideAttrs (old: {
+            patches = [./0001-NIX_ABS_PATH.patch];
+          });
           nvim-config = pkgs.neovimUtils.makeNeovimConfig {
             plugins = with pkgs.vimPlugins; [
-              (pkgs.vimUtils.buildVimPlugin {
-                pname = "nvim-candy";
-                src = ./candy;
-                version = "#";
-              })
-
               nvim-treesitter.withAllGrammars
               nvim-lspconfig
               catppuccin-nvim
@@ -93,7 +89,17 @@
           };
         in {
           neovim = (pkgs.wrapNeovimUnstable unstable nvim-config).overrideAttrs (old: {
-            generatedWrapperArgs = old.generatedWrapperArgs or [] ++ ["--set" "NVIM_APPNAME" "candy"];
+            generatedWrapperArgs =
+              old.generatedWrapperArgs
+              or []
+              ++ [
+                "--set"
+                "NVIM_APPNAME"
+                "candy"
+                "--set"
+                "NIX_ABS_CONFIG"
+                "${./.}"
+              ];
           });
 
           default = config.packages.neovim;
