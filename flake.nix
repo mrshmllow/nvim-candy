@@ -68,6 +68,7 @@
               vim-dotenv
               nvim-spider
               vim-fugitive
+              gitsigns-nvim
 
               # nvim-cmp
               nvim-cmp
