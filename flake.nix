@@ -78,13 +78,6 @@
               cmp-buffer
               luasnip
               cmp_luasnip
-
-              # formatters
-              pkgs.stylua
-              pkgs.prettierd
-              pkgs.alejandra
-              pkgs.taplo
-              pkgs.nodePackages.sql-formatter
             ];
             wrapRc = false;
           };
@@ -100,6 +93,18 @@
                 "--set"
                 "NIX_ABS_CONFIG"
                 "${./.}"
+              ];
+            buildInputs = with pkgs;
+              old.buildInputs
+              or []
+              ++ [
+                curl
+                git
+                stylua
+                prettierd
+                alejandra
+                taplo
+                nodePackages.sql-formatter
               ];
             doCheck = true;
             checkPhase = ''
