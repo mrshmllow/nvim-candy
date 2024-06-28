@@ -101,6 +101,10 @@
                 "NIX_ABS_CONFIG"
                 "${./.}"
               ];
+            doCheck = true;
+            checkPhase = ''
+              $out/bin/nvim --headless -c "if !empty(v:errmsg) | cq 1 | else | cq 0 | endif"
+            '';
           });
 
           default = config.packages.neovim;
