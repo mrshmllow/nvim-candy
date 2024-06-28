@@ -107,7 +107,10 @@
                 nodePackages.sql-formatter
               ];
             doCheck = true;
+            nativeCheckInputs = [pkgs.luajitPackages.luacheck];
             checkPhase = ''
+              luacheck ${./candy} --only 0
+
               CANDY_CHECK=1 $out/bin/nvim \
                 --headless \
                 --cmd "source ${./pre-check.lua}" \
