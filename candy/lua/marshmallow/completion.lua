@@ -1,10 +1,13 @@
 -- Awaiting mini.completion w/ snippet support...
 -- require("mini.completion").setup()
 
-require("supermaven-nvim").setup({
-	disable_inline_completion = true,
-	disable_keymaps = true,
-})
+if vim.env.CANDY_CHECK == nil then
+	-- Disable in check phase
+	require("supermaven-nvim").setup({
+		disable_inline_completion = true,
+		disable_keymaps = true,
+	})
+end
 
 local cmp = require("cmp")
 cmp.setup({

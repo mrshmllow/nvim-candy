@@ -108,7 +108,10 @@
               ];
             doCheck = true;
             checkPhase = ''
-              $out/bin/nvim --headless -c "if !empty(v:errmsg) | cq 1 | else | cq 0 | endif"
+              CANDY_CHECK=1 $out/bin/nvim \
+                --headless \
+                --cmd "source ${./pre-check.lua}" \
+                -c "source ${./post-check.lua}" || (>&2 cat stderr.txt && exit 1)
             '';
           });
 
