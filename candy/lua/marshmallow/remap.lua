@@ -40,20 +40,19 @@ vim.keymap.set("n", "<leader>f", require("mini.pick").builtin.files, { desc = "P
 vim.keymap.set("n", "<leader>/", function()
 	local cope = function()
 		local items = require("mini.pick").get_picker_items()
-		local qfitems = {}
 
-		for _, value in pairs(items) do
+		vim.fn.setqflist(vim.tbl_map(function(value)
 			local split = vim.split(value, ":")
+			local text = table.concat(split, "", 4)
 
-			table.insert(qfitems, {
+			return {
 				filename = split[1],
 				lnum = split[2],
 				col = split[3],
-				text = vim.trim(split[4]),
-			})
-		end
+				text = vim.trim(text),
+			}
+		end, items))
 
-		vim.fn.setqflist(qfitems)
 		vim.cmd.cope()
 		return true
 	end
