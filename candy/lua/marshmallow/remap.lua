@@ -28,26 +28,6 @@ vim.keymap.set("n", "<C-H>", "<C-W><C-H>", { noremap = true, silent = true })
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
--- Lazygit --
-vim.keymap.set({ "n" }, "<leader>tl", function()
-	if vim.g.marsh_lazygit_buf == nil then
-		vim.cmd.terminal("lazygit")
-		vim.cmd.startinsert()
-		vim.g.marsh_lazygit_buf = vim.api.nvim_win_get_buf(0)
-
-		vim.api.nvim_create_autocmd({ "BufDelete" }, {
-			buffer = vim.g.marsh_lazygit_buf,
-			callback = function()
-				vim.g.marsh_lazygit_buf = nil
-			end,
-		})
-	else
-		vim.api.nvim_set_current_buf(vim.g.marsh_lazygit_buf)
-	end
-end, {
-	desc = "Open Lazygit",
-})
-
 -- Terminal --
 
 -- Leave normal mode
