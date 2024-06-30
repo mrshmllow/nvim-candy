@@ -8,6 +8,10 @@
   inputs.devshell.url = "github:numtide/devshell";
   inputs.nightly.url = "github:nix-community/neovim-nightly-overlay";
 
+  inputs.tolerable.url = "github:wires-org/tolerable-nvim-nix";
+  inputs.tolerable.inputs.nixpkgs.follows = "nixpkgs";
+  inputs.tolerable.inputs.nightly.follows = "nightly";
+
   # Plugins
   inputs.harpoon-nvim.url = "github:ThePrimeagen/harpoon/harpoon2";
   inputs.harpoon-nvim.flake = false;
@@ -37,86 +41,62 @@
         pkgs,
         ...
       }: {
-        packages = let
-          unstable = inputs'.nightly.packages.neovim.overrideAttrs (old: {
-            patches = [./0001-NIX_ABS_PATH.patch];
-          });
-          nvim-config = pkgs.neovimUtils.makeNeovimConfig {
-            plugins = with pkgs.vimPlugins; [
-              nvim-treesitter.withAllGrammars
-              nvim-lspconfig
-              catppuccin-nvim
-              kanagawa-nvim
-              mini-nvim
-              luasnip
-              conform-nvim
-              plenary-nvim
-              which-key-nvim
-              (pkgs.vimUtils.buildVimPlugin {
-                src = inputs.harpoon-nvim;
-                name = "harpoon";
-              })
-              (pkgs.vimUtils.buildVimPlugin {
-                src = inputs.supermaven-nvim;
-                name = "supermaven";
-              })
-              rustaceanvim
-              heirline-nvim
-              nvim-web-devicons
-              typescript-tools-nvim
-              direnv-vim
-              vim-dotenv
-              nvim-spider
-              vim-fugitive
-              gitsigns-nvim
-
-              # nvim-cmp
-              nvim-cmp
-              cmp-nvim-lsp
-              cmp-cmdline
-              cmp-async-path
-              cmp-buffer
-              luasnip
-              cmp_luasnip
+        packages = {
+          neovim = inputs.tolerable.makeNightlyNeovimConfig "candy" {
+            inherit pkgs;
+            src = lib.fileset.toSource {
+              root = ./.;
+              fileset = ./candy;
+            };
+            buildInputs = with pkgs; [
+              curl
+              git
+              stylua
+              prettierd
+              alejandra
+              taplo
+              nodePackages.sql-formatter
             ];
-            wrapRc = false;
-          };
-        in {
-          neovim = (pkgs.wrapNeovimUnstable unstable nvim-config).overrideAttrs (old: {
-            generatedWrapperArgs =
-              old.generatedWrapperArgs
-              or []
-              ++ [
-                "--set"
-                "NVIM_APPNAME"
-                "candy"
-                "--set"
-                "NIX_ABS_CONFIG"
-                "${./.}"
-              ];
-            buildInputs = with pkgs;
-              old.buildInputs
-              or []
-              ++ [
-                curl
-                git
-                stylua
-                prettierd
-                alejandra
-                taplo
-                nodePackages.sql-formatter
-              ];
-            doCheck = true;
-            nativeCheckInputs = [pkgs.luajitPackages.luacheck];
-            checkPhase = ''
-              luacheck ${./candy} --only 0
+            config = {
+              plugins = with pkgs.vimPlugins; [
+                nvim-treesitter.withAllGrammars
+                nvim-lspconfig
+                catppuccin-nvim
+                kanagawa-nvim
+                mini-nvim
+                luasnip
+                conform-nvim
+                plenary-nvim
+                which-key-nvim
+                (pkgs.vimUtils.buildVimPlugin {
+                  src = inputs.harpoon-nvim;
+                  name = "harpoon";
+                })
+                (pkgs.vimUtils.buildVimPlugin {
+                  src = inputs.supermaven-nvim;
+                  name = "supermaven";
+                })
+                rustaceanvim
+                heirline-nvim
+                nvim-web-devicons
+                typescript-tools-nvim
+                direnv-vim
+                vim-dotenv
+                nvim-spider
+                vim-fugitive
+                gitsigns-nvim
 
-              CANDY_CHECK=1 $out/bin/nvim \
-                --headless \
-                --cmd "source ${./pre-check.lua}" \
-                -c "source ${./post-check.lua}" || (>&2 cat stderr.txt && exit 1)
-            '';
-          });
+                # nvim-cmp
+                nvim-cmp
+                cmp-nvim-lsp
+                cmp-cmdline
+                cmp-async-path
+                cmp-buffer
+                luasnip
+                cmp_luasnip
+              ];
+            };
+          };
 
           default = config.packages.neovim;
         };

@@ -314,7 +314,8 @@
         "nightly": "nightly",
         "nixpkgs": "nixpkgs_3",
         "stay-in-place-nvim": "stay-in-place-nvim",
-        "supermaven-nvim": "supermaven-nvim"
+        "supermaven-nvim": "supermaven-nvim",
+        "tolerable": "tolerable"
       }
     },
     "stay-in-place-nvim": {
@@ -361,6 +362,29 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "tolerable": {
+      "inputs": {
+        "nightly": [
+          "nightly"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1719733981,
+        "narHash": "sha256-eE57ZInahplR5Ud1BctnWqjYuGUMzfjBy3aoWOlqTqk=",
+        "owner": "mrshmllow",
+        "repo": "tolerable-nvim-nix",
+        "rev": "d98e243a0d32b8bcd23b8db768c99e5ac232f978",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mrshmllow",
+        "repo": "tolerable-nvim-nix",
         "type": "github"
       }
     }
