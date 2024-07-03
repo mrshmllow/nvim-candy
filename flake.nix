@@ -42,61 +42,74 @@
         ...
       }: {
         packages = {
-          neovim = inputs.tolerable.makeNightlyNeovimConfig "candy" {
-            inherit pkgs;
-            src = lib.fileset.toSource {
-              root = ./.;
-              fileset = ./candy;
-            };
-            buildInputs = with pkgs; [
-              curl
-              git
-              stylua
-              prettierd
-              alejandra
-              taplo
-              nodePackages.sql-formatter
-            ];
-            config = {
-              plugins = with pkgs.vimPlugins; [
-                nvim-treesitter.withAllGrammars
-                nvim-lspconfig
-                catppuccin-nvim
-                kanagawa-nvim
-                mini-nvim
-                luasnip
-                conform-nvim
-                plenary-nvim
-                which-key-nvim
-                (pkgs.vimUtils.buildVimPlugin {
-                  src = inputs.harpoon-nvim;
-                  name = "harpoon";
-                })
-                (pkgs.vimUtils.buildVimPlugin {
-                  src = inputs.supermaven-nvim;
-                  name = "supermaven";
-                })
-                rustaceanvim
-                heirline-nvim
-                nvim-web-devicons
-                typescript-tools-nvim
-                direnv-vim
-                vim-dotenv
-                nvim-spider
-                vim-fugitive
-                gitsigns-nvim
+          neovim =
+            (inputs.tolerable.makeNightlyNeovimConfig "candy" {
+              inherit pkgs;
+              src = lib.fileset.toSource {
+                root = ./.;
+                fileset = ./candy;
+              };
+              config = {
+                plugins = with pkgs.vimPlugins; [
+                  nvim-treesitter.withAllGrammars
+                  nvim-lspconfig
+                  catppuccin-nvim
+                  kanagawa-nvim
+                  mini-nvim
+                  luasnip
+                  conform-nvim
+                  plenary-nvim
+                  which-key-nvim
+                  (pkgs.vimUtils.buildVimPlugin {
+                    src = inputs.harpoon-nvim;
+                    name = "harpoon";
+                  })
+                  (pkgs.vimUtils.buildVimPlugin {
+                    src = inputs.supermaven-nvim;
+                    name = "supermaven";
+                  })
+                  rustaceanvim
+                  heirline-nvim
+                  nvim-web-devicons
+                  typescript-tools-nvim
+                  direnv-vim
+                  vim-dotenv
+                  nvim-spider
+                  vim-fugitive
+                  gitsigns-nvim
 
-                # nvim-cmp
-                nvim-cmp
-                cmp-nvim-lsp
-                cmp-cmdline
-                cmp-async-path
-                cmp-buffer
-                luasnip
-                cmp_luasnip
-              ];
-            };
-          };
+                  # nvim-cmp
+                  nvim-cmp
+                  cmp-nvim-lsp
+                  cmp-cmdline
+                  cmp-async-path
+                  cmp-buffer
+                  luasnip
+                  cmp_luasnip
+                ];
+              };
+            })
+            .overrideAttrs (old: {
+              generatedWrapperArgs = with pkgs;
+                old.generatedWrapperArgs
+                or []
+                ++ [
+                  "--prefix"
+                  "PATH"
+                  ":"
+                  (
+                    lib.makeBinPath [
+                      curl
+                      git
+                      stylua
+                      prettierd
+                      alejandra
+                      taplo
+                      nodePackages.sql-formatter
+                    ]
+                  )
+                ];
+            });
 
           default = config.packages.neovim;
         };
