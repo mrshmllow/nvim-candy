@@ -77,6 +77,7 @@
                   nvim-spider
                   vim-fugitive
                   gitsigns-nvim
+                  vim-gnupg
 
                   # nvim-cmp
                   nvim-cmp
