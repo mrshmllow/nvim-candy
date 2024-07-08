@@ -1,3 +1,5 @@
+require("fidget").setup({})
+
 local lspconfig = require("lspconfig")
 local group = vim.api.nvim_create_augroup("marsh-lsp", {})
 
