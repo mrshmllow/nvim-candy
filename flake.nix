@@ -106,6 +106,8 @@
                       prettierd
                       alejandra
                       taplo
+                      lua-language-server
+                      nil
                       nodePackages.sql-formatter
                     ]
                   )
