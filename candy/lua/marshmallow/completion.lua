@@ -6,6 +6,7 @@ if vim.env.CANDY_CHECK == nil then
 	require("supermaven-nvim").setup({
 		disable_inline_completion = true,
 		disable_keymaps = true,
+		log_level = "off",
 	})
 end
 

@@ -67,6 +67,7 @@
                   (pkgs.vimUtils.buildVimPlugin {
                     src = inputs.supermaven-nvim;
                     name = "supermaven";
+                    patches = [./patches/use-env-for-supermaven-binary-path.patch];
                   })
                   rustaceanvim
                   heirline-nvim
@@ -112,6 +113,15 @@
                       nodePackages.sql-formatter
                     ]
                   )
+                  "--prefix"
+                  "SUPERMAVEN_BINARY"
+                  ":"
+                  (pkgs.fetchurl {
+                    url = "https://supermaven.com/api/download-path?platform=linux&arch=x86_64&editor=neovim";
+                    hash = "sha256-HRQ3W4QfSbYyM+cezAm7k3zSfjCJ5w0uOJMyEcqzNXI=";
+                    executable = true;
+                    name = "supermaven-binary";
+                  })
                 ];
             });
 

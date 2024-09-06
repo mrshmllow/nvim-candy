@@ -1,0 +1,29 @@
+From 369654628e2ac1a5471a3f2f546a172121749f83 Mon Sep 17 00:00:00 2001
+From: marshmallow <marshycity@gmail.com>
+Date: Fri, 6 Sep 2024 17:54:08 +1000
+Subject: [PATCH 1/1] use env for supermaven binary path
+
+---
+ lua/supermaven-nvim/binary/binary_fetcher.lua | 6 +-----
+ 1 file changed, 1 insertion(+), 5 deletions(-)
+
+diff --git a/lua/supermaven-nvim/binary/binary_fetcher.lua b/lua/supermaven-nvim/binary/binary_fetcher.lua
+index fc6572c..2eba9d6 100644
+--- a/lua/supermaven-nvim/binary/binary_fetcher.lua
++++ b/lua/supermaven-nvim/binary/binary_fetcher.lua
+@@ -121,11 +121,7 @@ function BinaryFetcher:fetch_binary()
+ end
+ 
+ function BinaryFetcher:local_binary_path()
+-  if self:platform() == "windows" then
+-    return self:local_binary_parent_path() .. "/sm-agent.exe"
+-  else
+-    return self:local_binary_parent_path() .. "/sm-agent"
+-  end
++  return vim.env.SUPERMAVEN_BINARY
+ end
+ 
+ function BinaryFetcher:local_binary_parent_path()
+-- 
+2.45.2
+
