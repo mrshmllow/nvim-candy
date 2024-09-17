@@ -70,7 +70,6 @@
                     patches = [./patches/use-env-for-supermaven-binary-path.patch];
                   })
                   rustaceanvim
-                  heirline-nvim
                   nvim-web-devicons
                   typescript-tools-nvim
                   direnv-vim

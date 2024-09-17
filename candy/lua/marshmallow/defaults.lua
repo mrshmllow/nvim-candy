@@ -22,6 +22,8 @@ vim.opt.showmode = false
 vim.opt.cmdheight = 0
 vim.opt.laststatus = 3 -- Global status
 
+vim.opt.statusline = "%{%v:lua.require'marshmallow.statusline'.statusline()%}"
+
 -- Scrolloff --
 vim.opt.scrolloff = 5
 vim.opt.sidescrolloff = 8
