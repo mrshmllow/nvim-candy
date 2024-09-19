@@ -76,19 +76,42 @@ vim.keymap.set("n", "<leader><leader>", function()
 end, { desc = "Switch Buffer" })
 
 -- Harpoon --
-local harpoon = require("harpoon")
-harpoon:setup()
-vim.keymap.set("n", "<leader>a", function()
-	harpoon:list():append()
-end, { desc = "Harpoon file" })
-vim.keymap.set("n", "<leader><C-space>", function()
-	harpoon.ui:toggle_quick_menu(harpoon:list())
-end, { desc = "Toggle Harpoon" })
-for i = 1, 5 do
-	vim.keymap.set("n", "<M-" .. i .. ">", function()
-		harpoon:list():select(i)
-	end, { desc = "Switch to file " .. i })
-end
+require("lz.n").load({
+	"harpoon",
+	keys = {
+		{
+			"<leader>a",
+			function()
+				require("harpoon"):list():append()
+			end,
+			mode = "n",
+			desc = "Harpoon file",
+		},
+		{
+			"<leader><C-space>",
+			function()
+				require("harpoon").ui:toggle_quick_menu(require("harpoon"):list())
+			end,
+			mode = "n",
+			desc = "Toggle Harpoon",
+		},
+		unpack(vim.iter(vim.fn.range(1, 5))
+			:map(function(i)
+				return {
+					"<M-" .. i .. ">",
+					function()
+						require("harpoon"):list():select(i)
+					end,
+					mode = "n",
+					desc = "Switch to file " .. i,
+				}
+			end)
+			:totable()),
+	},
+	before = function()
+		require("harpoon"):setup()
+	end,
+})
 
 -- Files --
 vim.keymap.set("n", "-", function()
