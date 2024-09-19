@@ -79,6 +79,7 @@
                   gitsigns-nvim
                   vim-gnupg
                   fidget-nvim
+                  presence-nvim
 
                   # nvim-cmp
                   nvim-cmp
