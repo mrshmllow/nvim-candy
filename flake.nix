@@ -50,46 +50,53 @@
                 fileset = ./candy;
               };
               config = {
-                plugins = with pkgs.vimPlugins; [
-                  nvim-treesitter.withAllGrammars
-                  nvim-lspconfig
-                  catppuccin-nvim
-                  kanagawa-nvim
-                  mini-nvim
-                  luasnip
-                  conform-nvim
-                  plenary-nvim
-                  which-key-nvim
-                  (pkgs.vimUtils.buildVimPlugin {
-                    src = inputs.harpoon-nvim;
-                    name = "harpoon";
-                  })
-                  (pkgs.vimUtils.buildVimPlugin {
-                    src = inputs.supermaven-nvim;
-                    name = "supermaven";
-                    patches = [./patches/use-env-for-supermaven-binary-path.patch];
-                  })
-                  rustaceanvim
-                  nvim-web-devicons
-                  typescript-tools-nvim
-                  direnv-vim
-                  vim-dotenv
-                  nvim-spider
-                  vim-fugitive
-                  gitsigns-nvim
-                  vim-gnupg
-                  fidget-nvim
-                  presence-nvim
+                plugins = let
+                  opt = plugin: {
+                    inherit plugin;
+                    optional = true;
+                  };
+                in
+                  with pkgs.vimPlugins; [
+                    lz-n
+                    nvim-treesitter.withAllGrammars
+                    nvim-lspconfig
+                    catppuccin-nvim
+                    kanagawa-nvim
+                    mini-nvim
+                    luasnip
+                    conform-nvim
+                    plenary-nvim
+                    which-key-nvim
+                    (pkgs.vimUtils.buildVimPlugin {
+                      src = inputs.harpoon-nvim;
+                      name = "harpoon";
+                    })
+                    (pkgs.vimUtils.buildVimPlugin {
+                      src = inputs.supermaven-nvim;
+                      name = "supermaven";
+                      patches = [./patches/use-env-for-supermaven-binary-path.patch];
+                    })
+                    rustaceanvim
+                    nvim-web-devicons
+                    typescript-tools-nvim
+                    direnv-vim
+                    vim-dotenv
+                    (opt nvim-spider)
+                    vim-fugitive
+                    gitsigns-nvim
+                    vim-gnupg
+                    fidget-nvim
+                    presence-nvim
 
-                  # nvim-cmp
-                  nvim-cmp
-                  cmp-nvim-lsp
-                  cmp-cmdline
-                  cmp-async-path
-                  cmp-buffer
-                  luasnip
-                  cmp_luasnip
-                ];
+                    # nvim-cmp
+                    nvim-cmp
+                    cmp-nvim-lsp
+                    cmp-cmdline
+                    cmp-async-path
+                    cmp-buffer
+                    luasnip
+                    cmp_luasnip
+                  ];
               };
             })
             .overrideAttrs (old: {
