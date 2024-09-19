@@ -64,7 +64,7 @@
                     kanagawa-nvim
                     mini-nvim
                     luasnip
-                    conform-nvim
+                    (opt conform-nvim)
                     plenary-nvim
                     which-key-nvim
                     (pkgs.vimUtils.buildVimPlugin {

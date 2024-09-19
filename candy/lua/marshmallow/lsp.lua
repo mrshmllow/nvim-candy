@@ -39,9 +39,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			{ noremap = true, silent = true, buffer = bufnr, desc = "Code Actions" }
 		)
 		vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
-		vim.keymap.set("n", "<leader>r", function()
-			require("conform").format()
-		end, { noremap = true, silent = true, buffer = bufnr, desc = "Format document" })
 	end,
 })
 
