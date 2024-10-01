@@ -87,6 +87,7 @@
                     vim-gnupg
                     fidget-nvim
                     presence-nvim
+                    vim-wakatime
 
                     # nvim-cmp
                     nvim-cmp
