@@ -125,8 +125,8 @@
                   "SUPERMAVEN_BINARY"
                   ":"
                   (pkgs.fetchurl {
-                    url = "https://supermaven.com/api/download-path?platform=linux&arch=x86_64&editor=neovim";
-                    hash = "sha256-HRQ3W4QfSbYyM+cezAm7k3zSfjCJ5w0uOJMyEcqzNXI=";
+                    url = "https://supermaven-public.s3.amazonaws.com/sm-agent/v2/8/linux-musl/x86_64/sm-agent";
+                    hash = "sha256-ibnrpykmc0Ao5Hh3aAWVxdnqzPLCtIyQxoOU1vWrCXQ=";
                     executable = true;
                     name = "supermaven-binary";
                   })

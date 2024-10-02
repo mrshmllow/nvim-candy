@@ -318,11 +318,11 @@
     "supermaven-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1726601131,
-        "narHash": "sha256-AFqQLySDCh2aZpBUTWUyb/QK4DxsRd2pakCJOI+PtlM=",
+        "lastModified": 1727812915,
+        "narHash": "sha256-oOi50tXsF30p81IidGfPmncYqJkh02UjdYj5OHGLv+M=",
         "owner": "supermaven-inc",
         "repo": "supermaven-nvim",
-        "rev": "3da044bbc23a354e9cb17602ed2d5ca8528173bb",
+        "rev": "32e54fa074a84a50c72863ff75b615a41ef482a8",
         "type": "github"
       },
       "original": {
