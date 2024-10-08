@@ -118,6 +118,8 @@
                       taplo
                       lua-language-server
                       nil
+                      nodePackages.typescript-language-server
+                      tailwindcss-language-server
                       nodePackages.sql-formatter
                       gopls
                       golangci-lint-langserver
