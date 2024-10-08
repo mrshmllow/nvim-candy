@@ -6,7 +6,6 @@ local group = vim.api.nvim_create_augroup("marsh-lsp", {})
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = group,
 	callback = function(ev)
-		local client = vim.lsp.get_client_by_id(ev.data.client_id)
 		local bufnr = ev.buf
 
 		vim.lsp.inlay_hint.enable(true, {
@@ -15,8 +14,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		local opts = { noremap = true, silent = true }
 		vim.keymap.set("n", "E", vim.diagnostic.open_float, opts)
-		vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-		vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+		vim.keymap.set("n", "[d", function()
+			vim.diagnostic.jump({ count = -1 })
+		end, opts)
+		vim.keymap.set("n", "]d", function()
+			vim.diagnostic.jump({ count = 1 })
+		end, opts)
 		vim.keymap.set(
 			"n",
 			"<space>q",
