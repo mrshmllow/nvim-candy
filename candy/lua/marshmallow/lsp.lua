@@ -63,6 +63,8 @@ lspconfig.tailwindcss.setup({
 
 lspconfig.astro.setup({})
 lspconfig.nil_ls.setup({})
+lspconfig.gopls.setup({})
+lspconfig.golangci_lint_ls.setup({})
 
 -- Boilerplate from https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#lua_ls
 lspconfig.lua_ls.setup({

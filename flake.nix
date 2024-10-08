@@ -119,6 +119,9 @@
                       lua-language-server
                       nil
                       nodePackages.sql-formatter
+                      gopls
+                      golangci-lint-langserver
+                      golangci-lint
                     ]
                   )
                   "--prefix"
