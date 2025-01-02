@@ -118,6 +118,7 @@
                       taplo
                       lua-language-server
                       nil
+                      statix
                       nodePackages.typescript-language-server
                       tailwindcss-language-server
                       nodePackages.sql-formatter
