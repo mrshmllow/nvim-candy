@@ -16,6 +16,7 @@ require("lz.n").load({
 				nix = { "alejandra" },
 				toml = { "taplo" },
 				sql = { "sql_formatter" },
+				python = { "black" },
 				["*"] = { "injected" },
 			},
 			format_on_save = {

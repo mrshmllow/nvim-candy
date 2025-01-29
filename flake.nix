@@ -114,6 +114,7 @@
                       git
                       stylua
                       prettierd
+                      black
                       alejandra
                       taplo
                       lua-language-server
@@ -125,6 +126,7 @@
                       gopls
                       golangci-lint-langserver
                       golangci-lint
+                      pyright
                     ]
                   )
                   "--prefix"
