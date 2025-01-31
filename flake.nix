@@ -127,6 +127,7 @@
                       golangci-lint-langserver
                       golangci-lint
                       pyright
+                      tinymist
                     ]
                   )
                   "--prefix"
