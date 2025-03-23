@@ -17,8 +17,6 @@
   inputs.harpoon-nvim.flake = false;
   inputs.stay-in-place-nvim.url = "github:gbprod/stay-in-place.nvim";
   inputs.stay-in-place-nvim.flake = false;
-  inputs.supermaven-nvim.url = "github:supermaven-inc/supermaven-nvim";
-  inputs.supermaven-nvim.flake = false;
 
   outputs = inputs:
     inputs.flake-parts.lib.mkFlake {inherit inputs;} ({config, ...}: {
@@ -42,105 +40,79 @@
         ...
       }: {
         packages = {
-          neovim =
-            (inputs.tolerable.makeNightlyNeovimConfig "candy" {
-              inherit pkgs;
-              src = lib.fileset.toSource {
-                root = ./.;
-                fileset = ./candy;
-              };
-              config = {
-                plugins = let
-                  opt = plugin: {
-                    inherit plugin;
-                    optional = true;
-                  };
-                in
-                  with pkgs.vimPlugins; [
-                    lz-n
-                    nvim-treesitter.withAllGrammars
-                    nvim-lspconfig
-                    catppuccin-nvim
-                    kanagawa-nvim
-                    mini-nvim
-                    luasnip
-                    (opt conform-nvim)
-                    plenary-nvim
-                    which-key-nvim
-                    (pkgs.vimUtils.buildVimPlugin {
-                      src = inputs.harpoon-nvim;
-                      name = "harpoon";
-                    })
-                    (pkgs.vimUtils.buildVimPlugin {
-                      src = inputs.supermaven-nvim;
-                      name = "supermaven";
-                      patches = [./patches/use-env-for-supermaven-binary-path.patch];
-                    })
-                    rustaceanvim
-                    nvim-web-devicons
-                    typescript-tools-nvim
-                    direnv-vim
-                    vim-dotenv
-                    (opt nvim-spider)
-                    vim-fugitive
-                    gitsigns-nvim
-                    vim-gnupg
-                    fidget-nvim
-                    presence-nvim
-                    vim-wakatime
-
-                    # nvim-cmp
-                    nvim-cmp
-                    cmp-nvim-lsp
-                    cmp-cmdline
-                    cmp-async-path
-                    cmp-buffer
-                    luasnip
-                    cmp_luasnip
-                  ];
-              };
-            })
-            .overrideAttrs (old: {
-              generatedWrapperArgs = with pkgs;
-                old.generatedWrapperArgs
-                or []
-                ++ [
-                  "--prefix"
-                  "PATH"
-                  ":"
-                  (
-                    lib.makeBinPath [
-                      curl
-                      git
-                      stylua
-                      prettierd
-                      black
-                      alejandra
-                      taplo
-                      lua-language-server
-                      nil
-                      statix
-                      nodePackages.typescript-language-server
-                      tailwindcss-language-server
-                      nodePackages.sql-formatter
-                      gopls
-                      golangci-lint-langserver
-                      golangci-lint
-                      pyright
-                      tinymist
-                    ]
-                  )
-                  "--prefix"
-                  "SUPERMAVEN_BINARY"
-                  ":"
-                  (pkgs.fetchurl {
-                    url = "https://supermaven-public.s3.amazonaws.com/sm-agent/v2/8/linux-musl/x86_64/sm-agent";
-                    hash = "sha256-ibnrpykmc0Ao5Hh3aAWVxdnqzPLCtIyQxoOU1vWrCXQ=";
-                    executable = true;
-                    name = "supermaven-binary";
+          neovim = inputs.tolerable.makeNightlyNeovimConfig "candy" {
+            inherit pkgs;
+            src = lib.fileset.toSource {
+              root = ./.;
+              fileset = ./candy;
+            };
+            path = with pkgs; [
+              curl
+              git
+              stylua
+              prettierd
+              black
+              alejandra
+              taplo
+              lua-language-server
+              nil
+              statix
+              nodePackages.typescript-language-server
+              tailwindcss-language-server
+              nodePackages.sql-formatter
+              gopls
+              golangci-lint-langserver
+              golangci-lint
+              pyright
+              tinymist
+            ];
+            config = {
+              plugins = let
+                opt = plugin: {
+                  inherit plugin;
+                  optional = true;
+                };
+              in
+                with pkgs.vimPlugins; [
+                  lz-n
+                  nvim-treesitter.withAllGrammars
+                  nvim-lspconfig
+                  catppuccin-nvim
+                  kanagawa-nvim
+                  mini-nvim
+                  luasnip
+                  (opt conform-nvim)
+                  plenary-nvim
+                  which-key-nvim
+                  (pkgs.vimUtils.buildVimPlugin {
+                    src = inputs.harpoon-nvim;
+                    name = "harpoon";
+                    doCheck = false;
                   })
+                  rustaceanvim
+                  nvim-web-devicons
+                  typescript-tools-nvim
+                  direnv-vim
+                  vim-dotenv
+                  (opt nvim-spider)
+                  vim-fugitive
+                  gitsigns-nvim
+                  vim-gnupg
+                  fidget-nvim
+                  presence-nvim
+                  vim-wakatime
+
+                  # nvim-cmp
+                  nvim-cmp
+                  cmp-nvim-lsp
+                  cmp-cmdline
+                  cmp-async-path
+                  cmp-buffer
+                  luasnip
+                  cmp_luasnip
                 ];
-            });
+            };
+          };
 
           default = config.packages.neovim;
         };
