@@ -52,7 +52,7 @@
               stylua
               prettierd
               black
-              alejandra
+              nixfmt-rfc-style
               taplo
               lua-language-server
               nil

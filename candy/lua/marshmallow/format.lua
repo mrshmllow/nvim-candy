@@ -13,7 +13,7 @@ require("lz.n").load({
 				lua = { "stylua" },
 				-- Use a sub-list to run only the first available formatter
 				javascript = { { "prettierd", "prettier" } },
-				nix = { "alejandra" },
+				nix = { "nixfmt" },
 				toml = { "taplo" },
 				sql = { "sql_formatter" },
 				python = { "black" },
