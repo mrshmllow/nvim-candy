@@ -292,7 +292,8 @@
         "nightly": "nightly",
         "nixpkgs": "nixpkgs_3",
         "stay-in-place-nvim": "stay-in-place-nvim",
-        "tolerable": "tolerable"
+        "tolerable": "tolerable",
+        "vim-firestore": "vim-firestore"
       }
     },
     "stay-in-place-nvim": {
@@ -352,6 +353,22 @@
       "original": {
         "owner": "numtide",
         "repo": "treefmt-nix",
+        "type": "github"
+      }
+    },
+    "vim-firestore": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1691283382,
+        "narHash": "sha256-sNnuEX3k3X4iXIgDK4HKgruHK//IYwiYwEKfoWI80WU=",
+        "owner": "delphinus",
+        "repo": "vim-firestore",
+        "rev": "417d41ba56c54cb21fab1f4b01c8ba4deed6bbe0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "delphinus",
+        "repo": "vim-firestore",
         "type": "github"
       }
     }

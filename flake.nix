@@ -17,6 +17,8 @@
   inputs.harpoon-nvim.flake = false;
   inputs.stay-in-place-nvim.url = "github:gbprod/stay-in-place.nvim";
   inputs.stay-in-place-nvim.flake = false;
+  inputs.vim-firestore.url = "github:delphinus/vim-firestore";
+  inputs.vim-firestore.flake = false;
 
   outputs = inputs:
     inputs.flake-parts.lib.mkFlake {inherit inputs;} ({config, ...}: {
@@ -101,6 +103,10 @@
                   fidget-nvim
                   presence-nvim
                   vim-wakatime
+                  (pkgs.vimUtils.buildVimPlugin {
+                    src = inputs.vim-firestore;
+                    name = "firestore";
+                  })
 
                   # nvim-cmp
                   nvim-cmp
