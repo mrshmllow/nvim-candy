@@ -59,8 +59,8 @@ vim.opt.shiftwidth = tab_width
 vim.opt.softtabstop = tab_width
 
 -- Folds --
-vim.wo.foldmethod = "expr"
-vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldenable = false
 
 -- Is this okay??
