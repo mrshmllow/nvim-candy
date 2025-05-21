@@ -186,3 +186,32 @@ if vim.g.neovide then
 	vim.keymap.set("c", "<D-v>", "<C-R>+") -- Paste command mode
 	vim.keymap.set("i", "<D-v>", '<ESC>l"+Pli') -- Paste insert mode
 end
+
+-- Completion --
+
+-- <CR> In completion
+local keycode = vim.keycode or function(x)
+	return vim.api.nvim_replace_termcodes(x, true, true, true)
+end
+local keys = {
+	["cr"] = keycode("<CR>"),
+	-- Enter the selected option
+	["ctrl-y"] = keycode("<C-y>"),
+	-- Enter the first option
+	["ctrl-n_ctrl-y"] = keycode("<C-n><C-y>"),
+}
+
+_G.cr_action = function()
+	if vim.fn.pumvisible() ~= 0 then
+		-- If popup is visible, confirm selected item or add new line otherwise
+		local item_selected = vim.fn.complete_info()["selected"] ~= -1
+		return item_selected and keys["ctrl-y"] or keys["ctrl-n_ctrl-y"]
+	else
+		-- If popup is not visible, use plain `<CR>`. You might want to customize
+		-- according to other plugins. For example, to use 'mini.pairs', replace
+		-- next line with `return require('mini.pairs').cr()`
+		return keys["cr"]
+	end
+end
+
+vim.keymap.set("i", "<CR>", "v:lua._G.cr_action()", { expr = true })
