@@ -50,6 +50,21 @@
         "type": "github"
       }
     },
+    "flake-compat_3": {
+      "locked": {
+        "lastModified": 1746162366,
+        "narHash": "sha256-5SSSZ/oQkwfcAz/o/6TlejlVGqeK08wyREBQ5qFFPhM=",
+        "owner": "nix-community",
+        "repo": "flake-compat",
+        "rev": "0f158086a2ecdbb138cd0429410e44994f1b7e4b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "flake-compat",
+        "type": "github"
+      }
+    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": [
@@ -314,6 +329,7 @@
     },
     "tolerable": {
       "inputs": {
+        "flake-compat": "flake-compat_3",
         "nightly": [
           "nightly"
         ],
@@ -322,11 +338,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1744942880,
-        "narHash": "sha256-XH9Y4ffQq9dHWsSDzPabtaxvEjOyShDYWgkfcggnZVk=",
+        "lastModified": 1747708726,
+        "narHash": "sha256-SipAOpY97/8g2CanfpQBBwR61b9ZLLshA9ikOClqmys=",
         "owner": "wires-org",
         "repo": "tolerable-nvim-nix",
-        "rev": "f1e0e952fba1aa6745f656961655642c4f8ffb09",
+        "rev": "192f8ebf629f584faf4ef46ebfca739b046e8872",
         "type": "github"
       },
       "original": {

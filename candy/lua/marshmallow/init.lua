@@ -1,7 +1,6 @@
 require("marshmallow.defaults")
 require("marshmallow.statusline")
 require("marshmallow.remap")
-require("marshmallow.colorscheme")
 require("marshmallow.treesitter")
 require("marshmallow.completion")
 require("marshmallow.lsp")
@@ -9,6 +8,12 @@ require("marshmallow.snippets")
 
 -- Too short for file
 require("mini.pick").setup()
+require("mini.move").setup()
+require("mini.surround").setup()
+require("hardtime").setup()
+require("mini.jump2d").setup({ view = { dim = true } })
+require("mini.jump").setup()
+require("mini.bracketed").setup()
 
 require("marshmallow.format")
 require("marshmallow.files")

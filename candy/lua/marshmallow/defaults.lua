@@ -3,6 +3,9 @@ vim.g.mapleader = " "
 vim.o.timeout = true
 vim.o.timeoutlen = 300
 
+-- Colourscheme --
+vim.cmd.colorscheme("lackluster-hack")
+
 -- Terminal --
 vim.opt.termguicolors = true
 
@@ -41,6 +44,7 @@ vim.opt.guifont = { "JetBrainsMono Nerd Font Mono", ":h14:w-1" }
 -- Diagnostics --
 vim.diagnostic.config({
 	virtual_text = false,
+	virtual_lines = true,
 	signs = false,
 	update_in_insert = false,
 	severity_sort = true,

@@ -1,8 +1,8 @@
-vim.api.nvim_create_user_command("Trans", function()
-	if vim.g.neovide_transparency ~= 1 then
-		vim.g.neovide_transparency = 1
+vim.api.nvim_create_user_command("Opacity", function()
+	if vim.g.neovide_opacity ~= 1 then
+		vim.g.neovide_opacity = 1
 	else
-		vim.g.neovide_transparency = 0.9
+		vim.g.neovide_opacity = 0.9
 	end
 end, {})
 

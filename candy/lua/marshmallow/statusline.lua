@@ -1,6 +1,6 @@
 local M = {}
 
-local function set_highlights(recording)
+local function set_highlights_kanagawa(recording)
 	local palette = require("kanagawa.colors").setup().theme
 
 	local bg = recording and palette.diff.delete or palette.ui.bg_m2
@@ -23,23 +23,70 @@ local function set_highlights(recording)
 		bg = bg,
 	})
 
-	vim.api.nvim_set_hl(0, "StatusAdd", {
-		fg = palette.vcs.added,
+	vim.api.nvim_set_hl(0, "StatusHead", {
+		fg = palette.syn.identifier,
+		bg = bg,
+	})
+end
+
+--   color = {
+--   black = "#000000",
+--   blue = "#7788AA",
+--   gray1 = "#080808",
+--   gray2 = "#191919",
+--   gray3 = "#2a2a2a",
+--   gray4 = "#444444",
+--   gray5 = "#555555",
+--   gray6 = "#7a7a7a",
+--   gray7 = "#aaaaaa",
+--   gray8 = "#cccccc",
+--   gray9 = "#DDDDDD",
+--   green = "#789978",
+--   lack = "#708090",
+--   luster = "#deeeed",
+--   none = "none",
+--   orange = "#ffaa88",
+--   red = "#D70000",
+--   yellow = "#abab77"
+-- },
+-- color_special = {
+--   comment = "#3A3A3A",
+--   exception = "#505050",
+--   keyword = "#666666",
+--   main_background = "#101010",
+--   menu_background = "#191919",
+--   param = "#8E8E8E",
+--   popup_background = "#1A1A1A",
+--   statusline = "#242424",
+--   whitespace = "#202020"
+-- },
+
+local function set_highlights_lackluster(recording)
+	local lackluster = require("lackluster")
+
+	local bg = lackluster.color_special.statusline
+	local fg = recording and lackluster.color.red or lackluster.color.gray7
+
+	--  xxx guifg=#aaaaaa guibg=#242424
+	vim.api.nvim_set_hl(0, "StatusLine", { fg = fg, bg = bg })
+
+	vim.api.nvim_set_hl(0, "Ruler", {
+		fg = lackluster.color.gray7,
 		bg = bg,
 	})
 
-	vim.api.nvim_set_hl(0, "StatusChanged", {
-		fg = palette.vcs.changed,
+	vim.api.nvim_set_hl(0, "StatusLsp", {
+		fg = lackluster.color.green,
 		bg = bg,
 	})
 
-	vim.api.nvim_set_hl(0, "StatusRemoved", {
-		fg = palette.vcs.removed,
+	vim.api.nvim_set_hl(0, "StatusFt", {
+		fg = lackluster.color.orange,
 		bg = bg,
 	})
 
 	vim.api.nvim_set_hl(0, "StatusHead", {
-		fg = palette.syn.identifier,
+		fg = lackluster.color.yellow,
 		bg = bg,
 	})
 end
@@ -50,7 +97,7 @@ vim.api.nvim_create_autocmd({ "ColorScheme", "RecordingLeave" }, {
 	pattern = "*",
 	group = augroup,
 	callback = function()
-		set_highlights(false)
+		set_highlights_lackluster(false)
 	end,
 })
 
@@ -58,7 +105,7 @@ vim.api.nvim_create_autocmd({ "RecordingEnter" }, {
 	pattern = "*",
 	group = augroup,
 	callback = function()
-		set_highlights(true)
+		set_highlights_lackluster(true)
 	end,
 })
 
@@ -93,9 +140,9 @@ local function git()
 	local removed_count = status.removed or 0
 	local changed_count = status.removed or 0
 
-	local added = added_count > 0 and ("%#StatusAdd#+" .. added_count .. "%*") or ""
-	local removed = removed_count > 0 and ("%#StatusRemoved#-" .. removed_count .. "%*") or ""
-	local changed = changed_count > 0 and ("%#StatusChanged#~" .. changed_count .. "%*") or ""
+	local added = added_count > 0 and ("%#GitSignsAdd#+" .. added_count .. "%*") or ""
+	local removed = removed_count > 0 and ("%#GitSignsDelete#-" .. removed_count .. "%*") or ""
+	local changed = changed_count > 0 and ("%#GitSignsChange#~" .. changed_count .. "%*") or ""
 	local changes = "(" .. added .. removed .. changed .. "%#StatusHead#)%*"
 
 	return " %#StatusHead#" .. status.head .. (has_changes and changes or "") .. "%*"

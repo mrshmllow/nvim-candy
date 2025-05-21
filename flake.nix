@@ -20,114 +20,135 @@
   inputs.vim-firestore.url = "github:delphinus/vim-firestore";
   inputs.vim-firestore.flake = false;
 
-  outputs = inputs:
-    inputs.flake-parts.lib.mkFlake {inherit inputs;} ({config, ...}: {
-      systems = [
-        "x86_64-linux"
-        "x86_64-darwin"
-        "aarch64-linux"
-        "aarch64-darwin"
-      ];
+  outputs =
+    inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } (
+      { config, ... }:
+      {
+        systems = [
+          "x86_64-linux"
+          "x86_64-darwin"
+          "aarch64-linux"
+          "aarch64-darwin"
+        ];
 
-      imports = [
-        inputs.devshell.flakeModule
-      ];
+        imports = [
+          inputs.devshell.flakeModule
+        ];
 
-      perSystem = {
-        inputs',
-        system,
-        config,
-        lib,
-        pkgs,
-        ...
-      }: {
-        packages = {
-          neovim = inputs.tolerable.makeNightlyNeovimConfig "candy" {
-            inherit pkgs;
-            src = lib.fileset.toSource {
-              root = ./.;
-              fileset = ./candy;
+        perSystem =
+          {
+            inputs',
+            system,
+            config,
+            lib,
+            pkgs,
+            ...
+          }:
+          let
+            tolerableConfig = {
+              inherit pkgs;
+              src = lib.fileset.toSource {
+                root = ./.;
+                fileset = ./candy;
+              };
+              path = with pkgs; [
+                curl
+                git
+                stylua
+                prettierd
+                black
+                nixfmt-rfc-style
+                taplo
+                lua-language-server
+                nil
+                statix
+                nodePackages.typescript-language-server
+                tailwindcss-language-server
+                nodePackages.sql-formatter
+                gopls
+                golangci-lint-langserver
+                golangci-lint
+                pyright
+                tinymist
+              ];
+              config = {
+                plugins =
+                  let
+                    opt = plugin: {
+                      inherit plugin;
+                      optional = true;
+                    };
+                  in
+                  with pkgs.vimPlugins;
+                  [
+                    lz-n
+                    nvim-treesitter.withAllGrammars
+                    nvim-lspconfig
+                    catppuccin-nvim
+                    mini-nvim
+                    colorizer
+                    luasnip
+                    (opt conform-nvim)
+                    plenary-nvim
+                    (pkgs.vimUtils.buildVimPlugin {
+                      src = inputs.harpoon-nvim;
+                      name = "harpoon";
+                      doCheck = false;
+                    })
+                    rustaceanvim
+                    lackluster-nvim
+                    typescript-tools-nvim
+                    direnv-vim
+                    vim-dotenv
+                    (opt nvim-spider)
+                    vim-fugitive
+                    gitsigns-nvim
+                    vim-gnupg
+                    fidget-nvim
+                    presence-nvim
+                    hardtime-nvim
+                    (pkgs.vimUtils.buildVimPlugin {
+                      src = inputs.vim-firestore;
+                      name = "firestore";
+                    })
+
+                    # nvim-cmp
+                    nvim-cmp
+                    cmp-nvim-lsp
+                    cmp-cmdline
+                    cmp-async-path
+                    cmp-buffer
+                    luasnip
+                    cmp_luasnip
+                  ];
+              };
             };
-            path = with pkgs; [
-              curl
-              git
-              stylua
-              prettierd
-              black
-              nixfmt-rfc-style
-              taplo
-              lua-language-server
-              nil
-              statix
-              nodePackages.typescript-language-server
-              tailwindcss-language-server
-              nodePackages.sql-formatter
-              gopls
-              golangci-lint-langserver
-              golangci-lint
-              pyright
-              tinymist
-            ];
-            config = {
-              plugins = let
-                opt = plugin: {
-                  inherit plugin;
-                  optional = true;
-                };
-              in
-                with pkgs.vimPlugins; [
-                  lz-n
-                  nvim-treesitter.withAllGrammars
-                  nvim-lspconfig
-                  catppuccin-nvim
-                  kanagawa-nvim
-                  mini-nvim
-                  luasnip
-                  (opt conform-nvim)
-                  plenary-nvim
-                  which-key-nvim
-                  (pkgs.vimUtils.buildVimPlugin {
-                    src = inputs.harpoon-nvim;
-                    name = "harpoon";
-                    doCheck = false;
-                  })
-                  rustaceanvim
-                  nvim-web-devicons
-                  typescript-tools-nvim
-                  direnv-vim
-                  vim-dotenv
-                  (opt nvim-spider)
-                  vim-fugitive
-                  gitsigns-nvim
-                  vim-gnupg
-                  fidget-nvim
-                  presence-nvim
-                  vim-wakatime
-                  (pkgs.vimUtils.buildVimPlugin {
-                    src = inputs.vim-firestore;
-                    name = "firestore";
-                  })
+          in
+          {
+            packages = {
+              neovim = inputs.tolerable.makeNightlyNeovimConfig "candy" tolerableConfig;
 
-                  # nvim-cmp
-                  nvim-cmp
-                  cmp-nvim-lsp
-                  cmp-cmdline
-                  cmp-async-path
-                  cmp-buffer
-                  luasnip
-                  cmp_luasnip
-                ];
+              default = config.packages.neovim;
+
+              testing = inputs.tolerable.makeNightlyNeovimConfig "candy" (
+                tolerableConfig
+                // {
+                  testing = true;
+                }
+              );
             };
           };
 
-          default = config.packages.neovim;
-        };
-      };
-
-      flake = let
-        package = inputs.nixpkgs.lib.genAttrs config.systems (system: inputs.self.packages.${system}.default);
-      in {
-        defaultPackage = package;
-      };
-    });
+        flake =
+          let
+            package = inputs.nixpkgs.lib.genAttrs config.systems (
+              system: inputs.self.packages.${system}.default
+            );
+          in
+          {
+            defaultPackage = package;
+          };
+      }
+    );
 }

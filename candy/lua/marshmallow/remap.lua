@@ -1,8 +1,64 @@
-require("which-key").setup({})
+-- require("which-key").setup({})
+local miniclue = require("mini.clue")
+miniclue.setup({
+	triggers = {
+		-- Leader triggers
+		{ mode = "n", keys = "<Leader>" },
+		{ mode = "x", keys = "<Leader>" },
+
+		-- Built-in completion
+		{ mode = "i", keys = "<C-x>" },
+
+		-- `g` key
+		{ mode = "n", keys = "g" },
+		{ mode = "x", keys = "g" },
+
+		-- Marks
+		{ mode = "n", keys = "'" },
+		{ mode = "n", keys = "`" },
+		{ mode = "x", keys = "'" },
+		{ mode = "x", keys = "`" },
+
+		-- Registers
+		{ mode = "n", keys = '"' },
+		{ mode = "x", keys = '"' },
+		{ mode = "i", keys = "<C-r>" },
+		{ mode = "c", keys = "<C-r>" },
+
+		-- Window commands
+		{ mode = "n", keys = "<C-w>" },
+
+		-- `z` key
+		{ mode = "n", keys = "z" },
+		{ mode = "x", keys = "z" },
+
+		-- mini surround
+		{ mode = "n", keys = "s" },
+		{ mode = "x", keys = "s" },
+
+		-- mini bracketed
+		{ mode = "n", keys = "]" },
+		{ mode = "n", keys = "[" },
+	},
+
+	clues = {
+		-- Enhance this by adding descriptions for <Leader> mapping groups
+		miniclue.gen_clues.builtin_completion(),
+		miniclue.gen_clues.g(),
+		miniclue.gen_clues.marks(),
+		miniclue.gen_clues.registers(),
+		miniclue.gen_clues.windows(),
+		miniclue.gen_clues.z(),
+	},
+})
 
 -- experimental --
 vim.keymap.set("n", "0", "^", { noremap = true, silent = true })
 vim.keymap.set("n", "^", "0", { noremap = true, silent = true })
+
+-- mini.surround
+-- fix s key deleting characters
+vim.keymap.set({ "n", "x" }, "s", "<Nop>")
 
 -- nvim-spider
 require("lz.n").load({
@@ -43,24 +99,14 @@ vim.keymap.set("t", "<C-w><C-n>", "<C-\\><C-n><C-w>h", { silent = true })
 
 -- Grep / Pick --
 vim.keymap.set("n", "<leader>f", require("mini.pick").builtin.files, { desc = "Pick (root dir)" })
+vim.keymap.set("n", "<leader>g", require("mini.pick").builtin.resume, { desc = "Resume Pick" })
 
 vim.keymap.set("n", "<leader>/", function()
 	local cope = function()
-		local items = require("mini.pick").get_picker_items()
+		local query = require("mini.pick").get_picker_query()
 
-		vim.fn.setqflist(vim.tbl_map(function(value)
-			local split = vim.split(value, ":")
-			local text = table.concat(split, "", 4)
+		vim.cmd("Ggrep " .. table.concat(query))
 
-			return {
-				filename = split[1],
-				lnum = split[2],
-				col = split[3],
-				text = vim.trim(text),
-			}
-		end, items))
-
-		vim.cmd.cope()
 		return true
 	end
 	local buffer_mappings = { wipeout = { char = "<C-q>", func = cope } }
@@ -74,6 +120,10 @@ vim.keymap.set("n", "<leader><leader>", function()
 	local buffer_mappings = { wipeout = { char = "<C-d>", func = wipeout_current } }
 	require("mini.pick").builtin.buffers({ include_current = false }, { mappings = buffer_mappings })
 end, { desc = "Switch Buffer" })
+
+vim.keymap.set("n", "<leader>s", function()
+	require("mini.jump2d").start()
+end, { desc = "Jump2d" })
 
 -- Harpoon --
 require("lz.n").load({

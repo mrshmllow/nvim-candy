@@ -22,7 +22,7 @@ vim.g.neovide_padding_bottom = 10
 vim.g.neovide_padding_right = 10
 vim.g.neovide_padding_left = 10
 
-vim.g.neovide_transparency = 0.9
+vim.g.neovide_opacity = 0.9
 
 vim.g.neovide_refresh_rate = 240
 
