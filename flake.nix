@@ -112,15 +112,6 @@
                       src = inputs.vim-firestore;
                       name = "firestore";
                     })
-
-                    # nvim-cmp
-                    nvim-cmp
-                    cmp-nvim-lsp
-                    cmp-cmdline
-                    cmp-async-path
-                    cmp-buffer
-                    luasnip
-                    cmp_luasnip
                   ];
               };
             };
