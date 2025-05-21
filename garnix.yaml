@@ -1,4 +1,6 @@
 builds:
+  include:
+    - "packages.*.*"
   exclude:
-  - '*.testing'
-  include: []
+    - "packages.*.testing"
+  branch: main
