@@ -78,3 +78,8 @@ vim.fn.sign_define("DiagnosticSignInfo", { text = " ", texthl = "DiagnosticSi
 vim.fn.sign_define("DiagnosticSignHint", { text = "", texthl = "DiagnosticSignHint" })
 
 vim.opt.exrc = true
+
+-- Completion --
+
+vim.opt.completeopt = "menuone,noselect,fuzzy"
+vim.opt.wildoptions = "fuzzy,pum,tagfile"
