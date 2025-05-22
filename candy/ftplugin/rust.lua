@@ -8,3 +8,11 @@ vim.g.rustaceanvim = {
 	},
 	dap = {},
 }
+
+vim.keymap.set("n", "gra", function()
+	vim.cmd.RustLsp("codeAction")
+end, { buffer = true, silent = true })
+
+vim.keymap.set("n", "K", function()
+	vim.cmd.RustLsp({ "hover", "actions" })
+end, { buffer = true, silent = true })
