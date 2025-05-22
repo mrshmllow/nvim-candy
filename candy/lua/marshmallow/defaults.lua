@@ -4,7 +4,7 @@ vim.o.timeout = true
 vim.o.timeoutlen = 300
 
 -- Colourscheme --
-vim.cmd.colorscheme("lackluster-hack")
+vim.cmd.colorscheme("lackluster-mint")
 
 -- Terminal --
 vim.opt.termguicolors = true
