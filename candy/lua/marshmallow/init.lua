@@ -1,3 +1,4 @@
+require("marshmallow.colorscheme")
 require("marshmallow.defaults")
 require("marshmallow.statusline")
 require("marshmallow.remap")
