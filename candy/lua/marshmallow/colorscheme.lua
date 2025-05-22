@@ -11,5 +11,6 @@ vim.api.nvim_create_autocmd({ "ColorScheme" }, {
 		vim.api.nvim_set_hl(0, "MiniPickPrompt", { fg = ls.color.lack })
 		vim.api.nvim_set_hl(0, "MiniFilesDirectory", { fg = ls.color.lack })
 		vim.api.nvim_set_hl(0, "MiniFilesTitleFocused", { fg = ls.color.lack })
+		vim.api.nvim_set_hl(0, "MiniClueNextKey", { fg = ls.color.lack })
 	end,
 })
