@@ -74,6 +74,9 @@ vim.opt.linespace = -2
 vim.opt.exrc = true
 
 -- Completion --
-
 vim.opt.completeopt = "menuone,noselect,fuzzy"
 vim.opt.wildoptions = "fuzzy,pum,tagfile"
+
+-- Search --
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
