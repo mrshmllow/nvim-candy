@@ -109,4 +109,5 @@ vim.lsp.enable({
 	"golangci_lint_ls",
 	"pyright",
 	"tinymist",
+	"sourcekit",
 })

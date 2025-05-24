@@ -71,6 +71,7 @@
                 golangci-lint
                 pyright
                 tinymist
+                sourcekit-lsp
               ];
               config = {
                 plugins =
