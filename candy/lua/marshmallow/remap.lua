@@ -1,3 +1,5 @@
+local GROUP = vim.api.nvim_create_augroup("marsh-keymap", {})
+
 -- require("which-key").setup({})
 local miniclue = require("mini.clue")
 miniclue.setup({
@@ -215,3 +217,25 @@ _G.cr_action = function()
 end
 
 vim.keymap.set("i", "<CR>", "v:lua._G.cr_action()", { expr = true })
+
+-- Lsp --
+vim.api.nvim_create_autocmd("LspAttach", {
+	group = GROUP,
+	callback = function(ev)
+		local bufnr = ev.buf
+
+		local opts = { noremap = true, silent = true }
+		vim.keymap.set("n", "E", vim.diagnostic.open_float, opts)
+		vim.keymap.set(
+			"n",
+			"<space>q",
+			vim.diagnostic.setloclist,
+			{ noremap = true, silent = true, desc = "Add diagnostics to list" }
+		)
+
+		local bufopts = { noremap = true, silent = true, buffer = bufnr }
+
+		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
+		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
+	end,
+})
