@@ -27,60 +27,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
-vim.lsp.config("tailwindcss", {
-	settings = {
-		tailwindCSS = {
-			experimental = {
-				classRegex = {
-					{ "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
-					{ "cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
-				},
-			},
-		},
-	},
-})
-
--- Boilerplate from https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#lua_ls
-vim.lsp.config("lua_ls", {
-	on_init = function(client)
-		local path = client.workspace_folders[1].name
-		if vim.loop.fs_stat(path .. "/.luarc.json") or vim.loop.fs_stat(path .. "/.luarc.jsonc") then
-			return
-		end
-
-		client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
-			runtime = {
-				version = "LuaJIT",
-			},
-			workspace = {
-				checkThirdParty = false,
-				library = {
-					vim.env.VIMRUNTIME,
-					-- Depending on the usage, you might want to add additional paths here.
-					-- vim.env.LUV .. "lib/lua/5.1/",
-					-- "${3rd}/busted/library",
-				},
-				-- or pull in all of 'runtimepath'. NOTE: this is a lot slower
-				-- library = vim.api.nvim_get_runtime_file("", true),
-			},
-		})
-	end,
-	settings = {
-		Lua = {
-			format = {
-				enable = false,
-			},
-			runtime = { version = "LuaJIT" },
-			workspace = { checkThirdParty = false },
-			telemetry = { enable = false },
-			diagnostics = { globals = { "vim" } },
-			completion = {
-				callSnippet = "Replace",
-			},
-		},
-	},
-})
-
 require("typescript-tools").setup({
 	cmd = { "typescript-language-server", "--stdio" },
 	settings = {
@@ -101,13 +47,11 @@ require("typescript-tools").setup({
 	},
 })
 
-vim.lsp.enable({
-	"tailwindcss",
-	"astro",
-	"nil_ls",
-	"gopls",
-	"golangci_lint_ls",
-	"pyright",
-	"tinymist",
-	"sourcekit",
-})
+local lsp_configs = {}
+
+for _, f in pairs(vim.api.nvim_get_runtime_file("lsp/*.lua", true)) do
+	local server_name = vim.fn.fnamemodify(f, ":t:r")
+	table.insert(lsp_configs, server_name)
+end
+
+vim.lsp.enable(lsp_configs)
