@@ -1,6 +1,5 @@
 require("fidget").setup({})
 
-local lspconfig = require("lspconfig")
 local group = vim.api.nvim_create_augroup("marsh-lsp", {})
 
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -28,24 +27,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
-lspconfig.lua_ls.setup({
-	settings = {
-		Lua = {
-			format = {
-				enable = false,
-			},
-			runtime = { version = "LuaJIT" },
-			workspace = { checkThirdParty = false },
-			telemetry = { enable = false },
-			diagnostics = { globals = { "vim" } },
-			completion = {
-				callSnippet = "Replace",
-			},
-		},
-	},
-})
-
-lspconfig.tailwindcss.setup({
+vim.lsp.config("tailwindcss", {
 	settings = {
 		tailwindCSS = {
 			experimental = {
@@ -58,15 +40,8 @@ lspconfig.tailwindcss.setup({
 	},
 })
 
-lspconfig.astro.setup({})
-lspconfig.nil_ls.setup({})
-lspconfig.gopls.setup({})
-lspconfig.golangci_lint_ls.setup({})
-lspconfig.pyright.setup({})
-lspconfig.tinymist.setup({})
-
 -- Boilerplate from https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#lua_ls
-lspconfig.lua_ls.setup({
+vim.lsp.config("lua_ls", {
 	on_init = function(client)
 		local path = client.workspace_folders[1].name
 		if vim.loop.fs_stat(path .. "/.luarc.json") or vim.loop.fs_stat(path .. "/.luarc.jsonc") then
@@ -91,7 +66,18 @@ lspconfig.lua_ls.setup({
 		})
 	end,
 	settings = {
-		Lua = {},
+		Lua = {
+			format = {
+				enable = false,
+			},
+			runtime = { version = "LuaJIT" },
+			workspace = { checkThirdParty = false },
+			telemetry = { enable = false },
+			diagnostics = { globals = { "vim" } },
+			completion = {
+				callSnippet = "Replace",
+			},
+		},
 	},
 })
 
@@ -113,4 +99,14 @@ require("typescript-tools").setup({
 			allowRenameOfImportPath = false,
 		},
 	},
+})
+
+vim.lsp.enable({
+	"tailwindcss",
+	"astro",
+	"nil_ls",
+	"gopls",
+	"golangci_lint_ls",
+	"pyright",
+	"tinymist",
 })
