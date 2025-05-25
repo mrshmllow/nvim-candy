@@ -53,7 +53,7 @@ vim.diagnostic.config({
 -- Chars --
 vim.opt.showbreak = "↪ "
 vim.opt.list = true
-vim.opt.listchars = "space:.,tab:▎·,trail:."
+vim.opt.listchars = { space = ".", tab = "▎·", trail = "." }
 
 -- Tabs / Spaces --
 local tab_width = 8
@@ -74,8 +74,8 @@ vim.opt.linespace = -2
 vim.opt.exrc = true
 
 -- Completion --
-vim.opt.completeopt = "menuone,noselect,fuzzy"
-vim.opt.wildoptions = "fuzzy,pum,tagfile"
+vim.opt.completeopt = { "menuone", "noselect", "fuzzy" }
+vim.opt.wildoptions = { "fuzzy", "pum", "tagfile" }
 
 -- Search --
 vim.opt.ignorecase = true
