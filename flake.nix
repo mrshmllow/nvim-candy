@@ -105,7 +105,6 @@
                     vim-dotenv
                     (opt nvim-spider)
                     vim-fugitive
-                    gitsigns-nvim
                     vim-gnupg
                     fidget-nvim
                     presence-nvim

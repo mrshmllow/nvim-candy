@@ -67,7 +67,7 @@ vim.api.nvim_create_autocmd("User", {
 				-- first number in the string is the number of files changed
 				table.insert(changes, {
 					"~" .. string.match(obj.stdout, "%d"),
-					"GitSignsChange",
+					"MiniDiffSignChange",
 				})
 			end
 
@@ -77,7 +77,7 @@ vim.api.nvim_create_autocmd("User", {
 
 				table.insert(changes, {
 					change .. number,
-					change == "-" and "GitSignsDelete" or "GitSignsAdd",
+					change == "-" and "MiniDiffSignDelete" or "MiniDiffSignAdd",
 				})
 			end
 

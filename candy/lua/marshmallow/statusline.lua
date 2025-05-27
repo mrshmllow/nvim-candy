@@ -69,22 +69,7 @@ local function finish()
 end
 
 local function git()
-	local status = vim.b.gitsigns_status_dict
-	if status == nil then
-		return " "
-	end
-
-	local has_changes = status.added ~= 0 or status.removed ~= 0 or status.changed ~= 0
-	local added_count = status.added or 0
-	local removed_count = status.removed or 0
-	local changed_count = status.removed or 0
-
-	local added = added_count > 0 and ("%#GitSignsAdd#+" .. added_count .. "%*") or ""
-	local removed = removed_count > 0 and ("%#GitSignsDelete#-" .. removed_count .. "%*") or ""
-	local changed = changed_count > 0 and ("%#GitSignsChange#~" .. changed_count .. "%*") or ""
-	local changes = "(" .. added .. removed .. changed .. "%#StatusHead#)%*"
-
-	return " %#StatusHead#" .. status.head .. (has_changes and changes or "") .. "%*"
+	return " %{FugitiveStatusline()} "
 end
 
 local function first()
