@@ -90,6 +90,7 @@
                     mini-nvim
                     colorizer
                     luasnip
+                    minuet-ai-nvim
                     (opt conform-nvim)
                     plenary-nvim
                     (pkgs.vimUtils.buildVimPlugin {
