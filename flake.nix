@@ -109,10 +109,6 @@
                     fidget-nvim
                     presence-nvim
                     hardtime-nvim
-                    (pkgs.vimUtils.buildVimPlugin {
-                      src = inputs.vim-firestore;
-                      name = "firestore";
-                    })
                   ];
               };
             };
