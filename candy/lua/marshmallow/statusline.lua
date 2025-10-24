@@ -30,13 +30,28 @@ local function set_highlights_lackluster(recording)
 	})
 end
 
+local function set_highlights_everforest(recording)
+	local config = vim.fn["everforest#get_configuration"]()
+	local palette = vim.fn["everforest#get_palette"](config.background, config.colors_override)
+	local set_hl = vim.fn["everforest#highlight"]
+
+	local bg = palette.bg1
+	local fg = recording and palette.red or palette.fg
+
+	set_hl("StatusLine", fg, bg)
+	set_hl("Ruler", palette.statusline3, bg)
+	set_hl("StatusLsp", palette.statusline3, bg)
+	set_hl("StatusFt", palette.statusline2, bg)
+	set_hl("StatusHead", palette.statusline1, bg)
+end
+
 local augroup = vim.api.nvim_create_augroup("StatusLine", { clear = true })
 
 vim.api.nvim_create_autocmd({ "ColorScheme", "RecordingLeave" }, {
 	pattern = "*",
 	group = augroup,
 	callback = function()
-		set_highlights_lackluster(false)
+		set_highlights_everforest(false)
 	end,
 })
 
@@ -44,19 +59,9 @@ vim.api.nvim_create_autocmd({ "RecordingEnter" }, {
 	pattern = "*",
 	group = augroup,
 	callback = function()
-		set_highlights_lackluster(true)
+		set_highlights_everforest(true)
 	end,
 })
-
-local function get_scrollbar()
-	local bars = { "🭶", "🭷", "🭸", "🭹", "🭺", "🭻" }
-	local current_line = vim.api.nvim_win_get_cursor(0)[1]
-	local lines = vim.api.nvim_buf_line_count(0)
-
-	local i = math.floor((current_line - 1) / lines * #bars) + 1
-
-	return "%p%% %#Ruler#" .. string.rep(bars[i], 2)
-end
 
 local function finish()
 	local bufnr = vim.api.nvim_get_current_buf()
@@ -65,11 +70,11 @@ local function finish()
 		return value.name
 	end, clients)
 
-	return "%(%#StatusLsp#" .. vim.fn.join(names, ", ") .. "%* %#StatusFt#%y%* %l,%c " .. get_scrollbar() .. "%)"
+	return "%(%#StatusLsp#" .. vim.fn.join(names, ", ") .. "%* %#StatusFt#%y%* %l,%c %)"
 end
 
 local function git()
-	return " %{FugitiveStatusline()} "
+	return " %#StatusHead#%{FugitiveStatusline()} "
 end
 
 local function first()
@@ -88,5 +93,7 @@ end
 function M.statusline()
 	return first() .. "%=" .. center() .. finish()
 end
+
+set_highlights_everforest(false)
 
 return M

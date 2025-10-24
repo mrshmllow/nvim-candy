@@ -4,7 +4,9 @@ vim.o.timeout = true
 vim.o.timeoutlen = 300
 
 -- Colourscheme --
-vim.cmd.colorscheme("lackluster-mint")
+vim.g.everforest_enable_italic = true
+vim.g.everforest_background = "hard"
+vim.cmd.colorscheme("everforest")
 
 -- Terminal --
 vim.opt.termguicolors = true

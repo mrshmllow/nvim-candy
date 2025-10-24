@@ -107,7 +107,7 @@ vim.keymap.set("n", "<leader>/", function()
 	local cope = function()
 		local query = require("mini.pick").get_picker_query()
 
-		vim.cmd("Ggrep " .. table.concat(query))
+		vim.cmd("vimgrep " .. table.concat(query))
 
 		return true
 	end

@@ -72,6 +72,7 @@
                 pyright
                 tinymist
                 sourcekit-lsp
+                ripgrep
               ];
               config = {
                 plugins =
@@ -87,10 +88,11 @@
                     nvim-treesitter.withAllGrammars
                     nvim-lspconfig
                     catppuccin-nvim
+                    lackluster-nvim
+                    everforest
                     mini-nvim
                     colorizer
                     luasnip
-                    minuet-ai-nvim
                     (opt conform-nvim)
                     plenary-nvim
                     (pkgs.vimUtils.buildVimPlugin {
@@ -99,7 +101,6 @@
                       doCheck = false;
                     })
                     rustaceanvim
-                    lackluster-nvim
                     typescript-tools-nvim
                     direnv-vim
                     vim-dotenv

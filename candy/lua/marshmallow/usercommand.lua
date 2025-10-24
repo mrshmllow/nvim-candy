@@ -79,59 +79,59 @@ local mods_prompt = function(context, arg)
 	-- 	buf = buf,
 	-- })
 
-	local obj = vim.system({ "mods", arg }, {
-		stdin = context,
-		text = true,
-		detach = true,
-		stdout = function(err, data)
-			vim.schedule(function()
-				-- if string.find(data, "\n") then
-				-- 	local lines = vim.split(data, "\n")
-				-- 	local last_line = vim.api.nvim_buf_line_count(buf)
-				-- 	vim.api.nvim_buf_set_lines(buf, last_line, last_line, false, lines)
-				-- else
-
-				local lines = vim.split(data, "\n")
-
-				local first = true
-
-				for key, line in pairs(lines) do
-					local length = vim.api.nvim_buf_line_count(buf)
-
-					if not first then
-						vim.api.nvim_buf_set_lines(buf, length, length, false, { "" })
-						length = length + 1
-					end
-
-					local col = vim.fn.col({ length, "$" }) - 1
-					-- local existing_line = vim.api.nvim_buf_get_text(buf, length - 1, 0, length - 1, -1, {})[1]
-					-- local new_line = existing_line .. data
-					--
-					-- vim.api.nvim_buf_set_lines(buf, length - 1, length - 1, false, {
-					-- 	new_line,
-					-- })
-					vim.api.nvim_buf_set_text(buf, length - 1, col, length - 1, col, {
-						line,
-					})
-
-					first = false
-				end
-
-				-- if string.find(data, "\n") then
-				-- 	vim.api.nvim_buf_set_lines(buf, length, length, false, { "" })
-				-- end
-
-				-- vim.api.nvim_win_call(window, function()
-				-- 	vim.cmd("normal! G")
-				-- end)
-			end)
-		end,
-		stderr = function(err, data)
-			vim.schedule(function()
-				vim.notify(data, vim.log.levels.ERROR)
-			end)
-		end,
-	})
+	-- local obj = vim.system({ "mods", arg }, {
+	-- 	stdin = context,
+	-- 	text = true,
+	-- 	detach = true,
+	-- 	stdout = function(err, data)
+	-- 		vim.schedule(function()
+	-- 			-- if string.find(data, "\n") then
+	-- 			-- 	local lines = vim.split(data, "\n")
+	-- 			-- 	local last_line = vim.api.nvim_buf_line_count(buf)
+	-- 			-- 	vim.api.nvim_buf_set_lines(buf, last_line, last_line, false, lines)
+	-- 			-- else
+	--
+	-- 			local lines = vim.split(data, "\n")
+	--
+	-- 			local first = true
+	--
+	-- 			for key, line in pairs(lines) do
+	-- 				local length = vim.api.nvim_buf_line_count(buf)
+	--
+	-- 				if not first then
+	-- 					vim.api.nvim_buf_set_lines(buf, length, length, false, { "" })
+	-- 					length = length + 1
+	-- 				end
+	--
+	-- 				local col = vim.fn.col({ length, "$" }) - 1
+	-- 				-- local existing_line = vim.api.nvim_buf_get_text(buf, length - 1, 0, length - 1, -1, {})[1]
+	-- 				-- local new_line = existing_line .. data
+	-- 				--
+	-- 				-- vim.api.nvim_buf_set_lines(buf, length - 1, length - 1, false, {
+	-- 				-- 	new_line,
+	-- 				-- })
+	-- 				vim.api.nvim_buf_set_text(buf, length - 1, col, length - 1, col, {
+	-- 					line,
+	-- 				})
+	--
+	-- 				first = false
+	-- 			end
+	--
+	-- 			-- if string.find(data, "\n") then
+	-- 			-- 	vim.api.nvim_buf_set_lines(buf, length, length, false, { "" })
+	-- 			-- end
+	--
+	-- 			-- vim.api.nvim_win_call(window, function()
+	-- 			-- 	vim.cmd("normal! G")
+	-- 			-- end)
+	-- 		end)
+	-- 	end,
+	-- 	stderr = function(err, data)
+	-- 		vim.schedule(function()
+	-- 			vim.notify(data, vim.log.levels.ERROR)
+	-- 		end)
+	-- 	end,
+	-- })
 
 	vim.print(obj)
 end
