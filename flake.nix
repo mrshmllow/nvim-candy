@@ -87,7 +87,6 @@
                     lz-n
                     nvim-treesitter.withAllGrammars
                     nvim-lspconfig
-                    catppuccin-nvim
                     lackluster-nvim
                     everforest
                     mini-nvim
