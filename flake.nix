@@ -90,7 +90,6 @@
                     lackluster-nvim
                     everforest
                     mini-nvim
-                    colorizer
                     luasnip
                     (opt conform-nvim)
                     plenary-nvim
