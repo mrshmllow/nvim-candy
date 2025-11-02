@@ -1,1 +1,2 @@
 startinsert
+set spell
