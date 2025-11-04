@@ -1,7 +1,7 @@
 # Neovim Config
 
-Neovim config for myself using [tolerable](https://github.com/wires-org/tolerable-nvim-nix).
+Neovim config for myself using [tolerable](https://github.com/mrshmllow/tolerable-nvim-nix).
 
 ```bash 
-nix run github:mrshmllow/nvim-candy
+nix run https://tangled.org/@althaea.zone/candy/archive/trunk
 ```
