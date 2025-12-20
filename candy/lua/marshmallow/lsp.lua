@@ -1,3 +1,31 @@
+vim.g.rustaceanvim = {
+	tools = {},
+	server = {
+		settings = {
+			["rust-analyzer"] = {
+				diagnostics = {
+					enable = true,
+					disabled = { "proc-macro-disabled" },
+					enableExperimental = true,
+				},
+
+				procMacro = {
+					ignored = {
+						leptos_macro = {
+							"component",
+							"server",
+						},
+					},
+				},
+				cargo = {
+					features = "all", -- Run against all crate features
+				},
+			},
+		},
+	},
+	dap = {},
+}
+
 require("fidget").setup({})
 
 local group = vim.api.nvim_create_augroup("marsh-lsp", {})
