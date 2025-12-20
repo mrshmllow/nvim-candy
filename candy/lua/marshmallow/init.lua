@@ -1,4 +1,3 @@
--- I just like having it seperated by ft even if its not heavy
 require("marshmallow.colorscheme")
 require("marshmallow.defaults")
 require("marshmallow.statusline")
