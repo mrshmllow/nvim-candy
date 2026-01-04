@@ -22,3 +22,5 @@ require("marshmallow.usercommand")
 require("marshmallow.autocmd")
 require("marshmallow.env")
 require("marshmallow.git")
+
+vim.cmd("packadd! termdebug")

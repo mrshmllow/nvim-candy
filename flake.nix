@@ -71,8 +71,8 @@
                 golangci-lint
                 pyright
                 tinymist
-                sourcekit-lsp
                 ripgrep
+                gdb
               ];
               config = {
                 plugins =
