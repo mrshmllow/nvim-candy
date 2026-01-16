@@ -8,7 +8,7 @@
   inputs.devshell.url = "github:numtide/devshell";
   inputs.nightly.url = "github:nix-community/neovim-nightly-overlay";
 
-  inputs.tolerable.url = "github:wires-org/tolerable-nvim-nix";
+  inputs.tolerable.url = "github:mrshmllow/tolerable-nvim-nix";
   inputs.tolerable.inputs.nixpkgs.follows = "nixpkgs";
   inputs.tolerable.inputs.nightly.follows = "nightly";
 

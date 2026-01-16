@@ -2,7 +2,6 @@ require("marshmallow.colorscheme")
 require("marshmallow.defaults")
 require("marshmallow.statusline")
 require("marshmallow.remap")
-require("marshmallow.treesitter")
 require("marshmallow.lsp")
 require("marshmallow.snippets")
 
