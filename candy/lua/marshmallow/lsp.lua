@@ -45,6 +45,7 @@ local lsp_configs = {}
 local disabled = {
 	"rust_analyzer",
 	"ts_ls",
+	"volar", -- message was annoying, depcrecated
 }
 
 for _, f in pairs(vim.api.nvim_get_runtime_file("lsp/*.lua", true)) do

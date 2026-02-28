@@ -58,7 +58,7 @@
                 stylua
                 prettierd
                 black
-                nixfmt-rfc-style
+                nixfmt
                 taplo
                 lua-language-server
                 nil
@@ -73,6 +73,7 @@
                 tinymist
                 ripgrep
                 gdb
+                llvmPackages_20.clang-tools
               ];
               config = {
                 plugins =

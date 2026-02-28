@@ -24,7 +24,7 @@ vim.opt.mousemodel = "extend"
 
 -- Status --
 vim.opt.showmode = false
-vim.opt.cmdheight = 0
+vim.opt.cmdheight = 1
 vim.opt.laststatus = 3 -- Global status
 
 vim.opt.statusline = "%{%v:lua.require'marshmallow.statusline'.statusline()%}"
