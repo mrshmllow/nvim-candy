@@ -107,7 +107,6 @@
                     vim-fugitive
                     vim-gnupg
                     fidget-nvim
-                    presence-nvim
                     hardtime-nvim
                   ];
               };
