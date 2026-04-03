@@ -1,6 +1,5 @@
 local GROUP = vim.api.nvim_create_augroup("marsh-keymap", {})
 
--- require("which-key").setup({})
 local miniclue = require("mini.clue")
 miniclue.setup({
 	triggers = {
