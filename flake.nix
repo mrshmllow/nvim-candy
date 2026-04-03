@@ -81,9 +81,9 @@
                 lua-language-server
                 nil
                 statix
-                nodePackages.typescript-language-server
+                # nodePackages.typescript-language-server
                 tailwindcss-language-server
-                nodePackages.sql-formatter
+                # nodePackages.sql-formatter
                 gopls
                 golangci-lint-langserver
                 golangci-lint
