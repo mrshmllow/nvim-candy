@@ -81,7 +81,8 @@
                 lua-language-server
                 nil
                 statix
-                # nodePackages.typescript-language-server
+                # typescript-language-server
+                typescript-go
                 tailwindcss-language-server
                 # nodePackages.sql-formatter
                 gopls
@@ -118,7 +119,6 @@
                       doCheck = false;
                     })
                     rustaceanvim
-                    typescript-tools-nvim
                     direnv-vim
                     vim-dotenv
                     (opt nvim-spider)
