@@ -1,7 +1,3 @@
-local group = vim.api.nvim_create_augroup("CandyConform", {
-	clear = true,
-})
-
 require("lz.n").load({
 	"conform.nvim",
 	event = "FileType",
@@ -12,18 +8,15 @@ require("lz.n").load({
 			formatters_by_ft = {
 				lua = { "stylua" },
 				-- Use a sub-list to run only the first available formatter
-				javascript = { { "prettierd", "prettier" } },
+				javascript = { "prettier" },
 				nix = { "nixfmt" },
 				toml = { "taplo" },
 				sql = { "sql_formatter" },
 				python = { "black" },
 				["*"] = { "injected" },
 			},
-			format_on_save = {
-				-- These options will be passed to conform.format()
-				timeout_ms = 500,
-				lsp_fallback = true,
-			},
+			default_format_opts = { lsp_format = "prefer" },
+			format_on_save = { timeout_ms = 500 },
 			formatters = {
 				sql_formatter = {
 					cmd = "sql-formatter",
@@ -31,26 +24,6 @@ require("lz.n").load({
 					prepend_args = { "-l", "postgresql" },
 				},
 			},
-		})
-
-		vim.api.nvim_create_autocmd("BufWritePre", {
-			pattern = "*",
-			group = group,
-			callback = function(args)
-				require("conform").format({ bufnr = args.buf })
-			end,
-		})
-
-		vim.api.nvim_create_autocmd("LspAttach", {
-			group = group,
-			callback = function(args)
-				vim.keymap.set(
-					"n",
-					"<leader>r",
-					require("conform").format,
-					{ noremap = true, silent = true, buffer = args.buf, desc = "Format document" }
-				)
-			end,
 		})
 	end,
 })
