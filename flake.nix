@@ -93,6 +93,9 @@
                 ripgrep
                 gdb
                 llvmPackages_20.clang-tools
+
+                asm-lsp
+                vscode-langservers-extracted
               ];
               config = {
                 plugins =
