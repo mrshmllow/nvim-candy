@@ -56,17 +56,17 @@
               package = inputs.tolerable.packages.${pkgs.stdenv.hostPlatform.system}.nightly.overrideAttrs (old: {
                 patches = old.patches or [ ] ++ [
                   # revert fix for previous patch
-                  (pkgs.fetchpatch2 {
-                    url = "https://github.com/echasnovski/neovim/commit/cd712212509884d959c464f94bca15f881d95f1b.diff";
-                    hash = "sha256-+ibLxtsLcqi8HN5wIy2EhNs5QkKMeYsmEocqjf/M6uA=";
-                    revert = true;
-                  })
+                  # (pkgs.fetchpatch2 {
+                  #   url = "https://github.com/echasnovski/neovim/commit/cd712212509884d959c464f94bca15f881d95f1b.diff";
+                  #   hash = "sha256-+ibLxtsLcqi8HN5wIy2EhNs5QkKMeYsmEocqjf/M6uA=";
+                  #   revert = true;
+                  # })
                   # revert logo
-                  (pkgs.fetchpatch2 {
-                    url = "https://patch-diff.githubusercontent.com/raw/neovim/neovim/pull/38378.diff";
-                    hash = "sha256-ig5SjPqLDQb9by7UJJgvJ/rIlgu0rE694kMrri+Y4vs=";
-                    revert = true;
-                  })
+                  # (pkgs.fetchpatch2 {
+                  #   url = "https://patch-diff.githubusercontent.com/raw/neovim/neovim/pull/38378.diff";
+                  #   hash = "sha256-ig5SjPqLDQb9by7UJJgvJ/rIlgu0rE694kMrri+Y4vs=";
+                  #   revert = true;
+                  # })
                 ];
               });
 
