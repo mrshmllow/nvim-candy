@@ -6,7 +6,7 @@ vim.o.timeoutlen = 300
 -- Colourscheme --
 vim.g.everforest_enable_italic = true
 vim.g.everforest_background = "hard"
-vim.cmd.colorscheme("everforest")
+vim.cmd.colorscheme("generated")
 
 -- Terminal --
 vim.opt.termguicolors = true
