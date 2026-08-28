@@ -82,3 +82,10 @@ vim.opt.wildoptions = { "fuzzy", "pum", "tagfile" }
 -- Search --
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+
+-- Enable treesitter for all files.
+vim.api.nvim_create_autocmd("FileType", {
+	callback = function()
+		pcall(vim.treesitter.start)
+	end,
+})
