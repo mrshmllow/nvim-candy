@@ -3,6 +3,10 @@ local config_path = (vim.env.XDG_CONFIG_HOME == nil and vim.env.XDG_CONFIG_HOME 
 local file = io.open(config_path, "r")
 
 if not file then
+	if vim.env.TOLERABLE_CHECK then
+		return
+	end
+
 	vim.notify("no base16-theme.json file:" .. config_path, vim.log.levels.ERROR)
 	return
 end
