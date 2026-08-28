@@ -38,6 +38,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.lsp.inlay_hint.enable(true, {
 			bufnr = bufnr,
 		})
+
+		-- LSP overrides tree sitter injection... really annoying.
+		vim.api.nvim_set_hl(0, "@lsp.type.string", {})
+		vim.api.nvim_set_hl(0, "@lsp.type.string.rust", {})
 	end,
 })
 
