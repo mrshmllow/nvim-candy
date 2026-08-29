@@ -194,12 +194,12 @@ end
 local keycode = vim.keycode or function(x)
 	return vim.api.nvim_replace_termcodes(x, true, true, true)
 end
+
 local keys = {
+	-- Accept
 	["cr"] = keycode("<CR>"),
 	-- Enter the selected option
 	["ctrl-y"] = keycode("<C-y>"),
-	-- Enter the first option
-	["ctrl-n_ctrl-y"] = keycode("<C-n><C-y>"),
 }
 
 _G.cr_action = function()
