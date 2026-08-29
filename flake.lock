@@ -72,23 +72,6 @@
         "type": "github"
       }
     },
-    "harpoon-nvim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1761924951,
-        "narHash": "sha256-qQSPVMdldksNZDPZvnTiXxty+GSUqMGz8nYEFDRezrQ=",
-        "owner": "ThePrimeagen",
-        "repo": "harpoon",
-        "rev": "87b1a3506211538f460786c23f98ec63ad9af4e5",
-        "type": "github"
-      },
-      "original": {
-        "owner": "ThePrimeagen",
-        "ref": "harpoon2",
-        "repo": "harpoon",
-        "type": "github"
-      }
-    },
     "neovim-src": {
       "flake": false,
       "locked": {
@@ -177,7 +160,6 @@
       "inputs": {
         "devshell": "devshell",
         "flake-parts": "flake-parts",
-        "harpoon-nvim": "harpoon-nvim",
         "nightly": "nightly",
         "nixpkgs": "nixpkgs_3",
         "stay-in-place-nvim": "stay-in-place-nvim",

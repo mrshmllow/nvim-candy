@@ -126,44 +126,6 @@ vim.keymap.set("n", "<leader>s", function()
 	require("mini.jump2d").start()
 end, { desc = "Jump2d" })
 
--- Harpoon --
-require("lz.n").load({
-	"harpoon",
-	keys = {
-		{
-			"<leader>a",
-			function()
-				require("harpoon"):list():append()
-			end,
-			mode = "n",
-			desc = "Harpoon file",
-		},
-		{
-			"<leader><C-space>",
-			function()
-				require("harpoon").ui:toggle_quick_menu(require("harpoon"):list())
-			end,
-			mode = "n",
-			desc = "Toggle Harpoon",
-		},
-		unpack(vim.iter(vim.fn.range(1, 5))
-			:map(function(i)
-				return {
-					"<M-" .. i .. ">",
-					function()
-						require("harpoon"):list():select(i)
-					end,
-					mode = "n",
-					desc = "Switch to file " .. i,
-				}
-			end)
-			:totable()),
-	},
-	before = function()
-		require("harpoon"):setup()
-	end,
-})
-
 -- Files --
 vim.keymap.set("n", "-", function()
 	require("mini.files").open(vim.api.nvim_buf_get_name(0))

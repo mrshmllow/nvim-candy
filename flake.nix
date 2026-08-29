@@ -13,8 +13,6 @@
   inputs.tolerable.inputs.nightly.follows = "nightly";
 
   # Plugins
-  inputs.harpoon-nvim.url = "github:ThePrimeagen/harpoon/harpoon2";
-  inputs.harpoon-nvim.flake = false;
   inputs.stay-in-place-nvim.url = "github:gbprod/stay-in-place.nvim";
   inputs.stay-in-place-nvim.flake = false;
 
@@ -114,11 +112,6 @@
                     luasnip
                     (opt conform-nvim)
                     plenary-nvim
-                    (pkgs.vimUtils.buildVimPlugin {
-                      src = inputs.harpoon-nvim;
-                      name = "harpoon";
-                      doCheck = false;
-                    })
                     rustaceanvim
                     direnv-vim
                     vim-dotenv
