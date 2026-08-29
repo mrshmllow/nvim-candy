@@ -7,3 +7,5 @@ require("mini.snippets").setup({
 		gen_loader.from_lang(),
 	},
 })
+
+require("mini.snippets").start_lsp_server()
