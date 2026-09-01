@@ -78,7 +78,7 @@
                 nil
                 statix
                 # typescript-language-server
-                typescript-go
+                typescript
                 tailwindcss-language-server
                 # nodePackages.sql-formatter
                 gopls
