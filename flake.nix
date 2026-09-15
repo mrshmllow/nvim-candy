@@ -92,6 +92,8 @@
 
                 asm-lsp
                 vscode-langservers-extracted
+
+                haskell-language-server
               ];
               config = {
                 plugins =
