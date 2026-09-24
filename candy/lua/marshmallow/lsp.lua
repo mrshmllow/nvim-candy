@@ -40,8 +40,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		})
 
 		-- LSP overrides tree sitter injection... really annoying.
-		vim.api.nvim_set_hl(0, "@lsp.type.string", {})
-		vim.api.nvim_set_hl(0, "@lsp.type.string.rust", {})
+		vim.api.nvim_set_hl(0, "@string", {})
+		vim.api.nvim_set_hl(0, "@string.rust", {})
 	end,
 })
 
