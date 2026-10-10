@@ -18,17 +18,8 @@ local function first()
 	return "%(%f%m%h%r" .. git() .. "%)"
 end
 
-local function center()
-	local reg = vim.fn.reg_recording()
-	if reg ~= "" then
-		return "%(Recording to @" .. reg .. "%)%="
-	end
-
-	return ""
-end
-
 function M.statusline()
-	return first() .. "%=" .. center() .. finish()
+	return first() .. "%=" .. finish()
 end
 
 return M
