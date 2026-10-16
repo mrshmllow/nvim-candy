@@ -83,9 +83,21 @@ vim.opt.wildoptions = { "fuzzy", "pum", "tagfile" }
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
+-- Treesitter --
+
 -- Enable treesitter for all files.
 vim.api.nvim_create_autocmd("FileType", {
 	callback = function()
 		pcall(vim.treesitter.start)
 	end,
 })
+
+-- Custom treesitter predicate to check the ft
+vim.treesitter.query.add_predicate("has-filetype?", function(_, _, bufnr, pred)
+	return vim.bo[bufnr].filetype == pred[2]
+end, { force = true })
+
+-- Haskell --
+
+-- Force treesitter to read lhaskell as latex
+vim.treesitter.language.register("latex", "lhaskell")
