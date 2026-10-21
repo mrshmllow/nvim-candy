@@ -41,7 +41,7 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 
 -- GUI --
-vim.opt.guifont = { "JetBrainsMono Nerd Font Mono", ":h14:w-1" }
+vim.opt.guifont = { "Maple Mono NF", ":h14:w-1" }
 
 -- Diagnostics --
 vim.diagnostic.config({

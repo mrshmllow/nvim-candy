@@ -1,6 +1,4 @@
 -- Gui --
-vim.opt.guifont = { "JetBrainsMono Nerd Font Mono", ":h14:w-1" }
-
 vim.g.neovide_input_use_logo = 1
 
 vim.g.neovide_floating_blur_amount_x = 2.0
