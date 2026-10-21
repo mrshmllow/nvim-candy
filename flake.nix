@@ -194,7 +194,9 @@
                   paths = [ package ];
                   nativeBuildInputs = [ pkgs.makeWrapper ];
                   postBuild = ''
-                    wrapProgram $out/bin/neovide --set-default NEOVIM_BIN ${lib.getExe self'.packages.neovim}
+                    wrapProgram $out/bin/neovide \
+                        --set-default NEOVIM_BIN ${lib.getExe self'.packages.neovim} \
+                        --set-default NEOVIDE_FRAME none
                   '';
                 };
             };
