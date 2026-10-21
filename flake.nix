@@ -1,20 +1,32 @@
 {
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
   description = "nvim-candy";
-  inputs.flake-parts = {
-    url = "github:hercules-ci/flake-parts";
-    inputs.nixpkgs-lib.follows = "nixpkgs";
+
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
+    devshell.url = "github:numtide/devshell";
+    nightly.url = "github:nix-community/neovim-nightly-overlay";
+
+    tolerable = {
+      url = "github:mrshmllow/tolerable-nvim-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nightly.follows = "nightly";
+    };
+
+    # Plugins
+    stay-in-place-nvim = {
+      url = "github:gbprod/stay-in-place.nvim";
+      flake = false;
+    };
+
+    neovide = {
+      url = "github:neovide/neovide/nightly";
+      flake = false;
+    };
   };
-  inputs.devshell.url = "github:numtide/devshell";
-  inputs.nightly.url = "github:nix-community/neovim-nightly-overlay";
-
-  inputs.tolerable.url = "github:mrshmllow/tolerable-nvim-nix";
-  inputs.tolerable.inputs.nixpkgs.follows = "nixpkgs";
-  inputs.tolerable.inputs.nightly.follows = "nightly";
-
-  # Plugins
-  inputs.stay-in-place-nvim.url = "github:gbprod/stay-in-place.nvim";
-  inputs.stay-in-place-nvim.flake = false;
 
   outputs =
     inputs:
@@ -39,6 +51,7 @@
             config,
             lib,
             pkgs,
+            self',
             ...
           }:
           let
@@ -138,6 +151,52 @@
                   testing = true;
                 }
               );
+
+              neovide =
+                let
+                  package = pkgs.neovide.overrideAttrs (old: rec {
+                    version = "unstable";
+
+                    src = inputs.neovide;
+
+                    cargoDeps = pkgs.rustPlatform.fetchCargoVendor {
+                      inherit src;
+                      hash = "sha256-wYuJxxNPl7pUY/lkVMUoKceBJFDHgGrusYKoUTmoRIM=";
+                    };
+
+                    # skia-bindings 0.153.3
+                    env = old.env // {
+                      SKIA_SOURCE_DIR =
+                        let
+                          skiaRepo = pkgs.fetchFromGitHub {
+                            owner = "rust-skia";
+                            repo = "skia";
+                            tag = "m153-0.101.2";
+                            hash = "sha256-xKCkvQoTAMlLvKdVzzSxTST6kER4kRUIDjvTRZ9z72o=";
+                          };
+                          externals = pkgs.linkFarm "skia-externals" (
+                            lib.mapAttrsToList (name: value: {
+                              inherit name;
+                              path = pkgs.fetchgit value;
+                            }) (lib.importJSON ./skia-externals.json)
+                          );
+                        in
+                        pkgs.runCommand "source" { } ''
+                          cp -R ${skiaRepo} $out
+                          chmod -R +w $out
+                          ln -s ${externals} $out/third_party/externals
+                        '';
+                    };
+                  });
+                in
+                pkgs.symlinkJoin {
+                  inherit (package) name version meta;
+                  paths = [ package ];
+                  nativeBuildInputs = [ pkgs.makeWrapper ];
+                  postBuild = ''
+                    wrapProgram $out/bin/neovide --set-default NEOVIM_BIN ${lib.getExe self'.packages.neovim}
+                  '';
+                };
             };
           };
 

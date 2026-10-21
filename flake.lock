@@ -72,6 +72,23 @@
         "type": "github"
       }
     },
+    "neovide": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1792437313,
+        "narHash": "sha256-j4G/3OeZtJ1bXEmAcbKbA34hQZXGK2FUbjrZEEnjUW0=",
+        "owner": "neovide",
+        "repo": "neovide",
+        "rev": "86227b8bee279b681d99d30a7612b02c1f54e380",
+        "type": "github"
+      },
+      "original": {
+        "owner": "neovide",
+        "ref": "nightly",
+        "repo": "neovide",
+        "type": "github"
+      }
+    },
     "neovim-src": {
       "flake": false,
       "locked": {
@@ -160,6 +177,7 @@
       "inputs": {
         "devshell": "devshell",
         "flake-parts": "flake-parts",
+        "neovide": "neovide",
         "nightly": "nightly",
         "nixpkgs": "nixpkgs_3",
         "stay-in-place-nvim": "stay-in-place-nvim",
