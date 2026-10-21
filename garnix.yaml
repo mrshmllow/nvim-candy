@@ -1,6 +1,0 @@
-builds:
-  include:
-    - "packages.*.*"
-  exclude:
-    - "packages.*.testing"
-  branch: main
