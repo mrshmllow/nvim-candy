@@ -9,6 +9,7 @@ vim.g.neovide_hide_mouse_when_typing = true
 vim.g.neovide_cursor_animate_command_line = false
 
 vim.g.neovide_cursor_animation_length = 0.1
+vim.g.neovide_cursor_trail_size = false
 
 vim.g.winblend = 30
 vim.g.pumblend = 30
@@ -20,9 +21,9 @@ vim.g.neovide_padding_bottom = 10
 vim.g.neovide_padding_right = 10
 vim.g.neovide_padding_left = 10
 
-vim.g.neovide_opacity = 0.9
+-- vim.g.neovide_opacity = 0.9
 
-vim.g.neovide_refresh_rate = 240
+vim.g.neovide_refresh_rate = 144
 
 if vim.g.neovide then
 	vim.cmd.cd = "~"
