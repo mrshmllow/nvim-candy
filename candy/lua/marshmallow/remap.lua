@@ -165,16 +165,15 @@ local keys = {
 }
 
 _G.cr_action = function()
-	if vim.fn.pumvisible() ~= 0 then
-		-- If popup is visible, confirm selected item or add new line otherwise
-		local item_selected = vim.fn.complete_info()["selected"] ~= -1
-		return item_selected and keys["ctrl-y"] or keys["ctrl-n_ctrl-y"]
-	else
-		-- If popup is not visible, use plain `<CR>`. You might want to customize
-		-- according to other plugins. For example, to use 'mini.pairs', replace
-		-- next line with `return require('mini.pairs').cr()`
-		return keys["cr"]
+	-- If there is selected item in popup, accept it with <C-y>
+	if vim.fn.complete_info()["selected"] ~= -1 then
+		return keycode("<CR>")
 	end
+
+	-- Fall back to plain `<CR>`. You might want to customize according
+	-- to other plugins. For example if 'mini.pairs' is set up, replace
+	-- next line with `return MiniPairs.cr()`
+	return "\r"
 end
 
 vim.keymap.set("i", "<CR>", "v:lua._G.cr_action()", { expr = true })
