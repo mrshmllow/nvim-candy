@@ -53,10 +53,6 @@ miniclue.setup({
 	},
 })
 
--- experimental --
-vim.keymap.set("n", "0", "^", { noremap = true, silent = true })
-vim.keymap.set("n", "^", "0", { noremap = true, silent = true })
-
 -- mini.surround
 -- fix s key deleting characters
 vim.keymap.set({ "n", "x" }, "s", "<Nop>")
