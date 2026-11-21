@@ -161,7 +161,7 @@
 
                     cargoDeps = pkgs.rustPlatform.fetchCargoVendor {
                       inherit src;
-                      hash = "sha256-wYuJxxNPl7pUY/lkVMUoKceBJFDHgGrusYKoUTmoRIM=";
+                      hash = "sha256-AplCrgM4iVZr/7rsy425weroxywgptl5nIFr6zS39vk=";
                     };
 
                     # skia-bindings 0.153.3
